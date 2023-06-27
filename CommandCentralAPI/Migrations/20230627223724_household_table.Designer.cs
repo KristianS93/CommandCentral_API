@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CommandCentralAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230627201934_numba12")]
-    partial class numba12
+    [Migration("20230627223724_household_table")]
+    partial class household_table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace CommandCentralAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CommandCentralAPI.Models.Products", b =>
+            modelBuilder.Entity("CommandCentralAPI.dbmodels.DbHousehold", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -32,22 +32,9 @@ namespace CommandCentralAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<string>("brand")
-                        .HasColumnType("text");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("price")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("size")
-                        .HasColumnType("text");
-
                     b.HasKey("id");
 
-                    b.ToTable("products");
+                    b.ToTable("household");
                 });
 #pragma warning restore 612, 618
         }

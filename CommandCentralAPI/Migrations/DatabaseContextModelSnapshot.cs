@@ -21,7 +21,7 @@ namespace CommandCentralAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CommandCentralAPI.Models.Products", b =>
+            modelBuilder.Entity("CommandCentralAPI.dbmodels.DbHousehold", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -29,22 +29,9 @@ namespace CommandCentralAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<string>("brand")
-                        .HasColumnType("text");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("price")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("size")
-                        .HasColumnType("text");
-
                     b.HasKey("id");
 
-                    b.ToTable("products");
+                    b.ToTable("household");
                 });
 #pragma warning restore 612, 618
         }
