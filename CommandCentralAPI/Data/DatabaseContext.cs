@@ -22,4 +22,6 @@ public class DatabaseContext : DbContext
 
         }
     public DbSet<DbHousehold> household { get; set; }
+    public DbSet<DbGroceryList> grocery_list { get; set; }
+    public DbSet<DbGroceryListItem> grocery_list_item { get; set; }
 }

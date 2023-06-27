@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CommandCentralAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class household_table : Migration
+    public partial class household_scheme : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -2,6 +2,7 @@
 using CommandCentralAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CommandCentralAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230627230633_grocery_list_scheme")]
+    partial class grocery_list_scheme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,40 +32,14 @@ namespace CommandCentralAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int>("household_id")
+                    b.Property<int>("household_idid")
                         .HasColumnType("integer");
 
                     b.HasKey("id");
 
-                    b.HasIndex("household_id");
+                    b.HasIndex("household_idid");
 
                     b.ToTable("grocery_list");
-                });
-
-            modelBuilder.Entity("CommandCentralAPI.dbmodels.DbGroceryListItem", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-                    b.Property<int>("grocery_list_id")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("item_amount")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("item_name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("grocery_list_id");
-
-                    b.ToTable("grocery_list_item");
                 });
 
             modelBuilder.Entity("CommandCentralAPI.dbmodels.DbHousehold", b =>
@@ -80,24 +57,13 @@ namespace CommandCentralAPI.Migrations
 
             modelBuilder.Entity("CommandCentralAPI.dbmodels.DbGroceryList", b =>
                 {
-                    b.HasOne("CommandCentralAPI.dbmodels.DbHousehold", "household_")
+                    b.HasOne("CommandCentralAPI.dbmodels.DbHousehold", "household_id")
                         .WithMany()
-                        .HasForeignKey("household_id")
+                        .HasForeignKey("household_idid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("household_");
-                });
-
-            modelBuilder.Entity("CommandCentralAPI.dbmodels.DbGroceryListItem", b =>
-                {
-                    b.HasOne("CommandCentralAPI.dbmodels.DbGroceryList", "grocery_list_")
-                        .WithMany()
-                        .HasForeignKey("grocery_list_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("grocery_list_");
+                    b.Navigation("household_id");
                 });
 #pragma warning restore 612, 618
         }

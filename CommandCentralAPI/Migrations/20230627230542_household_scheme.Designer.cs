@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CommandCentralAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230627223724_household_table")]
-    partial class household_table
+    [Migration("20230627230542_household_scheme")]
+    partial class household_scheme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
