@@ -1,4 +1,4 @@
-# CommandCentral_API
+# CommandCentral API
 API for the CommandCentral App
 
 To run the API and database as a backend, start downloading the docker images.
