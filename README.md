@@ -2,5 +2,8 @@
 API for the CommandCentral App
 
 
-# Dockerimage repo
-https://hub.docker.com/repository/docker/kristians93/command_central_api/general
+# Docker image repo
+## API image
+\ahref{https://hub.docker.com/repository/docker/kristians93/command_central_api/general}{API image}
+## Postgres image
+https://hub.docker.com/repository/docker/kristians93/command_central_postgres/general
