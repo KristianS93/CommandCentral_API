@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
 # Copy the solution file and restore dependencies
-COPY CommandCentralApi.sln .
+COPY CommandCentralAPI.sln .
 COPY Core/ ./Core/
 COPY Infrastructure/ ./Infrastructure/
 COPY WebApi/API/ ./WebApi/API/
