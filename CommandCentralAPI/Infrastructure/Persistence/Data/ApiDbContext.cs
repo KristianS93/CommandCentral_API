@@ -12,6 +12,19 @@ public class ApiDbContext : DbContext
     {
         _logger = logger;
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<HouseholdEntity>()
+            .HasOne(g => g.grocery_list)
+            .WithOne(h => h.household_)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<GroceryListEntity>()
+            .HasMany(i => i.items)
+            .WithOne(l => l.grocery_list_)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+
     public DbSet<HouseholdEntity> Household { get; set; }
     public DbSet<GroceryListEntity> GroceryList { get; set; }
     public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
@@ -52,8 +65,8 @@ public class ApiDbContext : DbContext
         if (!Household.Any())
         {
             // Create households
-            var household1 = new HouseholdEntity();
-            var household2 = new HouseholdEntity();
+            var household1 = new HouseholdEntity { Name = "Kristians hus"};
+            var household2 = new HouseholdEntity { Name = "Ibis hus"} ;
             Household.Add(household1);
             Household.Add(household2);
             SaveChanges();
@@ -63,6 +76,9 @@ public class ApiDbContext : DbContext
             var grocerylist2 = new GroceryListEntity { household_ = household2 };
             GroceryList.Add(grocerylist1);
             GroceryList.Add(grocerylist2);
+            SaveChanges();
+            household1.grocery_list = grocerylist1;
+            household2.grocery_list = grocerylist2;
             SaveChanges();
             
             // Create grocery list items

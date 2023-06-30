@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmigrate : Migration
+    public partial class updateentities2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,8 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,7 @@ namespace Persistence.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    household_id = table.Column<int>(type: "integer", nullable: false)
+                    household_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,7 +49,7 @@ namespace Persistence.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    grocery_list_id = table.Column<int>(type: "integer", nullable: false),
+                    grocery_list_id = table.Column<int>(type: "integer", nullable: true),
                     item_name = table.Column<string>(type: "text", nullable: false),
                     item_amount = table.Column<string>(type: "text", nullable: false)
                 },
@@ -66,7 +67,8 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_grocery_list_household_id",
                 table: "grocery_list",
-                column: "household_id");
+                column: "household_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_grocery_list_item_grocery_list_id",
