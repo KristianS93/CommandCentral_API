@@ -1,21 +1,47 @@
-﻿services:
+version: '3.5'
+services:
+  postgres:
+    container_name: postgres_db_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-commandcentralpass}
+      POSTGRES_DB: ${POSTGRES_DB:-commandcental_db}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: always
+  
+  pgadmin:
+    container_name: pgadmin_db_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - "pgadmin:/var/lib/pgadmin"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: always
+
+
   commandcentralapi:
-    image: commandcentralapi
+    image: commandcentral_api
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8080:80
-    depends_on: 
-      - db
+    depends_on:
+      - postgres
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-  db:
-    image: postgres
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=commandcentraldb
-      - POSTGRES_PASSWORD=commandcentralpass
-      - POSTGRES_DB=commandcentral_db
+
+
+
+volumes:
+  postgres:
+  pgadmin:

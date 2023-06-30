@@ -1,22 +1,25 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-ENV ASPNETCORE_URLS http://*:80
-ENV ASPNETCORE_ENVIRONMENT=Development
-
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["CommandCentralAPI.csproj", "./"]
-RUN dotnet restore "CommandCentralAPI.csproj"
-COPY . .
-WORKDIR "/src/"
-RUN dotnet build "CommandCentralAPI.csproj" -c Release -o /app/build
 
+# Copy the solution file and restore dependencies
+COPY CommandCentralApi.sln .
+COPY Core/ ./Core/
+COPY Infrastructure/ ./Infrastructure/
+COPY WebApi/API/ ./WebApi/API/
+RUN dotnet restore
+
+# Build the projects
+RUN dotnet build -c Release
+
+# Publish stage
 FROM build AS publish
-RUN dotnet publish "CommandCentralAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish -c Release -o /app/publish
 
-FROM base AS final
+# Final stage
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CommandCentralAPI.dll"]
+
+# Set the entry point
+ENTRYPOINT ["dotnet", "API.dll"]
