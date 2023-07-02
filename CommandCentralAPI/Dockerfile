@@ -7,6 +7,8 @@ COPY CommandCentralAPI.sln .
 COPY Core/ ./Core/
 COPY Infrastructure/ ./Infrastructure/
 COPY WebApi/API/ ./WebApi/API/
+
+COPY Infrastructure.Tests/Infrastructure.Tests.csproj ./Infrastructure.Tests/
 RUN dotnet restore
 
 # Build the projects
