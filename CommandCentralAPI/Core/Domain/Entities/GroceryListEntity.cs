@@ -6,6 +6,10 @@ namespace Domain.Entities;
 [Table("grocery_list")]
 public class GroceryListEntity
 {
-    [Key] public int id { get; set; }
-    public HouseholdEntity household_ { get; set; }
+    [Key] 
+    [Column("id")]
+    public int Id { get; set; }
+    [ForeignKey("household_id")]
+    public HouseholdEntity? household_ { get; set; }
+    public ICollection<GroceryListItemEntity>? items { get; set; }
 }

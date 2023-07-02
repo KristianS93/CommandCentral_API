@@ -8,11 +8,11 @@ namespace Infrastructure.Services;
 
 public class HouseholdService : IHouseholdService
 {
-    private readonly ApiDbContext _dbContext;
+    private readonly IApiDbContext _dbContext;
     private readonly ILogger<HouseholdService> _logger;
     
     //db context should probably be an interface
-    public HouseholdService(ApiDbContext dbContext, ILogger<HouseholdService> logger)
+    public HouseholdService(IApiDbContext dbContext, ILogger<HouseholdService> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
@@ -31,4 +31,27 @@ public class HouseholdService : IHouseholdService
         return await _dbContext.Household.ToListAsync();
     }
 
+    public async Task<HouseholdEntity> GetByIdAsync(int id)
+    {
+        return await _dbContext.Household.FindAsync(id);
+    }
+
+    public async Task<int> CreateAsync(HouseholdEntity item)
+    {
+        _dbContext.Household.Add(item);
+        await _dbContext.SaveChangesAsync();
+        return item.Id;
+    }
+
+    public async Task UpdateAsync(HouseholdEntity item)
+    {
+        _dbContext.Household.Update(item);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(HouseholdEntity item)
+    {
+        _dbContext.Household.Remove(item);
+        await _dbContext.SaveChangesAsync();
+    }
 }

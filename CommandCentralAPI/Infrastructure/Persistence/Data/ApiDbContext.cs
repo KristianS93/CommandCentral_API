@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Persistence.Data;
 
-public class ApiDbContext : DbContext
+public class ApiDbContext : DbContext, IApiDbContext
 {
     private readonly ILogger<ApiDbContext> _logger;
 
@@ -91,5 +91,10 @@ public class ApiDbContext : DbContext
             SaveChanges();
         }
         
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        return await SaveChangesAsync();
     }
 }

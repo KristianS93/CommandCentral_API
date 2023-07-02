@@ -2,7 +2,10 @@ using Domain.Entities;
 
 namespace Infrastructure.Interfaces;
 
-public interface IHouseholdService
+/// <summary>
+/// This should be used if there is extra functionality needed for the household.
+/// </summary>
+public interface IHouseholdService: IBaseCRUD<HouseholdEntity>
 {
-    public Task<List<HouseholdEntity>> GetAllAsync();
+    // public Task<List<HouseholdEntity>> GetAllAsync();
 }

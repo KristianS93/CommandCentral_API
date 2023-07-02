@@ -7,7 +7,8 @@ public class GroceryListItemEntity
 {
     [Key]
     public int id { get; set; }
-    public GroceryListEntity grocery_list_ { get; set; }
+    [ForeignKey("grocery_list_id")]
+    public GroceryListEntity? grocery_list_ { get; set; }
     public string item_name { get; set; }
     public string item_amount { get; set; }
 }

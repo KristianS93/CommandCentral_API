@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{93DB5682-9A66-4499-8FE9-415950AC3832}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Core\Domain\Domain.csproj", "{693DA1B9-6916-40BA-B9A4-8091AAE86333}"
@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{0A63A7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "WebApi\API\API.csproj", "{1D42BF73-C0FF-4880-B2F2-EAA91F5EA740}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{878EBECB-E122-4D3A-B57E-5A69797D630A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{E20FE167-3589-4FE4-BBEE-264825C94053}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,7 @@ Global
 		{DFF766C6-28EA-4719-901F-779FB3F2B832} = {5C7B2C70-2171-4576-99AE-95FAB98A2809}
 		{B9F3445F-9573-4729-ADE8-982CFF449D2E} = {5C7B2C70-2171-4576-99AE-95FAB98A2809}
 		{1D42BF73-C0FF-4880-B2F2-EAA91F5EA740} = {0A63A73C-8B94-4469-AE30-09E067BE9795}
+		{E20FE167-3589-4FE4-BBEE-264825C94053} = {878EBECB-E122-4D3A-B57E-5A69797D630A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{693DA1B9-6916-40BA-B9A4-8091AAE86333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -43,5 +48,9 @@ Global
 		{1D42BF73-C0FF-4880-B2F2-EAA91F5EA740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D42BF73-C0FF-4880-B2F2-EAA91F5EA740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D42BF73-C0FF-4880-B2F2-EAA91F5EA740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20FE167-3589-4FE4-BBEE-264825C94053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20FE167-3589-4FE4-BBEE-264825C94053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20FE167-3589-4FE4-BBEE-264825C94053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20FE167-3589-4FE4-BBEE-264825C94053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
