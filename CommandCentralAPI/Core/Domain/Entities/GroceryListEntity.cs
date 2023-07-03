@@ -3,13 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities;
 
-[Table("grocery_list")]
+[Table("grocerylist")]
 public class GroceryListEntity
 {
     [Key] 
-    [Column("id")]
-    public int Id { get; set; }
-    [ForeignKey("household_id")]
-    public HouseholdEntity? household_ { get; set; }
-    public ICollection<GroceryListItemEntity>? items { get; set; }
+    [Column("grocerylist_id")]
+    public int GroceryListID { get; set; }
+    
+    [Required]
+    [Column("household_id")]
+    public int HouseholdID { get; set; }
+    
+    [Required, Column("creation_date")]
+    public DateTime CreationDate { get; set; }
+    
+    [ForeignKey("HouseholdID")]
+    public HouseholdEntity household{ get; set; }
+
+    public ICollection<GroceryListItemEntity> grocerylist_items { get; set; }
 }

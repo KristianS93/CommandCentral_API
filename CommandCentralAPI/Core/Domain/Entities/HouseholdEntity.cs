@@ -7,10 +7,9 @@ namespace Domain.Entities;
 public class HouseholdEntity
 {
     [Key] 
-    [Column("id")]
-    public int Id { get; set; }
-    [Column("name")]
+    [Column("household_id")]
+    public int HouseholdID { get; set; }
+    
+    [Required, Column("name")]
     public string Name { get; set; }
-    [Column("grocerlist_id")]
-    public GroceryListEntity? grocery_list { get; set; }
 }

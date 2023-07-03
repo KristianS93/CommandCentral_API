@@ -54,7 +54,7 @@ public class HouseholdController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateHousehold(int id, HouseholdEntity item)
     {
-        if (id != item.Id)
+        if (id != item.HouseholdID)
         {
             return BadRequest();
         }

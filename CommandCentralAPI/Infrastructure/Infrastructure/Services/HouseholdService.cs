@@ -40,7 +40,7 @@ public class HouseholdService : IHouseholdService
     {
         _dbContext.Household.Add(item);
         await _dbContext.SaveChangesAsync();
-        return item.Id;
+        return item.HouseholdID;
     }
 
     public async Task UpdateAsync(HouseholdEntity item)
