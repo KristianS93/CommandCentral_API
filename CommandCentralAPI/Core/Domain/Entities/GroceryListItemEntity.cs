@@ -11,6 +11,7 @@ public class GroceryListItemEntity
     
     [Required]
     [Column("grocerylist_id")]
+    [ForeignKey("grocerylist_id")]
     public int GroceryListID { get; set; }
     
     [Required]
@@ -20,7 +21,4 @@ public class GroceryListItemEntity
     [Required]
     [Column("item_amount")]
     public int ItemAmount { get; set; }
-    
-    [ForeignKey("GroceryListID")]
-    public GroceryListEntity grocerylist { get; set; }
 }

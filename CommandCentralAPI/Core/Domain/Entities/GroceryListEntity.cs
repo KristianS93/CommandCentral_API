@@ -11,14 +11,8 @@ public class GroceryListEntity
     public int GroceryListID { get; set; }
     
     [Required]
+    
     [Column("household_id")]
+    [ForeignKey("household_id")]
     public int HouseholdID { get; set; }
-    
-    [Required, Column("creation_date")]
-    public DateTime CreationDate { get; set; }
-    
-    [ForeignKey("HouseholdID")]
-    public HouseholdEntity household{ get; set; }
-
-    public ICollection<GroceryListItemEntity> grocerylist_items { get; set; }
 }

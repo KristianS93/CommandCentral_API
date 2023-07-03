@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -15,17 +16,11 @@ public class ApiDbContext : DbContext, IApiDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<GroceryListEntity>()
-            .HasOne(h => h.household)
-            .WithMany()
-            .HasForeignKey(k => k.HouseholdID)
-            .OnDelete(DeleteBehavior.Cascade);
-        
-        modelBuilder.Entity<GroceryListItemEntity>()
-            .HasOne(i => i.grocerylist)
-            .WithMany()
-            .HasForeignKey(i => i.GroceryListID)
-            .OnDelete(DeleteBehavior.Cascade);
+        // modelBuilder.Entity<GroceryListItemEntity>()
+        //     .HasOne<GroceryListEntity>()
+        //     .WithMany()
+        //     .HasForeignKey(gli => gli.GroceryListID)
+        //     .OnDelete(DeleteBehavior.Cascade);
     }
 
     public DbSet<HouseholdEntity> Household { get; set; }
@@ -64,29 +59,32 @@ public class ApiDbContext : DbContext, IApiDbContext
             UpdateDatabase();
         }
 
-        Database.EnsureCreated();
+        // if (!Database.EnsureCreated())
+        // {
+        //     throw new SqlNullValueException("No db created");
+        // }
         
         // Seed dummy data
         if (!Household.Any())
         {
             // Create households
-            var household1 = new HouseholdEntity { Name = "Kristians hus" };
-            var household2 = new HouseholdEntity { Name = "Ibis hus" };
-            Household.AddRange(household1, household2);
+            var household1 = new HouseholdEntity { Name = "Kristians hus"};
+            var household2 = new HouseholdEntity { Name = "Ibis hus"} ;
+            Household.Add(household1);
+            Household.Add(household2);
             SaveChanges();
             
             // Create Grocerylists
             var grocerylist1 = new GroceryListEntity
             {
                 HouseholdID = household1.HouseholdID,
-                CreationDate = DateTime.Now
             };
             var grocerylist2 = new GroceryListEntity
             {
                 HouseholdID = household2.HouseholdID,
-                CreationDate = DateTime.Now
             };
-            GroceryList.AddRange(grocerylist1, grocerylist2);
+            GroceryList.Add(grocerylist1);
+            GroceryList.Add(grocerylist2);
             SaveChanges();
             
             // Create GroceryListItems
@@ -108,7 +106,9 @@ public class ApiDbContext : DbContext, IApiDbContext
                 ItemName = "Mælk",
                 ItemAmount = 2
             };
-            GroceryListItem.AddRange(item1, item2, item2);
+            GroceryListItem.Add(item1);
+            GroceryListItem.Add(item2);
+            GroceryListItem.Add(item3);
             SaveChanges();
 
             //     // Create households

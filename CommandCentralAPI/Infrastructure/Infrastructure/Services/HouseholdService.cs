@@ -36,11 +36,11 @@ public class HouseholdService : IHouseholdService
         return await _dbContext.Household.FindAsync(id);
     }
 
-    public async Task<int> CreateAsync(HouseholdEntity item)
+    public async Task<HouseholdEntity> CreateAsync(HouseholdEntity item)
     {
         _dbContext.Household.Add(item);
         await _dbContext.SaveChangesAsync();
-        return item.HouseholdID;
+        return item;
     }
 
     public async Task UpdateAsync(HouseholdEntity item)
