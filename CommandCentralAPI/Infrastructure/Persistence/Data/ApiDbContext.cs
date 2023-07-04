@@ -14,18 +14,19 @@ public class ApiDbContext : DbContext, IApiDbContext
         _logger = logger;
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // modelBuilder.Entity<GroceryListItemEntity>()
-        //     .HasOne<GroceryListEntity>()
-        //     .WithMany()
-        //     .HasForeignKey(gli => gli.GroceryListID)
-        //     .OnDelete(DeleteBehavior.Cascade);
-    }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     // modelBuilder.Entity<GroceryListItemEntity>()
+    //     //     .HasOne<GroceryListEntity>()
+    //     //     .WithMany()
+    //     //     .HasForeignKey(gli => gli.GroceryListID)
+    //     //     .OnDelete(DeleteBehavior.Cascade);
+    // }
 
-    public DbSet<HouseholdEntity> Household { get; set; }
-    public DbSet<GroceryListEntity> GroceryList { get; set; }
-    public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
+    // public DbSet<HouseholdEntity> Household { get; set; }
+    // public DbSet<GroceryListEntity> GroceryList { get; set; }
+    // public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
+    public DbSet<TodoItem> TodoItems { get; set; }
 
     private void UpdateDatabase()
     {
@@ -51,7 +52,8 @@ public class ApiDbContext : DbContext, IApiDbContext
         {
             // we only check household since it is essential
             // maybe further should be added 
-            Household.Any();
+            // Household.Any();
+            TodoItems.Any();
         }
         catch (Exception e)
         {
@@ -65,51 +67,59 @@ public class ApiDbContext : DbContext, IApiDbContext
         // }
         
         // Seed dummy data
-        if (!Household.Any())
+        // if (!Household.Any())
+        if (!TodoItems.Any())
         {
-            // Create households
-            var household1 = new HouseholdEntity { Name = "Kristians hus"};
-            var household2 = new HouseholdEntity { Name = "Ibis hus"} ;
-            Household.Add(household1);
-            Household.Add(household2);
+            var item1 = new TodoItem { Title = "My title", IsCompleted = false };
+            var item2 = new TodoItem { Title = "buy milk", IsCompleted = true };
+            var item3 = new TodoItem { Title = "go to school", IsCompleted = false };
+            TodoItems.Add(item1);
+            TodoItems.Add(item2);
+            TodoItems.Add(item3);
             SaveChanges();
-            
-            // Create Grocerylists
-            var grocerylist1 = new GroceryListEntity
-            {
-                HouseholdID = household1.HouseholdID,
-            };
-            var grocerylist2 = new GroceryListEntity
-            {
-                HouseholdID = household2.HouseholdID,
-            };
-            GroceryList.Add(grocerylist1);
-            GroceryList.Add(grocerylist2);
-            SaveChanges();
-            
-            // Create GroceryListItems
-            var item1 = new GroceryListItemEntity
-            {
-                GroceryListID = grocerylist1.GroceryListID,
-                ItemName = "Æbler",
-                ItemAmount = 4
-            };
-            var item2 = new GroceryListItemEntity
-            {
-                GroceryListID = grocerylist1.GroceryListID,
-                ItemName = "Toilet papir",
-                ItemAmount = 1
-            };
-            var item3 = new GroceryListItemEntity
-            {
-                GroceryListID = grocerylist2.GroceryListID,
-                ItemName = "Mælk",
-                ItemAmount = 2
-            };
-            GroceryListItem.Add(item1);
-            GroceryListItem.Add(item2);
-            GroceryListItem.Add(item3);
-            SaveChanges();
+            // // Create households
+            // var household1 = new HouseholdEntity { Name = "Kristians hus"};
+            // var household2 = new HouseholdEntity { Name = "Ibis hus"} ;
+            // Household.Add(household1);
+            // Household.Add(household2);
+            // SaveChanges();
+            //
+            // // Create Grocerylists
+            // var grocerylist1 = new GroceryListEntity
+            // {
+            //     HouseholdID = household1.HouseholdID,
+            // };
+            // var grocerylist2 = new GroceryListEntity
+            // {
+            //     HouseholdID = household2.HouseholdID,
+            // };
+            // GroceryList.Add(grocerylist1);
+            // GroceryList.Add(grocerylist2);
+            // SaveChanges();
+            //
+            // // Create GroceryListItems
+            // var item1 = new GroceryListItemEntity
+            // {
+            //     GroceryListID = grocerylist1.GroceryListID,
+            //     ItemName = "Æbler",
+            //     ItemAmount = 4
+            // };
+            // var item2 = new GroceryListItemEntity
+            // {
+            //     GroceryListID = grocerylist1.GroceryListID,
+            //     ItemName = "Toilet papir",
+            //     ItemAmount = 1
+            // };
+            // var item3 = new GroceryListItemEntity
+            // {
+            //     GroceryListID = grocerylist2.GroceryListID,
+            //     ItemName = "Mælk",
+            //     ItemAmount = 2
+            // };
+            // GroceryListItem.Add(item1);
+            // GroceryListItem.Add(item2);
+            // GroceryListItem.Add(item3);
+            // SaveChanges();
 
             //     // Create households
             //     var household1 = new HouseholdEntity { Name = "Kristians hus"};
@@ -142,6 +152,6 @@ public class ApiDbContext : DbContext, IApiDbContext
 
     public async Task<int> SaveChangesAsync()
     {
-        return await SaveChangesAsync();
+        return await base.SaveChangesAsync();
     }
 }

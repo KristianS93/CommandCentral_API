@@ -15,8 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<IApiDbContext, ApiDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
-builder.Services.AddScoped<IHouseholdService, HouseholdService>();
-builder.Services.AddCors();
+// builder.Services.AddScoped<IHouseholdService, HouseholdService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 var app = builder.Build();
 
@@ -32,8 +32,6 @@ if (app.Environment.IsDevelopment())
         var db = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
         db.InitializeDb();
     }
-
-    app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 }
 
 app.UseHttpsRedirection();

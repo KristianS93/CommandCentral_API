@@ -1,8 +1,11 @@
-# Build stage
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Copy the solution file and restore dependencies
 COPY CommandCentralAPI.sln .
 COPY Core/ ./Core/
 COPY Infrastructure/ ./Infrastructure/
@@ -19,9 +22,9 @@ FROM build AS publish
 RUN dotnet publish -c Release -o /app/publish
 
 # Final stage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+# Set the entry point
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# Set the entry point
 ENTRYPOINT ["dotnet", "API.dll"]

@@ -5,10 +5,6 @@ namespace Persistence.Data;
 
 public interface IApiDbContext
 {
-    DbSet<HouseholdEntity> Household { get; set; }
-    DbSet<GroceryListEntity> GroceryList { get; set; }
-    DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
-        
-    void InitializeDb();
+    DbSet<TodoItem> TodoItems { get; set; }
     Task<int> SaveChangesAsync();
 }
