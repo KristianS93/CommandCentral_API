@@ -12,7 +12,7 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230704214730_entityAdd")]
+    [Migration("20230704222601_entityAdd")]
     partial class entityAdd
     {
         /// <inheritdoc />
@@ -42,6 +42,8 @@ namespace Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HouseholdId");
 
                     b.HasIndex("household")
                         .IsUnique();
@@ -93,10 +95,18 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.GroceryListEntity", b =>
                 {
+                    b.HasOne("Domain.Entities.HouseholdEntity", "Household")
+                        .WithMany()
+                        .HasForeignKey("HouseholdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.HouseholdEntity", null)
                         .WithOne()
                         .HasForeignKey("Domain.Entities.GroceryListEntity", "household")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Household");
                 });
 #pragma warning restore 612, 618
         }

@@ -56,6 +56,12 @@ namespace Persistence.Migrations
                         principalTable: "household",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_grocerylist_household_household_id",
+                        column: x => x.household_id,
+                        principalTable: "household",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -63,6 +69,11 @@ namespace Persistence.Migrations
                 table: "grocerylist",
                 column: "household",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_grocerylist_household_id",
+                table: "grocerylist",
+                column: "household_id");
         }
 
         /// <inheritdoc />

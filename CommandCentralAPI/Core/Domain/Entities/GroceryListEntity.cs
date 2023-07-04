@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain.Entities;
 
@@ -12,7 +13,8 @@ public class GroceryListEntity
     
     [Required]
     [Column("household_id")]
-    [ForeignKey("household")]
+    [ForeignKey("Household")]
     public int HouseholdId { get; set; }
-    
+    [JsonIgnore]
+    public HouseholdEntity Household { get; set; }
 }

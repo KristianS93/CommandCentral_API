@@ -14,6 +14,7 @@ public static class InfrastructureExtension
     {
         service.AddScoped<ITodoService, TodoService>();
         service.AddScoped<IHouseholdService, HouseholdService>();
+        service.AddScoped<IGroceryListService, GroceryListService>();
 
         return service;
     }
