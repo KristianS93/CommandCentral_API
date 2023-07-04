@@ -13,6 +13,8 @@ When the migration is created proceed.
   - `docker compose build`
 - Then to run the images:
   - `docker compose up`
+  - Or to compose in detached mode use:
+  - `docker compose up -d`
 - verify everything is running either in the browser using swagger or in postman, with the following url:
   - `http://localhost:8080/swagger/index.html`
 
