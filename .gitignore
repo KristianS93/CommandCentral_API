@@ -385,7 +385,7 @@ FodyWeavers.xsd
 *.code-workspace
 .vscode
 .idea/*
-.DS_STORE
+.DS_Store
 
 # Local History for Visual Studio Code
 .history/
