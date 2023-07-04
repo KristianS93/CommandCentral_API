@@ -23,7 +23,7 @@ public static class MigationExtensions
             // we only check household since it is essential
             // maybe further should be added 
             // Household.Any();
-            dbcontext.TodoItems.Any();
+            dbcontext.Household.Any();
         }
         catch (Exception e)
         {
@@ -35,8 +35,9 @@ public static class MigationExtensions
 
     public static void SeedDatabase()
     {
-        if (!_dbContext.TodoItems.Any())
+        if (!_dbContext.Household.Any())
         {
+            // Todoitems
             var item1 = new TodoItem { Title = "My title", IsCompleted = false };
             var item2 = new TodoItem { Title = "buy milk", IsCompleted = true };
             var item3 = new TodoItem { Title = "go to school", IsCompleted = false };
@@ -44,6 +45,13 @@ public static class MigationExtensions
             _dbContext.TodoItems.Add(item2);
             _dbContext.TodoItems.Add(item3);
             _dbContext.SaveChanges();
+            
+            // add household
+            var household1 = new HouseholdEntity { Name = "Kristians hus" };
+            var household2 = new HouseholdEntity { Name = "Ibis hus" };
+            _dbContext.AddRange(household1, household2);
+            _dbContext.SaveChanges();
+
         }
     }
 }

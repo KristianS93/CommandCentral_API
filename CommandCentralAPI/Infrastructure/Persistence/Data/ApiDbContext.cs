@@ -1,4 +1,3 @@
-using System.Data.SqlTypes;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,17 +13,17 @@ public class ApiDbContext : DbContext, IApiDbContext
         _logger = logger;
     }
 
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     // modelBuilder.Entity<GroceryListItemEntity>()
-    //     //     .HasOne<GroceryListEntity>()
-    //     //     .WithMany()
-    //     //     .HasForeignKey(gli => gli.GroceryListID)
-    //     //     .OnDelete(DeleteBehavior.Cascade);
-    // }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<GroceryListEntity>()
+            .HasOne<HouseholdEntity>()
+            .WithOne()
+            .HasForeignKey<GroceryListEntity>("household")
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 
-    // public DbSet<HouseholdEntity> Household { get; set; }
-    // public DbSet<GroceryListEntity> GroceryList { get; set; }
+    public DbSet<HouseholdEntity> Household { get; set; }
+    public DbSet<GroceryListEntity> GroceryList { get; set; }
     // public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
     public DbSet<TodoItem> TodoItems { get; set; }
     public async Task<int> SaveChangesAsync()

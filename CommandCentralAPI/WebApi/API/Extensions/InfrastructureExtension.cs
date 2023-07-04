@@ -13,6 +13,7 @@ public static class InfrastructureExtension
     public static IServiceCollection AddInfrastructure(this IServiceCollection service)
     {
         service.AddScoped<ITodoService, TodoService>();
+        service.AddScoped<IHouseholdService, HouseholdService>();
 
         return service;
     }
