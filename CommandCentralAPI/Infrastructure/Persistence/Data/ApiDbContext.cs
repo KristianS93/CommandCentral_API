@@ -15,86 +15,25 @@ public class ApiDbContext : DbContext, IApiDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<HouseholdEntity>()
-            .HasOne(g => g.grocery_list)
-            .WithOne(h => h.household_)
-            .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<GroceryListEntity>()
-            .HasMany(i => i.items)
-            .WithOne(l => l.grocery_list_)
+            .HasOne<HouseholdEntity>()
+            .WithOne()
+            .HasForeignKey<GroceryListEntity>("household")
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<GroceryListItemEntity>()
+            .HasOne<GroceryListEntity>()
+            .WithMany()
+            .HasForeignKey("grocerylist")
             .OnDelete(DeleteBehavior.Cascade);
     }
 
     public DbSet<HouseholdEntity> Household { get; set; }
     public DbSet<GroceryListEntity> GroceryList { get; set; }
     public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
-
-    private void UpdateDatabase()
-    {
-        try
-        {
-            Database.Migrate();
-        }
-        catch (Exception e)
-        {
-            _logger.LogCritical("Could not migrate");
-        }
-    }
-
-    public void InitializeDb()
-    {
-        while (!Database.CanConnect())
-        {
-            _logger.LogCritical("Could not connect to database, retry in 1 sec...");
-            Thread.Sleep(1000);
-        }
-
-        try
-        {
-            // we only check household since it is essential
-            // maybe further should be added 
-            Household.Any();
-        }
-        catch (Exception e)
-        {
-            // Since Household didnt exist, migrate the latest migration.
-            UpdateDatabase();
-        }
-        
-        // Seed dummy data
-        if (!Household.Any())
-        {
-            // Create households
-            var household1 = new HouseholdEntity { Name = "Kristians hus"};
-            var household2 = new HouseholdEntity { Name = "Ibis hus"} ;
-            Household.Add(household1);
-            Household.Add(household2);
-            SaveChanges();
-            
-            // Create grocerylists
-            var grocerylist1 = new GroceryListEntity { household_ = household1 };
-            var grocerylist2 = new GroceryListEntity { household_ = household2 };
-            GroceryList.Add(grocerylist1);
-            GroceryList.Add(grocerylist2);
-            SaveChanges();
-            household1.grocery_list = grocerylist1;
-            household2.grocery_list = grocerylist2;
-            SaveChanges();
-            
-            // Create grocery list items
-            var item1 = new GroceryListItemEntity { grocery_list_ = grocerylist1, item_name = "Mælk", item_amount = "2 stk"};
-            var item2 = new GroceryListItemEntity { grocery_list_ = grocerylist1, item_name = "Kokosnødder", item_amount = "3"};
-            var item3 = new GroceryListItemEntity { grocery_list_ = grocerylist2, item_name = "Cykel", item_amount = "1"};
-            GroceryListItem.Add(item1);
-            GroceryListItem.Add(item2);
-            GroceryListItem.Add(item3);
-            SaveChanges();
-        }
-        
-    }
-
+    public DbSet<TodoItem> TodoItems { get; set; }
     public async Task<int> SaveChangesAsync()
     {
-        return await SaveChangesAsync();
+        return await base.SaveChangesAsync();
     }
 }

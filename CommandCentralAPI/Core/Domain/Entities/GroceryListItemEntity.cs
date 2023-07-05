@@ -1,14 +1,28 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain.Entities;
-[Table("grocery_list_item")]
+[Table("grocerylist_item")]
 public class GroceryListItemEntity
 {
     [Key]
-    public int id { get; set; }
-    [ForeignKey("grocery_list_id")]
-    public GroceryListEntity? grocery_list_ { get; set; }
-    public string item_name { get; set; }
-    public string item_amount { get; set; }
+    [Column("id")]
+    public int GroceryListItemId { get; set; }
+
+    [Required]
+    [Column("item_name")]
+    public string ItemName { get; set; }
+    
+    [Required]
+    [Column("item_amount")]
+    public int ItemAmount { get; set; }
+    
+    [Required]
+    [Column("grocerylist_id")]
+    [JsonIgnore]
+    public int GroceryListId { get; set; }
+    
+    [JsonIgnore]
+    public GroceryListEntity GroceryList { get; set; }
 }

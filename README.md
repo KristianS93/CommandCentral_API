@@ -13,6 +13,8 @@ When the migration is created proceed.
   - `docker compose build`
 - Then to run the images:
   - `docker compose up`
+  - Or to compose in detached mode use:
+  - `docker compose up -d`
 - verify everything is running either in the browser using swagger or in postman, with the following url:
   - `http://localhost:8080/swagger/index.html`
 
@@ -22,3 +24,27 @@ When the migration is created proceed.
 [API image](https://hub.docker.com/repository/docker/kristians93/command_central_api/general)
 ## Postgres image
 [Postgres image](https://hub.docker.com/repository/docker/kristians93/command_central_postgres/general)
+
+
+Household and grocerylist schema idea:
+-- Create Household table
+CREATE TABLE Household (
+    HouseholdID INT PRIMARY KEY,
+    Name VARCHAR(255)
+);
+
+-- Create Grocerylist table
+CREATE TABLE Grocerylist (
+    GrocerylistID INT PRIMARY KEY,
+    HouseholdID INT,
+    CreationDate DATE,
+    FOREIGN KEY (HouseholdID) REFERENCES Household(HouseholdID) ON DELETE CASCADE
+);
+
+-- Create GrocerylistItem table
+CREATE TABLE GrocerylistItem (
+    GrocerylistItemID INT PRIMARY KEY,
+    GrocerylistID INT,
+    ItemName VARCHAR(255),
+    FOREIGN KEY (GrocerylistID) REFERENCES Grocerylist(GrocerylistID) ON DELETE CASCADE
+);

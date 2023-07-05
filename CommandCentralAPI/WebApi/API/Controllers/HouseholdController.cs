@@ -43,12 +43,13 @@ public class HouseholdController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateHousehold(HouseholdEntity item)
+    public async Task<ActionResult<HouseholdEntity>> CreateHousehold(string name)
     {
         // this requires further testing
-        var id = await _household.CreateAsync(item);
-        _logger.LogCritical("Generated id {id}", id);
-        return CreatedAtAction(nameof(GetHousehold), new { id = id }, item);
+        var house = new HouseholdEntity { Name = name };
+        house.Id = await _household.CreateAsync(house);
+        // _logger.LogCritical("Generated id {id}", id);
+        return Ok(house);
     }
 
     [HttpPut("{id}")]

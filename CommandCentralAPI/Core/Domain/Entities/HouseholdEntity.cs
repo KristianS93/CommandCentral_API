@@ -9,8 +9,7 @@ public class HouseholdEntity
     [Key] 
     [Column("id")]
     public int Id { get; set; }
-    [Column("name")]
+    
+    [Required, Column("name")]
     public string Name { get; set; }
-    [Column("grocerlist_id")]
-    public GroceryListEntity? grocery_list { get; set; }
 }
