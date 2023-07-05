@@ -20,11 +20,17 @@ public class ApiDbContext : DbContext, IApiDbContext
             .WithOne()
             .HasForeignKey<GroceryListEntity>("household")
             .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<GroceryListItemEntity>()
+            .HasOne<GroceryListEntity>()
+            .WithMany()
+            .HasForeignKey("grocerylist")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     public DbSet<HouseholdEntity> Household { get; set; }
     public DbSet<GroceryListEntity> GroceryList { get; set; }
-    // public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
+    public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
     public DbSet<TodoItem> TodoItems { get; set; }
     public async Task<int> SaveChangesAsync()
     {

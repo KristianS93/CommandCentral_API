@@ -48,6 +48,40 @@ namespace Persistence.Migrations
                     b.ToTable("grocerylist");
                 });
 
+            modelBuilder.Entity("Domain.Entities.GroceryListItemEntity", b =>
+                {
+                    b.Property<int>("GroceryListItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("GroceryListItemId"));
+
+                    b.Property<int>("GroceryListId")
+                        .HasColumnType("integer")
+                        .HasColumnName("grocerylist_id");
+
+                    b.Property<int>("ItemAmount")
+                        .HasColumnType("integer")
+                        .HasColumnName("item_amount");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("grocerylist")
+                        .HasColumnType("integer");
+
+                    b.HasKey("GroceryListItemId");
+
+                    b.HasIndex("GroceryListId");
+
+                    b.HasIndex("grocerylist");
+
+                    b.ToTable("grocerylist_item");
+                });
+
             modelBuilder.Entity("Domain.Entities.HouseholdEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -104,6 +138,22 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Household");
+                });
+
+            modelBuilder.Entity("Domain.Entities.GroceryListItemEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.GroceryListEntity", "GroceryList")
+                        .WithMany()
+                        .HasForeignKey("GroceryListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.GroceryListEntity", null)
+                        .WithMany()
+                        .HasForeignKey("grocerylist")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("GroceryList");
                 });
 #pragma warning restore 612, 618
         }

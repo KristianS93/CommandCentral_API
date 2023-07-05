@@ -51,10 +51,19 @@ public static class MigationExtensions
             var household2 = new HouseholdEntity { Name = "Ibis hus" };
             _dbContext.AddRange(household1, household2);
             _dbContext.SaveChanges();
+            
             // add grocerylists
             var grocerylist1 = new GroceryListEntity { HouseholdId = household1.Id };
             var grocerylist2 = new GroceryListEntity { HouseholdId = household2.Id };
             _dbContext.AddRange(grocerylist1, grocerylist2);
+            _dbContext.SaveChanges();
+            
+            // add items to grocerylists
+            var gItem1 = new GroceryListItemEntity { ItemName = "Mælk", ItemAmount = 3, GroceryListId = grocerylist1.Id };
+            var gItem2 = new GroceryListItemEntity { ItemName = "Toilet papir", ItemAmount = 1, GroceryListId = grocerylist1.Id };
+            var gItem3 = new GroceryListItemEntity { ItemName = "Boller", ItemAmount = 5, GroceryListId = grocerylist1.Id };
+            var gItem4 = new GroceryListItemEntity { ItemName = "Specialized cykel", ItemAmount = 2, GroceryListId = grocerylist2.Id };
+            _dbContext.GroceryListItem.AddRange(gItem1, gItem2, gItem3, gItem4);
             _dbContext.SaveChanges();
 
         }

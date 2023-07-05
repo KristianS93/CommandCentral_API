@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class entityAdd : Migration
+    public partial class initalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,6 +64,34 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "grocerylist_item",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    item_name = table.Column<string>(type: "text", nullable: false),
+                    item_amount = table.Column<int>(type: "integer", nullable: false),
+                    grocerylist_id = table.Column<int>(type: "integer", nullable: false),
+                    grocerylist = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_grocerylist_item", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_grocerylist_item_grocerylist_grocerylist",
+                        column: x => x.grocerylist,
+                        principalTable: "grocerylist",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_grocerylist_item_grocerylist_grocerylist_id",
+                        column: x => x.grocerylist_id,
+                        principalTable: "grocerylist",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_grocerylist_household",
                 table: "grocerylist",
@@ -74,16 +102,29 @@ namespace Persistence.Migrations
                 name: "IX_grocerylist_household_id",
                 table: "grocerylist",
                 column: "household_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_grocerylist_item_grocerylist",
+                table: "grocerylist_item",
+                column: "grocerylist");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_grocerylist_item_grocerylist_id",
+                table: "grocerylist_item",
+                column: "grocerylist_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "grocerylist");
+                name: "grocerylist_item");
 
             migrationBuilder.DropTable(
                 name: "todo_item");
+
+            migrationBuilder.DropTable(
+                name: "grocerylist");
 
             migrationBuilder.DropTable(
                 name: "household");

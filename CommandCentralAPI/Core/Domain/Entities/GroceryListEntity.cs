@@ -13,7 +13,6 @@ public class GroceryListEntity
     
     [Required]
     [Column("household_id")]
-    [ForeignKey("Household")]
     public int HouseholdId { get; set; }
     [JsonIgnore]
     public HouseholdEntity Household { get; set; }
