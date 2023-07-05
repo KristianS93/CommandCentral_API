@@ -15,6 +15,7 @@ public static class InfrastructureExtension
         service.AddScoped<ITodoService, TodoService>();
         service.AddScoped<IHouseholdService, HouseholdService>();
         service.AddScoped<IGroceryListService, GroceryListService>();
+        service.AddScoped<IGroceryListItemService, GroceryListItemService>();
 
         return service;
     }

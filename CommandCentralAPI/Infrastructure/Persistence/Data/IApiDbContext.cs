@@ -8,5 +8,6 @@ public interface IApiDbContext
     DbSet<TodoItem> TodoItems { get; set; }
     DbSet<HouseholdEntity> Household { get; set; }
     DbSet<GroceryListEntity> GroceryList { get; set; }
+    DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
     Task<int> SaveChangesAsync();
 }

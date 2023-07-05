@@ -20,6 +20,7 @@ public class GroceryListItemEntity
     
     [Required]
     [Column("grocerylist_id")]
+    [JsonIgnore]
     public int GroceryListId { get; set; }
     
     [JsonIgnore]
