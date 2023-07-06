@@ -26,4 +26,20 @@ public class GroceryListService : IGroceryListService
         _dbContext.GroceryList.Remove(item);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task CreateAsync(int householdId)
+    {
+        // Check whether the household already have a grocerylist
+        var item = await GetAsyncByHousehold(householdId);
+        if (item != null)
+        {
+            throw new ArgumentException("Grocerylist already exist for this household!");
+        }
+        
+        
+        // Create new instance and update database 
+        var groceryList = new GroceryListEntity { HouseholdId = householdId };
+        _dbContext.GroceryList.Add(groceryList);
+        await _dbContext.SaveChangesAsync();
+    }
 }

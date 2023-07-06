@@ -6,4 +6,5 @@ public interface IGroceryListService
 {
     Task<GroceryListEntity> GetAsyncByHousehold(int householdId);
     Task DeleteAsync(GroceryListEntity item);
+    Task CreateAsync(int householdId);
 }

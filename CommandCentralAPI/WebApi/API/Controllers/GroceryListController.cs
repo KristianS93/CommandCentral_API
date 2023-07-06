@@ -10,11 +10,13 @@ public class GroceryListController : ControllerBase
 {
     private readonly ILogger<GroceryListController> _logger;
     private readonly IGroceryListService _groceryList;
+    private readonly IHouseholdService _householdService;
 
-    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList)
+    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList, IHouseholdService householdService)
     {
         _logger = logger;
         _groceryList = groceryList;
+        _householdService = householdService;
     }
 
     [HttpGet("{id}")]
@@ -27,6 +29,26 @@ public class GroceryListController : ControllerBase
         }
 
         return Ok(groceryList);
+    }
+
+    [HttpPost("{id}")]
+    public async Task<ActionResult> CreateGroceryList(int id)
+    {
+        var household = await _householdService.GetByIdAsync(id);
+        if (household == null)
+        {
+            return NotFound();
+        }
+        try
+        {
+            await _groceryList.CreateAsync(id);
+        }
+        catch (ArgumentException e)
+        {
+            return Conflict(e.Message);
+        }
+
+        return Ok();
     }
 
     [HttpDelete]
