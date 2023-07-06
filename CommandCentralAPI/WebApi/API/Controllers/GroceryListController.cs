@@ -30,7 +30,8 @@ public class GroceryListController : ControllerBase
 
         return Ok(groceryList);
     }
-
+    
+    // skal ændres 
     [HttpPost("{id}")]
     public async Task<ActionResult> CreateGroceryList(int id)
     {

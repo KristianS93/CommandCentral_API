@@ -21,6 +21,7 @@ public class GroceryListService : IGroceryListService
     {
         return await _dbContext.GroceryList.FirstOrDefaultAsync(h => h.HouseholdId == householdId);
     }
+
     public async Task DeleteAsync(GroceryListEntity item)
     {
         _dbContext.GroceryList.Remove(item);
@@ -42,4 +43,5 @@ public class GroceryListService : IGroceryListService
         _dbContext.GroceryList.Add(groceryList);
         await _dbContext.SaveChangesAsync();
     }
+    
 }

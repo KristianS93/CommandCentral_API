@@ -24,5 +24,5 @@ public class GroceryListItemEntity
     public int GroceryListId { get; set; }
     
     [JsonIgnore]
-    public GroceryListEntity GroceryList { get; set; }
+    public GroceryListEntity? GroceryList { get; set; }
 }
