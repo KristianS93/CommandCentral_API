@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Exceptions;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,12 @@ public class GroceryListService : IGroceryListService
 
     public async Task CreateAsync(int householdId)
     {
+        // Check household exsists
+        var household = await _dbContext.Household.FindAsync(householdId);
+        if (household == null)
+        {
+            throw new HouseholdException("Household does not exist");
+        }
         // Check whether the household already have a grocerylist
         var item = await GetAsyncByHousehold(householdId);
         if (item != null)

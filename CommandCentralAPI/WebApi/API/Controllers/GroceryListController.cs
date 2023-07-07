@@ -1,4 +1,6 @@
 using Domain.Entities;
+using Domain.Exceptions;
+using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,13 +12,11 @@ public class GroceryListController : ControllerBase
 {
     private readonly ILogger<GroceryListController> _logger;
     private readonly IGroceryListService _groceryList;
-    private readonly IHouseholdService _householdService;
 
     public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList, IHouseholdService householdService)
     {
         _logger = logger;
         _groceryList = groceryList;
-        _householdService = householdService;
     }
 
     [HttpGet("{id}")]
@@ -32,21 +32,22 @@ public class GroceryListController : ControllerBase
     }
     
     // skal ændres 
-    [HttpPost("{id}")]
-    public async Task<ActionResult> CreateGroceryList(int id)
+    [HttpPost("{householdId}")]
+    public async Task<ActionResult> CreateGroceryList(int householdId)
     {
-        var household = await _householdService.GetByIdAsync(id);
-        if (household == null)
-        {
-            return NotFound();
-        }
         try
         {
-            await _groceryList.CreateAsync(id);
+            await _groceryList.CreateAsync(householdId);
         }
         catch (ArgumentException e)
         {
             return Conflict(e.Message);
+        }
+        catch (HouseholdException e)
+        {
+            var error = new HouseHoldErrors(householdId,
+                $"{ControllerContext.ActionDescriptor.ControllerName}/{householdId}").HouseholdDoesNotExist();
+            return NotFound(error);
         }
 
         return Ok();
