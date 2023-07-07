@@ -7,7 +7,7 @@ public class HouseHoldErrors : IErrorResponse
         _id = id;
         _controllerPath = controllerPath;
     }
-
+    
     private int _id;
     private string _controllerPath;
     
