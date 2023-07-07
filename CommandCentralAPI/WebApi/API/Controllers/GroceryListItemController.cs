@@ -20,13 +20,19 @@ public class GroceryListItemController : ControllerBase
     [HttpGet("GetAll/{grocerylist_id}")]
     public async Task<ActionResult<List<GroceryListEntity>>> GetGroceryListItems(int grocerylist_id)
     {
-        var itemList = await _groceryListItem.GetAllAsync(grocerylist_id);
-        if (itemList == null)
+        try
         {
-            return NotFound();
+            var itemList = await _groceryListItem.GetAllAsync(grocerylist_id);
+            if (itemList == null)
+            {
+                return NotFound();
+            }
+            return Ok(itemList);
         }
-
-        return Ok(itemList);
+        catch (ArgumentException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 
     [HttpGet("GetOne/{grocerylist_item_id}")]

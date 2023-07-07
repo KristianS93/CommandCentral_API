@@ -1,4 +1,6 @@
 using Domain.Entities;
+using Domain.Models;
+using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +38,9 @@ public class HouseholdController : ControllerBase
         var item = await _household.GetByIdAsync(id);
         if (item == null)
         {
-            return NotFound();
+            // dette skal standardiseres i set eget... så man kun skal provide evt params
+            var error = new HouseHoldErrors(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}").HouseholdDoesNotExist();
+            return NotFound(error);
         }
 
         return Ok(item);
@@ -57,7 +61,9 @@ public class HouseholdController : ControllerBase
     {
         if (id != item.Id)
         {
-            return BadRequest();
+            var error = new HouseHoldErrors(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}")
+                .HouseholdIdDoesNotMatchUpdatedHousehold(item.Id);
+            return BadRequest(error);
         }
 
         await _household.UpdateAsync(item);
