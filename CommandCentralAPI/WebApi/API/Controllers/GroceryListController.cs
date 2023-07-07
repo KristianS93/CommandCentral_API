@@ -41,6 +41,7 @@ public class GroceryListController : ControllerBase
         }
         catch (ArgumentException e)
         {
+            // needs own error response
             return Conflict(e.Message);
         }
         catch (HouseholdException e)
