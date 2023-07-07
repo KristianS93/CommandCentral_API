@@ -19,6 +19,10 @@ When the migration is created proceed.
   - `http://localhost:8080/swagger/index.html`
 
 
+# Routing
+will follow the general approach of REST api's
+<img width="637" alt="intro-to-restful-routing-rest-routes" src="https://github.com/KristianS93/CommandCentral_API/assets/82061735/a27069f4-8b94-473d-a9fe-cfc34e5ee267">
+
 # Docker images
 ## API image
 [API image](https://hub.docker.com/repository/docker/kristians93/command_central_api/general)
