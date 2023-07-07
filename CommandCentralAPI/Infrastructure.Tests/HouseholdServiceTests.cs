@@ -1,41 +1,31 @@
-// using Domain.Entities;
-// using Infrastructure.Services;
-// using Microsoft.EntityFrameworkCore;
-// using Microsoft.Extensions.DependencyInjection;
-// using Microsoft.Extensions.Logging;
-// using Moq;
-// using Persistence.Data;
-//
-// namespace Infrastructure.Tests;
-//
-// public class HouseholdServiceTests
-// {
-//     private HouseholdService _householdService;
-//     private Mock<IApiDbContext> _dbContextMock;
-//
-//     public HouseholdServiceTests()
-//     {
-//         _dbContextMock = new Mock<IApiDbContext>();
-//         _householdService = new HouseholdService(_dbContextMock.Object, null);
-//         
-//     }
-//
-//     [Fact]
-//     public async Task GetAllAsync_ShouldReturnAllHouseHolds()
-//     {
-//         // // Arrange
-//         // var expectedHouseholds = new List<HouseholdEntity>
-//         // {
-//         //     new HouseholdEntity { Id = 1, Name = "House1" },
-//         //     new HouseholdEntity { Id = 2, Name = "House2" },
-//         // };
-//         // // _dbContextMock.Setup(db => db.Household.ToListAsync(It.IsAny<CancellationToken>())).ReturnsAsync(expectedHouseholds);
-//         // _dbContextMock.Setup(db => db.Household.ToListAsync(It.IsAny<CancellationToken>()))
-//         //     .ReturnsAsync(expectedHouseholds);
-//         // // Act
-//         // var actualHousehold = await _householdService.GetAllAsync();
-//         //
-//         // // Assert
-//         // Assert.Equal(expectedHouseholds, actualHousehold);
-//     }
-// }
+using API.Controllers;
+using Castle.Core.Logging;
+using Domain.Entities;
+using Infrastructure.Interfaces;
+using Microsoft.Extensions.Logging;
+using Moq;
+
+namespace Infrastructure.Tests;
+
+public class HouseholdServiceTests
+{
+    [Fact]
+    public async void GetAllHouseholds()
+    {
+        // Arrange
+        var returnObj = new List<HouseholdEntity> { new HouseholdEntity { Id = 1, Name = "Kristians hus" } };
+        var serviceMock = new Mock<IHouseholdService>();
+        var loggerMock = Mock.Of<ILogger<HouseholdController>>();
+        serviceMock.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(returnObj);
+        var controller = new HouseholdController(loggerMock, serviceMock.Object);
+        
+        // Act
+        var households = await controller.GetHouseholds();
+        
+        // Assert 
+        serviceMock.Verify(r => r.GetAllAsync());
+        Assert.Equal(1, returnObj[0].Id);
+        Assert.Equal("Kristians hus", returnObj[0].Name);
+    }
+}

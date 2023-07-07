@@ -1,0 +1,17 @@
+Baseret på https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy
+Så er det fint at teste mod en instance af postgresql, hvilket er det jeg kommer til at gøre. 
+Testing bør foregå på 2 niveauer, test af service lag (ikke helt unit men lidt), og integrations test af controlleren. 
+
+Så sum op, lav Moq testing af services (repositories)
+    I Householdservice test er der eksempel på moq
+og lav integration testing på en ny instance af postgres. 
+    Eksempel på integration test i WebApi.Tests
+ 
+
+Brug af test image:
+- Byg image
+- `docker build -t postgres-test .`
+- Kør image
+- `docker run --name postgres-test-env -p 5432:5432 -d postgres-test`
+- Connection string
+- `"Host=localhost;Port=5432;Database=commandcentraltest_db;Username=commandcentraltest;Password=commandcentraltestpass;"`
