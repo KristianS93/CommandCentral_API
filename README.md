@@ -18,6 +18,23 @@ When the migration is created proceed.
 - verify everything is running either in the browser using swagger or in postman, with the following url:
   - `http://localhost:8080/swagger/index.html`
 
+# Testing strategy 
+- Based on https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy
+- Testing the API will follow 2 strategies
+  - Strategy 1 - Moq for repository pattern 
+    - [Testing without DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-without-the-database#repository-pattern)
+    - This strategy involves mocking the repositories (or services in this project), to check whether the service implementation works as expected.
+  - Strategy 2 - Testing the same Database system
+    - [Testing with DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-with-the-database)
+    - This strategy involves full integration testing of the production database system, which is PostgreSQL.
+    - Ensures that each controller outputs the correct info from the testing db.
+  - The Tests solution has its own Dockerfile to instantiate the testing db locally
+    - To use the Database follow these instructions:
+      - cd to the directory of the Tests folder
+      - Build the image
+      - `docker build -t postgres-test .`
+      - Run the image
+      - `docker run --name postgres-test-env -p 5432:5432 -d postgres-test`
 
 # Routing
 will follow the general approach of REST api's
