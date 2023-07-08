@@ -15,7 +15,7 @@ jobs:
     
     services:
       postgres:
-        image: postgres-test
+        image: postgres
         env:
           POSTGRES_USER: commandcentraltest
           POSTGRES_PASSWORD: commandcentraltestpass
