@@ -19,13 +19,13 @@ When the migration is created proceed.
   - `http://localhost:8080/swagger/index.html`
 
 # Testing strategy 
-- Based on https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy
+- Based on [MSDN: Choosing a testing strategy](https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy)
 - Testing the API will follow 2 strategies
   - Strategy 1 - Moq for repository pattern 
-    - [Testing without DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-without-the-database#repository-pattern)
+    - [MSDN: Testing without DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-without-the-database#repository-pattern)
     - This strategy involves mocking the repositories (or services in this project), to check whether the service implementation works as expected.
   - Strategy 2 - Testing the same Database system
-    - [Testing with DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-with-the-database)
+    - [MSDN: Testing with DB](https://learn.microsoft.com/en-us/ef/core/testing/testing-with-the-database)
     - This strategy involves full integration testing of the production database system, which is PostgreSQL.
     - Ensures that each controller outputs the correct info from the testing db.
   - The Tests solution has its own Dockerfile to instantiate the testing db locally
