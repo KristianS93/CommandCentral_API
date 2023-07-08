@@ -49,4 +49,4 @@ will follow the general approach of REST api's
 
 
 # Current Db Scheme
-<img width="637" alt="db-schema" src="https://github.com/KristianS93/CommandCentral_API/assets/82061735/aed788f5-3feb-4cc8-aeea-3e71b6b4c168">
+<img width="500" alt="db-schema" src="https://github.com/KristianS93/CommandCentral_API/assets/82061735/aed788f5-3feb-4cc8-aeea-3e71b6b4c168">
