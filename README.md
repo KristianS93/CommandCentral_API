@@ -39,7 +39,7 @@ When the migration is created proceed.
 # Routing
 will follow the general approach of REST api's
 
-<img width="637" alt="intro-to-restful-routing-rest-routes" src="https://github.com/KristianS93/CommandCentral_API/assets/82061735/a27069f4-8b94-473d-a9fe-cfc34e5ee267">
+<img width="500" alt="intro-to-restful-routing-rest-routes" src="https://github.com/KristianS93/CommandCentral_API/assets/82061735/a27069f4-8b94-473d-a9fe-cfc34e5ee267">
 
 # Docker images
 ## API image
