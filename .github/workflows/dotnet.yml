@@ -11,8 +11,18 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres-test
+        env:
+          POSTGRES_USER: commandcentraltest
+          POSTGRES_PASSWORD: commandcentraltestpass
+          POSTGRES_DB: commandcentraltest_db
+        ports:
+          - 5432:5432
+        
 
     steps:
     - uses: actions/checkout@v3
