@@ -12,9 +12,12 @@ public class ApiDbContext : DbContext, IApiDbContext
     {
         _logger = logger;
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<GroceryListEntity>()
+            .HasIndex(key => key.HouseholdId)
+            .IsUnique();
+
         modelBuilder.Entity<GroceryListEntity>()
             .HasOne<HouseholdEntity>()
             .WithOne()

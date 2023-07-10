@@ -101,7 +101,8 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_grocerylist_household_id",
                 table: "grocerylist",
-                column: "household_id");
+                column: "household_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_grocerylist_item_grocerylist",

@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Exceptions.GroceryList;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -13,57 +14,61 @@ public class GroceryListController : ControllerBase
     private readonly ILogger<GroceryListController> _logger;
     private readonly IGroceryListService _groceryList;
 
-    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList, IHouseholdService householdService)
+    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList)
     {
         _logger = logger;
         _groceryList = groceryList;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<GroceryListEntity>> GetGroceryList(int id)
-    {
-        var groceryList = await _groceryList.GetAsyncByHousehold(id);
-        if (groceryList == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(groceryList);
-    }
-    
-    // skal ændres 
-    [HttpPost("{householdId}")]
-    public async Task<ActionResult> CreateGroceryList(int householdId)
+    [HttpGet("{household_id}")]
+    public async Task<ActionResult<GroceryListEntity>> GetGroceryList(int household_id)
     {
         try
         {
-            await _groceryList.CreateAsync(householdId);
+            return Ok(await _groceryList.GetAsyncByHouseholdId(household_id));
         }
-        catch (ArgumentException e)
+        catch (GroceryListDoesNotExistException)
         {
-            // needs own error response
-            return Conflict(e.Message);
-        }
-        catch (HouseholdException e)
-        {
-            var error = new HouseHoldErrors(householdId,
-                $"{ControllerContext.ActionDescriptor.ControllerName}/{householdId}").HouseholdDoesNotExist();
+            var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
-
-        return Ok();
+    }
+    
+    [HttpPost("{household_id}")]
+    public async Task<ActionResult> CreateGroceryList(int household_id)
+    {
+        try
+        {
+            await _groceryList.CreateAsync(household_id);
+            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{household_id}", null);
+        }
+        catch (GroceryListDuplicateException e)
+        {
+            var error = new GroceryListErrors().GroceryListDuplicateHousehold(household_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return Conflict(error);
+        }
+        catch (HouseholdDoesNotExistException e)
+        {
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(household_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
+        }
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteGroceryList(int id)
+    [HttpDelete("{household_id}")]
+    public async Task<IActionResult> DeleteGroceryList(int household_id)
     {
-        var item = await _groceryList.GetAsyncByHousehold(id);
-        if (item == null)
+        try
         {
-            return NotFound();
+            await _groceryList.DeleteAsync(household_id);
+            return NoContent();
         }
-
-        await _groceryList.DeleteAsync(item);
-        return NoContent();
+        catch (GroceryListDoesNotExistException)
+        {
+            var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
+        }
     }
 }

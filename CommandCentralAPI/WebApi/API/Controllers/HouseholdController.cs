@@ -39,7 +39,7 @@ public class HouseholdController : ControllerBase
         if (item == null)
         {
             // dette skal standardiseres i set eget... så man kun skal provide evt params
-            var error = new HouseHoldErrors(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}").HouseholdDoesNotExist();
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}");
             return NotFound(error);
         }
 
@@ -61,8 +61,8 @@ public class HouseholdController : ControllerBase
     {
         if (id != item.Id)
         {
-            var error = new HouseHoldErrors(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}")
-                .HouseholdIdDoesNotMatchUpdatedHousehold(item.Id);
+            var error = new HouseHoldErrors()
+                .HouseholdIdDoesNotMatchUpdatedHousehold(id, $"{ControllerContext.ActionDescriptor.ControllerName}",item.Id);
             return BadRequest(error);
         }
 

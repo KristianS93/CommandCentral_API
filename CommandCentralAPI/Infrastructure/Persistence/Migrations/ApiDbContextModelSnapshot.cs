@@ -40,7 +40,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdId");
+                    b.HasIndex("HouseholdId")
+                        .IsUnique();
 
                     b.HasIndex("household")
                         .IsUnique();

@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Exceptions.GroceryList;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -18,13 +19,24 @@ public class GroceryListService : IGroceryListService
         _logger = logger;
     }
     
-    public async Task<GroceryListEntity> GetAsyncByHousehold(int householdId)
+    public async Task<GroceryListEntity> GetAsyncByHouseholdId(int householdId)
     {
-        return await _dbContext.GroceryList.FirstOrDefaultAsync(h => h.HouseholdId == householdId);
+        var item = await _dbContext.GroceryList.FirstOrDefaultAsync(h => h.HouseholdId == householdId);
+        if (item == null)
+        {
+            throw new GroceryListDoesNotExistException();
+        }
+
+        return item;
     }
 
-    public async Task DeleteAsync(GroceryListEntity item)
+    public async Task DeleteAsync(int household_id)
     {
+        var item = await GetAsyncByHouseholdId(household_id);
+        if (item == null)
+        {
+            throw new GroceryListDoesNotExistException();
+        }
         _dbContext.GroceryList.Remove(item);
         await _dbContext.SaveChangesAsync();
     }
@@ -35,20 +47,26 @@ public class GroceryListService : IGroceryListService
         var household = await _dbContext.Household.FindAsync(householdId);
         if (household == null)
         {
-            throw new HouseholdException("Household does not exist");
+            throw new HouseholdDoesNotExistException("Household does not exist");
         }
+        
         // Check whether the household already have a grocerylist
-        var item = await GetAsyncByHousehold(householdId);
-        if (item != null)
+        try
         {
-            throw new ArgumentException("Grocerylist already exist for this household!");
+            var item = await GetAsyncByHouseholdId(householdId);
+            if (item != null)
+            {
+                throw new GroceryListDuplicateException("Grocerylist already exist for this household!");
+            }
         }
-        
-        
-        // Create new instance and update database 
-        var groceryList = new GroceryListEntity { HouseholdId = householdId };
-        _dbContext.GroceryList.Add(groceryList);
-        await _dbContext.SaveChangesAsync();
+        catch(GroceryListDoesNotExistException)
+        {
+            // OK, the grocerylist does not exist
+            // Create new instance and update database 
+            var groceryList = new GroceryListEntity { HouseholdId = householdId };
+            _dbContext.GroceryList.Add(groceryList);
+            await _dbContext.SaveChangesAsync();
+        }
     }
     
 }

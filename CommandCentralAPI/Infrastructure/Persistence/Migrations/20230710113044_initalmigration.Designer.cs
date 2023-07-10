@@ -12,7 +12,7 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230706222717_initalmigration")]
+    [Migration("20230710113044_initalmigration")]
     partial class initalmigration
     {
         /// <inheritdoc />
@@ -43,7 +43,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseholdId");
+                    b.HasIndex("HouseholdId")
+                        .IsUnique();
 
                     b.HasIndex("household")
                         .IsUnique();
