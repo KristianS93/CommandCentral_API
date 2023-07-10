@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Exceptions;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -26,21 +27,26 @@ public class HouseholdService : IHouseholdService
     /// <returns>List of household objects</returns>
     public async Task<List<HouseholdEntity>> GetAllAsync()
     {
-        // maybe user id requesting should be provided
         _logger.LogInformation("Requesting to retrieve all households");
         return await _dbContext.Household.ToListAsync();
     }
 
     public async Task<HouseholdEntity> GetByIdAsync(int id)
     {
-        return await _dbContext.Household.FindAsync(id);
+        var item = await _dbContext.Household.FindAsync(id);
+        if (item == null)
+        {
+            throw new HouseholdDoesNotExistException("Household does not exist");
+        }
+        return item;
     }
 
-    public async Task<int> CreateAsync(HouseholdEntity item)
+    public async Task<HouseholdEntity> CreateAsync(string householdName)
     {
-        _dbContext.Household.Add(item);
+        var household = new HouseholdEntity { Name = householdName };
+        _dbContext.Household.Add(household);
         await _dbContext.SaveChangesAsync();
-        return item.Id;
+        return household;
     }
 
     public async Task UpdateAsync(HouseholdEntity item)
@@ -49,8 +55,13 @@ public class HouseholdService : IHouseholdService
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(HouseholdEntity item)
+    public async Task DeleteAsync(int id)
     {
+        var item = await GetByIdAsync(id);
+        if (item == null)
+        {
+            throw new HouseholdDoesNotExistException("Household does not exist");
+        }
         _dbContext.Household.Remove(item);
         await _dbContext.SaveChangesAsync();
     }

@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
@@ -19,50 +20,52 @@ public class HouseholdController : ControllerBase
         _household = household;
     }
 
+    // maybe this method is not needed, as it would only be an admin feature
     [HttpGet]
-    public async Task<List<HouseholdEntity>> GetHouseholds()
+    public async Task<ActionResult<List<HouseholdEntity>>> GetHouseholds()
     {
         try
         {
-            return await _household.GetAllAsync();
+            return Ok(await _household.GetAllAsync());
         }
-        catch (ArgumentNullException arg)
+        catch (Exception e)
         {
-            throw;
+            // think of a smart way to create an error response here
+            // the ToListAsync() can throw 2 exceptions argumentnullexception
+            // and operationcancelledexception
+            return NotFound(e.InnerException);
         }
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
     {
-        var item = await _household.GetByIdAsync(id);
-        if (item == null)
+        try
         {
-            // dette skal standardiseres i set eget... så man kun skal provide evt params
-            var error = new HouseHoldErrors().HouseholdDoesNotExist(id, $"{ControllerContext.ActionDescriptor.ControllerName}/{id}");
+            return Ok(await _household.GetByIdAsync(id));
+        }
+        catch (HouseholdDoesNotExistException e)
+        {
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(id, ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
-
-        return Ok(item);
     }
 
-    [HttpPost]
+    [HttpPost("{name}")]
     public async Task<ActionResult<HouseholdEntity>> CreateHousehold(string name)
     {
-        // this requires further testing
-        var house = new HouseholdEntity { Name = name };
-        house.Id = await _household.CreateAsync(house);
-        // _logger.LogCritical("Generated id {id}", id);
-        return Ok(house);
+        var household= await _household.CreateAsync(name);
+        return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{household.Id}", household);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateHousehold(int id, HouseholdEntity item)
     {
+        // this validation can stay since it does not require db.
         if (id != item.Id)
         {
             var error = new HouseHoldErrors()
-                .HouseholdIdDoesNotMatchUpdatedHousehold(id, $"{ControllerContext.ActionDescriptor.ControllerName}",item.Id);
+                .HouseholdIdDoesNotMatchUpdatedHousehold(id, ControllerContext.ActionDescriptor.ControllerName,item.Id);
             return BadRequest(error);
         }
 
@@ -70,17 +73,19 @@ public class HouseholdController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteHousehold(int id)
     {
-        // test if this get is neccessary.
-        var item = await _household.GetByIdAsync(id);
-        if (item == null)
+        try
         {
-            return NotFound();
+            await _household.DeleteAsync(id);
+            return NoContent();
         }
-
-        await _household.DeleteAsync(item);
-        return NoContent();
+        catch (HouseholdDoesNotExistException e)
+        {
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
+        }
     }
 }
