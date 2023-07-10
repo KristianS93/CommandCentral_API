@@ -12,7 +12,7 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230710171738_initalmigration")]
+    [Migration("20230710205835_initalmigration")]
     partial class initalmigration
     {
         /// <inheritdoc />
@@ -147,7 +147,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.GroceryListItemEntity", b =>
                 {
                     b.HasOne("Domain.Entities.GroceryListEntity", "GroceryList")
-                        .WithMany()
+                        .WithMany("GroceryListItems")
                         .HasForeignKey("GroceryListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -158,6 +158,11 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("GroceryList");
+                });
+
+            modelBuilder.Entity("Domain.Entities.GroceryListEntity", b =>
+                {
+                    b.Navigation("GroceryListItems");
                 });
 #pragma warning restore 612, 618
         }

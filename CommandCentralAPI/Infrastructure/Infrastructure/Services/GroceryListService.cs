@@ -12,11 +12,13 @@ public class GroceryListService : IGroceryListService
 {
     private readonly IApiDbContext _dbContext;
     private readonly ILogger<GroceryListService> _logger;
+    private readonly IGroceryListItemService _itemService;
 
-    public GroceryListService(IApiDbContext dbContext, ILogger<GroceryListService> logger)
+    public GroceryListService(IApiDbContext dbContext, ILogger<GroceryListService> logger, IGroceryListItemService itemService)
     {
         _dbContext = dbContext;
         _logger = logger;
+        _itemService = itemService;
     }
     
     public async Task<GroceryListEntity> GetAsyncByHouseholdId(int householdId)
@@ -26,7 +28,10 @@ public class GroceryListService : IGroceryListService
         {
             throw new GroceryListDoesNotExistException();
         }
-
+        
+        // add items 
+        var groceryListItems = await _itemService.GetAllAsync(item.Id);
+        item.GroceryListItems = groceryListItems;
         return item;
     }
 

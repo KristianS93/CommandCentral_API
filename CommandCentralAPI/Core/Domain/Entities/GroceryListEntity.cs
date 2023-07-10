@@ -16,4 +16,6 @@ public class GroceryListEntity
     public int HouseholdId { get; set; }
     [JsonIgnore]
     public HouseholdEntity Household { get; set; }
+    
+    public IEnumerable<GroceryListItemEntity>? GroceryListItems { get; set; }
 }
