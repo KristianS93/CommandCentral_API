@@ -1,5 +1,5 @@
 using API.Controllers;
-using DatabaseFixture;
+using DatabaseFixture.Tests;
 using Domain.Entities;
 using Domain.Exceptions;
 using Infrastructure.Interfaces;

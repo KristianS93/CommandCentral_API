@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence.Data;
 
-namespace DatabaseFixture;
+namespace DatabaseFixture.Tests;
 
 public class TestDatabaseFixture
 {

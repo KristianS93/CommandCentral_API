@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Tests", "WebApi.Tests\WebApi.Tests.csproj", "{1910E16A-B8E9-4019-BDF2-EBD605383464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseFixture", "DatabaseFixture\DatabaseFixture.csproj", "{722852ED-623D-40FA-9D02-A883FA708A8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseFixture.Tests", "DatabaseFixture.Tests\DatabaseFixture.Tests.csproj", "{722852ED-623D-40FA-9D02-A883FA708A8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

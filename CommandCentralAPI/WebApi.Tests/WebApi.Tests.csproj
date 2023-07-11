@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DatabaseFixture\DatabaseFixture.csproj" />
+      <ProjectReference Include="..\DatabaseFixture.Tests\DatabaseFixture.Tests.csproj" />
       <ProjectReference Include="..\Infrastructure\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\WebApi\API\API.csproj" />
     </ItemGroup>

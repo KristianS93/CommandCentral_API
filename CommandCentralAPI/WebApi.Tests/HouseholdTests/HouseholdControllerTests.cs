@@ -1,5 +1,5 @@
 using API.Controllers;
-using DatabaseFixture;
+using DatabaseFixture.Tests;
 using Domain.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
