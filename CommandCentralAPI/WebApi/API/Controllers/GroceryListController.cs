@@ -25,7 +25,7 @@ public class GroceryListController : ControllerBase
     {
         try
         {
-            return Ok(await _groceryList.GetAsyncByHouseholdId(household_id));
+            return Ok(await _groceryList.GetAsyncByHouseholdIdAsync(household_id));
         }
         catch (GroceryListDoesNotExistException)
         {

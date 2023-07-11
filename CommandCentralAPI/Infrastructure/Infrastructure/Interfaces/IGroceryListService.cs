@@ -1,10 +1,11 @@
 using Domain.Entities;
+using Domain.Exceptions.GroceryList;
 
 namespace Infrastructure.Interfaces;
 
 public interface IGroceryListService
 {
-    Task<GroceryListEntity> GetAsyncByHouseholdId(int householdId);
+    Task<GroceryListEntity> GetAsyncByHouseholdIdAsync(int householdId);
     Task DeleteAsync(int householdId);
     Task CreateAsync(int householdId);
 }

@@ -1,3 +1,4 @@
+using System.Text;
 using Domain.Entities;
 using Domain.Exceptions;
 using Infrastructure.Interfaces;
@@ -43,6 +44,11 @@ public class HouseholdService : IHouseholdService
 
     public async Task<HouseholdEntity> CreateAsync(string householdName)
     {
+        var name = householdName.Any(Char.IsLetter);
+        if (!name)
+        {
+            throw new ArgumentException();
+        }
         var household = new HouseholdEntity { Name = householdName };
         _dbContext.Household.Add(household);
         await _dbContext.SaveChangesAsync();

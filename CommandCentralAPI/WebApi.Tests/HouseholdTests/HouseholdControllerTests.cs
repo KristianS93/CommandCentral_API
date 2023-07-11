@@ -1,6 +1,8 @@
 using API.Controllers;
+using DatabaseFixture;
 using Domain.Entities;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -31,10 +33,10 @@ public class HouseholdControllerTests : IClassFixture<TestDatabaseFixture>
         
         // Act
         var actualHouseholds = await controller.GetHouseholds();
-        
+        var actual = actualHouseholds.Result as OkObjectResult;
         // Assert
-        Assert.Equivalent(expected, actualHouseholds);
-        
+        Assert.Equivalent(expected, actual.Value);
+
     }
     
 }

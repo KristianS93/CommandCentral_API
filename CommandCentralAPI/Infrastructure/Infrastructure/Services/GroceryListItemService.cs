@@ -32,11 +32,8 @@ public class GroceryListItemService : IGroceryListItemService
     public async Task UpdateAsync(GroceryListItemEntity item)
     {
         // Check the provided item id exists
-        var checkItem = await _dbContext.GroceryListItem.FindAsync(item.GroceryListItemId);
-        if (checkItem == null)
-        {
-            throw new ItemDoesNotExistException();
-        }
+        var checkItem = await GetByIdAsync(item.GroceryListItemId);
+        
         // check grocerylist exists 
         if (!await GrocerylistExists(item.GroceryListId))
         {

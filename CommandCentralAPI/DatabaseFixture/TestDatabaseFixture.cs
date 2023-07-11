@@ -1,10 +1,9 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Persistence.Migrations;
 using Persistence.Data;
 
-namespace WebApi.Tests;
+namespace DatabaseFixture;
 
 public class TestDatabaseFixture
 {
@@ -21,7 +20,7 @@ public class TestDatabaseFixture
             {
                 using (var context = CreateContext())
                 {
-                    // context.Database.EnsureDeleted();
+                    context.Database.EnsureDeleted();
                     context.Database.Migrate();
 
                     SeedTestData(context);

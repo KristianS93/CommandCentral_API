@@ -19,7 +19,7 @@ public class GroceryListService : IGroceryListService
         _logger = logger;
     }
     
-    public async Task<GroceryListEntity> GetAsyncByHouseholdId(int householdId)
+    public async Task<GroceryListEntity> GetAsyncByHouseholdIdAsync(int householdId)
     {
         var item = await _dbContext.GroceryList.FirstOrDefaultAsync(h => h.HouseholdId == householdId);
         if (item == null)
@@ -35,7 +35,7 @@ public class GroceryListService : IGroceryListService
 
     public async Task DeleteAsync(int household_id)
     {
-        var item = await GetAsyncByHouseholdId(household_id);
+        var item = await GetAsyncByHouseholdIdAsync(household_id);
         if (item == null)
         {
             throw new GroceryListDoesNotExistException();
@@ -56,7 +56,7 @@ public class GroceryListService : IGroceryListService
         // Check whether the household already have a grocerylist
         try
         {
-            var item = await GetAsyncByHouseholdId(householdId);
+            var item = await GetAsyncByHouseholdIdAsync(householdId);
             if (item != null)
             {
                 throw new GroceryListDuplicateException("Grocerylist already exist for this household!");
