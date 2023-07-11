@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Exceptions.GroceryList;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -16,73 +17,60 @@ public class GroceryListItemService : IGroceryListItemService
         _dbContext = dbContext;
         _logger = logger;
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="groceryListId"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    public async Task<List<GroceryListItemEntity>> GetAllAsync(int groceryListId)
-    {
-        if (await GrocerylistExists(groceryListId))
-        {
-            return await _dbContext.GroceryListItem.Where(e => e.GroceryListId == groceryListId).ToListAsync();
-        }
-        else
-        {
-            throw new ArgumentException("Grocerylist doesn't exist");
-        }
-    }
-
+    
     public async Task<GroceryListItemEntity> GetByIdAsync(int groceryListItem)
     {
-        return await _dbContext.GroceryListItem.FindAsync(groceryListItem);
-    }
+        var item = await _dbContext.GroceryListItem.FindAsync(groceryListItem);
+        if (item == null)
+        {
+            throw new ItemDoesNotExistException();
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="item"></param>
-    /// <exception cref="ArgumentNullException"></exception>
+        return item;
+    }
+    
     public async Task UpdateAsync(GroceryListItemEntity item)
     {
-        if (await GrocerylistExists(item.GroceryListId))
+        // Check the provided item id exists
+        var checkItem = await _dbContext.GroceryListItem.FindAsync(item.GroceryListItemId);
+        if (checkItem == null)
         {
-            _dbContext.GroceryListItem.Update(item);
-            await _dbContext.SaveChangesAsync();
+            throw new ItemDoesNotExistException();
         }
-        else
+        // check grocerylist exists 
+        if (!await GrocerylistExists(item.GroceryListId))
         {
-            throw new ArgumentNullException("Grocerylist doesn't exist");
+            throw new GroceryListDoesNotExistException();
         }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="item"></param>
-    /// <exception cref="ArgumentNullException"></exception>
+        // update values
+        checkItem.ItemName = item.ItemName;
+        checkItem.ItemAmount = item.ItemAmount;
+        
+        _dbContext.GroceryListItem.Update(checkItem);
+        await _dbContext.SaveChangesAsync();
+    }
+    
     public async Task CreateAsync(GroceryListItemEntity item)
     {
         if (await GrocerylistExists(item.GroceryListId))
         {
-            item.GroceryList = await _dbContext.GroceryList.FindAsync(item.GroceryListId);
             _dbContext.GroceryListItem.Add(item);
             await _dbContext.SaveChangesAsync();
         }
         else
         {
-            throw new ArgumentNullException("Grocerylist doesn't exist");
+            throw new GroceryListDoesNotExistException();
         }
     }
     
     public async Task DeleteAsync(int itemId)
     {
+        // Check the provided item id exists
         var item = await _dbContext.GroceryListItem.FindAsync(itemId);
         if (item == null)
         {
-            throw new ArgumentNullException($"Item with id {itemId} does not exist.");
+            throw new ItemDoesNotExistException();
         }
         _dbContext.GroceryListItem.Remove(item);
         await _dbContext.SaveChangesAsync();
@@ -91,7 +79,7 @@ public class GroceryListItemService : IGroceryListItemService
     private async Task<bool> GrocerylistExists(int grocerylistId)
     {
         var grocerylist = await _dbContext.GroceryList.FindAsync(grocerylistId);
-        if (grocerylist is null)
+        if (grocerylist == null)
         {
             return false;
         }

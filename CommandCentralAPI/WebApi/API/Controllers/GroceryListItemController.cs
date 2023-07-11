@@ -1,4 +1,6 @@
 using Domain.Entities;
+using Domain.Exceptions.GroceryList;
+using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,85 +18,79 @@ public class GroceryListItemController : ControllerBase
         _groceryListItem = groceryListItemService;
         _logger = logger;
     }
-
-    [HttpGet("GetAll/{grocerylist_id}")]
-    public async Task<ActionResult<List<GroceryListEntity>>> GetGroceryListItems(int grocerylist_id)
-    {
-        try
-        {
-            var itemList = await _groceryListItem.GetAllAsync(grocerylist_id);
-            if (itemList == null)
-            {
-                return NotFound();
-            }
-            return Ok(itemList);
-        }
-        catch (ArgumentException e)
-        {
-            return NotFound(e.Message);
-        }
-    }
-
-    [HttpGet("GetOne/{grocerylist_item_id}")]
+    
+    [HttpGet("{grocerylist_item_id}")]
     public async Task<ActionResult<GroceryListEntity>> GetByGroceryListItemId(int grocerylist_item_id)
     {
         try
         {
             var item = await _groceryListItem.GetByIdAsync(grocerylist_item_id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
             return Ok(item);
         }
-        catch (ArgumentException e)
+        catch (ItemDoesNotExistException)
         {
-            return Conflict(e.Message);
+            var error = new GroceryListItemErrors().ItemDoesNotExist(grocerylist_item_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
         }
     }
 
-    [HttpPost("{grocerylist}")]
-    public async Task<ActionResult> CreateItem(int grocerylist, GroceryListItemEntity grocerylist_item)
+    [HttpPost("{grocerylist_id}/{item_name}/{item_amount}")]
+    public async Task<ActionResult> CreateItem(int grocerylist_id, string item_name, int item_amount)
     {
-        // comment.
-        grocerylist_item.GroceryListId = grocerylist;
+        var item = new GroceryListItemEntity
+            { GroceryListId = grocerylist_id, ItemName = item_name, ItemAmount = item_amount };
         try
         {
-            await _groceryListItem.CreateAsync(grocerylist_item);
-            return Ok();
+            await _groceryListItem.CreateAsync(item);
+            //created
+            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{grocerylist_id}", null);
         }
-        catch (ArgumentException e)
+        catch (GroceryListDoesNotExistException)
         {
-            return Conflict(e.Message);
+            var error = new GroceryListErrors().GroceryListDoesNotExist(grocerylist_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
         }
     }
 
+    [HttpPut("{grocerylist_id}")]
+    public async Task<ActionResult> UpdateItem(int grocerylist_id, GroceryListItemEntity item)
+    {
+        item.GroceryListId = grocerylist_id;
+        try
+        {
+            await _groceryListItem.UpdateAsync(item);
+            return NoContent();
+        }
+        catch (GroceryListDoesNotExistException)
+        {
+            var error = new GroceryListErrors().GroceryListDoesNotExist(item.GroceryListId,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
+        }
+        catch (ItemDoesNotExistException)
+        {
+            var error = new GroceryListItemErrors().ItemDoesNotExist(item.GroceryListItemId,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
+        }
+    }
+    
     [HttpDelete("{grocerylist_item_id}")]
     public async Task<ActionResult> DeleteItem(int grocerylist_item_id)
     {
         try
         {
             await _groceryListItem.DeleteAsync(grocerylist_item_id);
-            return Ok();
+            return NoContent();
         }
-        catch (ArgumentNullException e)
+        catch (ItemDoesNotExistException)
         {
-            return NotFound(e.Message);
+            var error = new GroceryListItemErrors().ItemDoesNotExist(grocerylist_item_id,
+                ControllerContext.ActionDescriptor.ControllerName);
+            return NotFound(error);
         }
     }
 
-    [HttpPut("{groceryListItem}")]
-    public async Task<ActionResult> UpdateItem(GroceryListItemEntity groceryListItem)
-    {
-        try
-        {
-            await _groceryListItem.UpdateAsync(groceryListItem);
-            return Ok();
-        }
-        catch (ArgumentException e)
-        {
-            return Conflict(e.Message);
-        }
-    }
 }
