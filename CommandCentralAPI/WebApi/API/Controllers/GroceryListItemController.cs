@@ -35,20 +35,19 @@ public class GroceryListItemController : ControllerBase
         }
     }
 
-    [HttpPost("{grocerylist_id}/{item_name}/{item_amount}")]
-    public async Task<ActionResult> CreateItem(int grocerylist_id, string item_name, int item_amount)
+    [HttpPost("{grocerylist_id}")]
+    public async Task<ActionResult> CreateItem(int grocerylist_id, GroceryListItemEntity item)
     {
-        var item = new GroceryListItemEntity
-            { GroceryListId = grocerylist_id, ItemName = item_name, ItemAmount = item_amount };
+        item.GroceryListId = grocerylist_id;
         try
         {
             await _groceryListItem.CreateAsync(item);
             //created
-            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{grocerylist_id}", null);
+            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{item.GroceryListItemId}", null);
         }
         catch (GroceryListDoesNotExistException)
         {
-            var error = new GroceryListErrors().GroceryListDoesNotExist(grocerylist_id,
+            var error = new GroceryListErrors().GroceryListDoesNotExist(item.GroceryListId,
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
