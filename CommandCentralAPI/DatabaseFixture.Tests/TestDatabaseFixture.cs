@@ -5,12 +5,12 @@ using Persistence.Data;
 
 namespace DatabaseFixture.Tests;
 
-public class TestDatabaseFixture
+public class TestDatabaseFixture : IDisposable
 {
     private const string ConnectionString = "Host=localhost;Port=5432;Database=commandcentraltest_db;Username=commandcentraltest;Password=commandcentraltestpass;";
     // Tests are run in parallel so a lock is required
-    private static readonly object _lock = new();
-    private static bool _databaseInitialized;
+    private readonly object _lock = new();
+    private bool _databaseInitialized;
 
     public TestDatabaseFixture()
     {
@@ -58,5 +58,13 @@ public class TestDatabaseFixture
         var gItem4 = new GroceryListItemEntity { ItemName = "Specialized cykel", ItemAmount = 2, GroceryListId = grocerylist2.Id };
         context.GroceryListItem.AddRange(gItem1, gItem2, gItem3, gItem4);
         context.SaveChanges();
+    }
+
+    public void Dispose()
+    {
+        using (var context = CreateContext())
+        {
+            context.Database.EnsureDeleted();
+        }
     }
 }
