@@ -105,11 +105,11 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
         // Arrange
         using var context = Fixture.CreateContext();
         var service = new HouseholdService(context, _loggerMock);
-        var expected = await context.Household.FindAsync(1);
+        var expected = await context.Household.FindAsync(2);
         
         // Act
         expected!.Name = "New household name";
-        var actual = await context.Household.FindAsync(1);
+        var actual = await context.Household.FindAsync(2);
         
         // Assert
         Assert.Equivalent(expected, actual);
