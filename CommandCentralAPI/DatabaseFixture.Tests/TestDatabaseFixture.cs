@@ -7,13 +7,16 @@ namespace DatabaseFixture.Tests;
 
 public class TestDatabaseFixture : IDisposable
 {
-    private const string ConnectionString = "Host=localhost;Port=5432;Database=commandcentraltest_db;Username=commandcentraltest;Password=commandcentraltestpass;";
+    private string _connectionString;
     // Tests are run in parallel so a lock is required
     private readonly object _lock = new();
     private bool _databaseInitialized;
+    private string _databaseName;
 
     public TestDatabaseFixture()
     {
+        _databaseName = "commandcentraltest_db_" + Guid.NewGuid().ToString("N"); 
+        _connectionString = $"Host=localhost;Port=5432;Database={_databaseName};Username=commandcentraltest;Password=commandcentraltestpass;";
         lock (_lock)
         {
             if (!_databaseInitialized)
@@ -34,7 +37,7 @@ public class TestDatabaseFixture : IDisposable
     public ApiDbContext CreateContext()
     {
         return new ApiDbContext(new DbContextOptionsBuilder<ApiDbContext>()
-            .UseNpgsql(ConnectionString).Options, new Logger<ApiDbContext>(new LoggerFactory()));
+            .UseNpgsql(_connectionString).Options, new Logger<ApiDbContext>(new LoggerFactory()));
     }
 
     public void SeedTestData(ApiDbContext context)
