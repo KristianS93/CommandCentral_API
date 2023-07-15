@@ -13,6 +13,7 @@ COPY WebApi/API/ ./WebApi/API/
 
 COPY Infrastructure.Tests/Infrastructure.Tests.csproj ./Infrastructure.Tests/
 COPY WebApi.Tests/WebApi.Tests.csproj ./WebApi.Tests/
+COPY DatabaseFixture.Tests/DatabaseFixture.Tests.csproj ./DatabaseFixture.Tests/
 RUN dotnet restore
 
 # Build the projects
