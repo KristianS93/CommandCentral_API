@@ -98,4 +98,56 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
         // Act + Assert
         await Assert.ThrowsAsync<ArgumentException>(() => service.CreateAsync(name));
     }
+
+    [Fact]
+    public async void UpdateAsync()
+    {
+        // Arrange
+        using var context = Fixture.CreateContext();
+        var service = new HouseholdService(context, _loggerMock);
+        var expected = await context.Household.FindAsync(1);
+        
+        // Act
+        expected!.Name = "New household name";
+        var actual = await context.Household.FindAsync(1);
+        
+        // Assert
+        Assert.Equivalent(expected, actual);
+    }
+    
+    [Fact]
+    public async void Deletehousehold_Wrong_Id()
+    {
+        // Arrange
+        using var context = Fixture.CreateContext();
+        var service = new HouseholdService(context, _loggerMock);
+
+        await Assert.ThrowsAsync<HouseholdDoesNotExistException>(() => service.DeleteAsync(3));
+    }
+
+    [Fact]
+    public async void DeleteHousehold()
+    {
+        // Arrange
+        var id = 1;
+        using var context = Fixture.CreateContext();
+        var service = new HouseholdService(context, _loggerMock);
+        var groceryListId = context.GroceryList.Where(h => h.HouseholdId == id).FirstOrDefault();
+
+        
+        // Act
+        await service.DeleteAsync(id);
+        
+
+        // Assert
+        // multiple things have to be checked as this delete function will cascade delete
+        // grocery list and items 
+        
+        // Check household is deleted 
+        Assert.Null(await context.Household.FindAsync(id));
+        // Check grocerylist is deleted
+        Assert.Empty(context.GroceryList.Where(i => i.HouseholdId == id));
+        // Check grocerylist items is deleted, same id can be used here since the first grocery list created is id 1
+        Assert.Empty(context.GroceryListItem.Where(i => i.GroceryListId == groceryListId.Id));
+    }
 }
