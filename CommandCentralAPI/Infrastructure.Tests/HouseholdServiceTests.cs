@@ -14,6 +14,7 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
 {
     private Mock<IHouseholdService> _serviceMock;
     private ILogger<HouseholdService> _loggerMock;
+    private static readonly object _lock = new();
     public TestDatabaseFixture Fixture { get; set; }
     public HouseholdServiceTests(TestDatabaseFixture fixture)
     {
@@ -122,7 +123,7 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
         using var context = Fixture.CreateContext();
         var service = new HouseholdService(context, _loggerMock);
 
-        await Assert.ThrowsAsync<HouseholdDoesNotExistException>(() => service.DeleteAsync(3));
+        await Assert.ThrowsAsync<HouseholdDoesNotExistException>(() => service.DeleteAsync(2522));
     }
 
     [Fact]
