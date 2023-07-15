@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseFixture.Tests;
 
-public class Connection: IClassFixture<TestDatabaseFixture>
+public class ConnectionTests: IClassFixture<TestDatabaseFixture>
 {
     public TestDatabaseFixture Fixture { get; set; }
 
-    public Connection(TestDatabaseFixture fixture)
+    public ConnectionTests(TestDatabaseFixture fixture)
     {
         Fixture = fixture;
     }
