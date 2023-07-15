@@ -45,7 +45,8 @@ public class TestDatabaseFixture : IDisposable
         // add household
         var household1 = new HouseholdEntity { Name = "Kristians hus" };
         var household2 = new HouseholdEntity { Name = "Ibis hus" };
-        context.AddRange(household1, household2);
+        var household3 = new HouseholdEntity { Name = "No grocery list" };
+        context.AddRange(household1, household2, household3);
         context.SaveChanges();
             
         // add grocerylists

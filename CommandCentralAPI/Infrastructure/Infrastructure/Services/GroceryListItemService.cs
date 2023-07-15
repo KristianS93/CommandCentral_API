@@ -29,6 +29,23 @@ public class GroceryListItemService : IGroceryListItemService
         return item;
     }
     
+    public async Task CreateAsync(GroceryListItemEntity item)
+    {
+        if (!item.ItemName.Any(Char.IsLetter))
+        {
+            throw new ArgumentException("Must contain a letter");
+        }
+        if (await GrocerylistExists(item.GroceryListId))
+        {
+            _dbContext.GroceryListItem.Add(item);
+            await _dbContext.SaveChangesAsync();
+        }
+        else
+        {
+            throw new GroceryListDoesNotExistException();
+        }
+    }
+    
     public async Task UpdateAsync(GroceryListItemEntity item)
     {
         // Check the provided item id exists
@@ -48,18 +65,6 @@ public class GroceryListItemService : IGroceryListItemService
         await _dbContext.SaveChangesAsync();
     }
     
-    public async Task CreateAsync(GroceryListItemEntity item)
-    {
-        if (await GrocerylistExists(item.GroceryListId))
-        {
-            _dbContext.GroceryListItem.Add(item);
-            await _dbContext.SaveChangesAsync();
-        }
-        else
-        {
-            throw new GroceryListDoesNotExistException();
-        }
-    }
     
     public async Task DeleteAsync(int itemId)
     {

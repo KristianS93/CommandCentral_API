@@ -1,10 +1,7 @@
-using API.Controllers;
 using DatabaseFixture.Tests;
 using Domain.Entities;
 using Domain.Exceptions;
-using Infrastructure.Interfaces;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -12,12 +9,10 @@ namespace Infrastructure.Tests;
 
 public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
 {
-    private Mock<IHouseholdService> _serviceMock;
     private ILogger<HouseholdService> _loggerMock;
     public TestDatabaseFixture Fixture { get; set; }
     public HouseholdServiceTests(TestDatabaseFixture fixture)
     {
-        _serviceMock = new Mock<IHouseholdService>();
         _loggerMock = Mock.Of<ILogger<HouseholdService>>();
         Fixture = fixture;
     }
