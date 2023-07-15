@@ -96,7 +96,7 @@ public class GroceryListTests : IClassFixture<TestDatabaseFixture>
     public async void CreateGroceryList_AlreadyHaveGroceryList()
     {
         // Arrange
-        var householdId = 2;
+        var householdId = 1;
         using var context = Fixture.CreateContext();
         var service = new GroceryListService(context, _loggerMock);
         
