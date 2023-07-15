@@ -14,13 +14,11 @@ public class GroceryListTests : IClassFixture<TestDatabaseFixture>
 {
     public TestDatabaseFixture Fixture { get; set; }
     private ILogger<GroceryListService> _loggerMock;
-    private readonly ITestOutputHelper output;
 
-    public GroceryListTests(TestDatabaseFixture fixture, ITestOutputHelper _output)
+    public GroceryListTests(TestDatabaseFixture fixture)
     {
         _loggerMock = Mock.Of<ILogger<GroceryListService>>();
         Fixture = fixture;
-        output = _output;
     }
 
     [Fact]
