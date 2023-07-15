@@ -7,7 +7,7 @@ namespace DatabaseFixture.Tests;
 
 public class TestDatabaseFixture
 {
-    private const string ConnectionString = "Host=postgres;Port=5432;Database=commandcentraltest_db;Username=commandcentraltest;Password=commandcentraltestpass;";
+    private const string ConnectionString = "Host=localhost;Port=5432;Database=commandcentraltest_db;Username=commandcentraltest;Password=commandcentraltestpass;";
     // Tests are run in parallel so a lock is required
     private static readonly object _lock = new();
     private static bool _databaseInitialized;
