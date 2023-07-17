@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.ErrorResponses;
+using Infrastructure.Authentication;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +44,13 @@ public class HouseholdController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
     {
+        var claims = User.FindFirstValue("household");
+        if (Convert.ToInt32(claims) != id)
+        {
+            throw new ArgumentException("Incorrect household id");
+        }
+        
+        
         try
         {
             return Ok(await _household.GetByIdAsync(id));

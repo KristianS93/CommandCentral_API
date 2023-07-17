@@ -2,6 +2,7 @@ using System.Text;
 using API.Extensions.Options;
 using Infrastructure.Authentication;
 using Infrastructure.Authentication.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace API.Extensions;
 
@@ -16,7 +17,7 @@ public static class AuthenticationExtension
         new JwtOptionsSetup(conf).Configure(jwtOptions);
 
         var set = new JwtBearerOptionsSetup(jwtOptions);
-        service.AddAuthentication().AddJwtBearer(o => set.Configure(o));
+        service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => set.Configure(o));
         
         return service;
     }
