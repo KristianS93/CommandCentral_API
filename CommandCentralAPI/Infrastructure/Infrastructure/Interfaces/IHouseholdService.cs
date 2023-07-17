@@ -8,6 +8,12 @@ namespace Infrastructure.Interfaces;
 public interface IHouseholdService
 {
     public Task<List<HouseholdEntity>> GetAllAsync();
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <exception cref="HouseholdDoesNotExistException">The provided id does not match a household</exception>
+    /// <param name="id">Int</param>
+    /// <returns></returns>
     public Task<HouseholdEntity> GetByIdAsync(int id);
     public Task<HouseholdEntity> CreateAsync(string householdName);
     public Task UpdateAsync(HouseholdEntity item);

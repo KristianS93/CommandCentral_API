@@ -3,6 +3,7 @@ using Domain.Exceptions;
 using Domain.Models;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -36,7 +37,8 @@ public class HouseholdController : ControllerBase
             return NotFound(e.InnerException);
         }
     }
-
+    
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
     {
