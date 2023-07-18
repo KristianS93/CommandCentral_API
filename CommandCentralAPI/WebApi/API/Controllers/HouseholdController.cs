@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using API.Helpers;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Models;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public class HouseholdController : ControllerBase
 {
@@ -40,19 +42,12 @@ public class HouseholdController : ControllerBase
         }
     }
     
-    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
     {
-        var claims = User.FindFirstValue("household");
-        if (Convert.ToInt32(claims) != id)
-        {
-            throw new ArgumentException("Incorrect household id");
-        }
-        
-        
         try
         {
+            ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
             return Ok(await _household.GetByIdAsync(id));
         }
         catch (HouseholdDoesNotExistException e)
@@ -62,6 +57,7 @@ public class HouseholdController : ControllerBase
         }
     }
 
+    // Consider how access to this should be
     [HttpPost("{name}")]
     public async Task<ActionResult<HouseholdEntity>> CreateHousehold(string name)
     {
@@ -72,6 +68,14 @@ public class HouseholdController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateHousehold(int id, HouseholdEntity item)
     {
+        // try
+        // {
+            ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
+        // }
+        // catch (ArgumentException e)
+        // {
+        //     
+        // }
         // this validation can stay since it does not require db.
         if (id != item.Id)
         {
@@ -84,6 +88,7 @@ public class HouseholdController : ControllerBase
         return NoContent();
     }
 
+    // Consider who should be able to delete
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteHousehold(int id)
     {
