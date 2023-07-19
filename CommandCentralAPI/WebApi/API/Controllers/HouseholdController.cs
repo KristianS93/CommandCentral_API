@@ -1,10 +1,10 @@
 using System.Security.Authentication;
 using System.Security.Claims;
-using API.Helpers;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Authentication;
+using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +16,13 @@ public class HouseholdController : ControllerBase
 {
     private readonly ILogger<HouseholdController> _logger;
     private readonly IHouseholdService _household;
+    private readonly IClaimAuthorizationService _claimAuthorization;
 
-    public HouseholdController(ILogger<HouseholdController> logger, IHouseholdService household)
+    public HouseholdController(ILogger<HouseholdController> logger, IHouseholdService household, IClaimAuthorizationService claimAuthorization)
     {
         _logger = logger;
         _household = household;
+        _claimAuthorization = claimAuthorization;
     }
 
     [HttpGet]
@@ -46,7 +48,7 @@ public class HouseholdController : ControllerBase
     {
         try
         {
-            ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
             return Ok(await _household.GetByIdAsync(id));
         }
         catch (AuthenticationException)
@@ -76,8 +78,7 @@ public class HouseholdController : ControllerBase
     {
         try
         {
-            // maybe dependency inject instead
-            ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
         }
         catch (AuthenticationException)
         {

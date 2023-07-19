@@ -12,6 +12,7 @@ public static class AuthenticationExtension
     {
         service.AddScoped<IGenerateTokenService, GenerateTokenService>();
         service.AddScoped<IJwtProvider, JwtProvider>();
+        service.AddScoped<IClaimAuthorizationService, ClaimAuthorizationService>();
         service.ConfigureOptions<JwtOptionsSetup>();
         var jwtOptions = new JwtOptions();
         new JwtOptionsSetup(conf).Configure(jwtOptions);
