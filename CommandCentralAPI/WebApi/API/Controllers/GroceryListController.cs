@@ -1,3 +1,4 @@
+using System.Security.Authentication;
 using System.Security.Claims;
 using Domain.Entities;
 using Domain.Exceptions;
@@ -40,6 +41,11 @@ public class GroceryListController : ControllerBase
             var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
+        }
     }
     
     [HttpPost("{household_id}")]
@@ -64,6 +70,11 @@ public class GroceryListController : ControllerBase
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
+        }
     }
 
     [HttpDelete("{household_id}")]
@@ -81,6 +92,11 @@ public class GroceryListController : ControllerBase
             var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
+        }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
         }
     }
 }

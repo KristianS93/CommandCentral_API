@@ -27,7 +27,6 @@ public class JwtProvider : IJwtProvider
         var claims = new Claim[]
         {
             // Right now only the household id is needed, in the future a username could be added
-            // TODO: Grocerylist is probably needed for that auth on those endpoints
             new Claim(JwtRegisteredClaimNames.Sub, Guid.NewGuid().ToString()),
             new Claim(Claims.Household.ToString(), household.Id.ToString()),
             new Claim(Claims.GroceryList.ToString(), groceryListId),
