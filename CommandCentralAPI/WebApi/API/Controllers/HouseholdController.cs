@@ -1,18 +1,16 @@
+using System.Security.Authentication;
 using System.Security.Claims;
 using API.Helpers;
 using Domain.Entities;
 using Domain.Exceptions;
-using Domain.Models;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Authentication;
 using Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
-[Authorize]
 [Route("[controller]")]
 public class HouseholdController : ControllerBase
 {
@@ -25,8 +23,8 @@ public class HouseholdController : ControllerBase
         _household = household;
     }
 
-    // maybe this method is not needed, as it would only be an admin feature
     [HttpGet]
+    [CustomAuthorize(Permission.SiteAdmin)]
     public async Task<ActionResult<List<HouseholdEntity>>> GetHouseholds()
     {
         try
@@ -43,12 +41,18 @@ public class HouseholdController : ControllerBase
     }
     
     [HttpGet("{id}")]
+    [CustomAuthorize(Permission.Member)]
     public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
     {
         try
         {
             ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
             return Ok(await _household.GetByIdAsync(id));
+        }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
         }
         catch (HouseholdDoesNotExistException e)
         {
@@ -59,6 +63,7 @@ public class HouseholdController : ControllerBase
 
     // Consider how access to this should be
     [HttpPost("{name}")]
+    [CustomAuthorize(Permission.SiteAdmin)]
     public async Task<ActionResult<HouseholdEntity>> CreateHousehold(string name)
     {
         var household= await _household.CreateAsync(name);
@@ -66,16 +71,19 @@ public class HouseholdController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [CustomAuthorize(Permission.HouseholdAdmin)]
     public async Task<IActionResult> UpdateHousehold(int id, HouseholdEntity item)
     {
-        // try
-        // {
+        try
+        {
+            // maybe dependency inject instead
             ClaimAuthorizationHelper.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
-        // }
-        // catch (ArgumentException e)
-        // {
-        //     
-        // }
+        }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
+        }
         // this validation can stay since it does not require db.
         if (id != item.Id)
         {
@@ -90,6 +98,7 @@ public class HouseholdController : ControllerBase
 
     // Consider who should be able to delete
     [HttpDelete("{id}")]
+    [CustomAuthorize(Permission.SiteAdmin)]
     public async Task<IActionResult> DeleteHousehold(int id)
     {
         try

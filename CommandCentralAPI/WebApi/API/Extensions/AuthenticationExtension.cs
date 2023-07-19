@@ -18,6 +18,21 @@ public static class AuthenticationExtension
 
         var set = new JwtBearerOptionsSetup(jwtOptions);
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => set.Configure(o));
+        service.AddAuthorization(o =>
+        {
+            // SiteAdmin
+            o.AddPolicy(Permission.SiteAdmin.ToString(), p => 
+                p.RequireRole(Permission.SiteAdmin.ToString()));
+            // Household Admin - Future work.
+            o.AddPolicy(Permission.HouseholdAdmin.ToString(), p => 
+                p.RequireRole(Permission.HouseholdAdmin.ToString(), 
+                    Permission.SiteAdmin.ToString()));
+            // Member of household
+            o.AddPolicy(Permission.Member.ToString(), p => 
+                p.RequireRole(Permission.HouseholdAdmin.ToString(), 
+                    Permission.SiteAdmin.ToString(), 
+                    Permission.Member.ToString()));
+        });
         
         return service;
     }

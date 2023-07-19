@@ -1,3 +1,5 @@
+using System.Security.Authentication;
+
 namespace API.Helpers;
 
 public static class ClaimAuthorizationHelper
@@ -6,8 +8,7 @@ public static class ClaimAuthorizationHelper
     {
         if (Convert.ToInt32(claim) != householdId)
         {
-            // Ændre til korrekt exception
-            throw new ArgumentException("Incorrect household id");
+            throw new AuthenticationException();
         }
     }
 }
