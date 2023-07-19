@@ -17,15 +17,21 @@ public class JwtProvider : IJwtProvider
         _options = options.Value;
     }
 
-    public string Generate(HouseholdEntity household)
+    public string Generate(HouseholdEntity household, GroceryListEntity? groceryList)
     {
+        var groceryListId = "null";
+        if (groceryList != null)
+        {
+            groceryListId = groceryList.Id.ToString();
+        }
         var claims = new Claim[]
         {
             // Right now only the household id is needed, in the future a username could be added
             // TODO: Grocerylist is probably needed for that auth on those endpoints
             new Claim(JwtRegisteredClaimNames.Sub, Guid.NewGuid().ToString()),
-            new Claim("household", household.Id.ToString()),
-            new Claim(ClaimTypes.Role, Permission.SiteAdmin.ToString())
+            new Claim(Claims.Household.ToString(), household.Id.ToString()),
+            new Claim(Claims.GroceryList.ToString(), groceryListId),
+            new Claim(ClaimTypes.Role, Permission.Member.ToString())
         };
 
         // Here we create the signing credentials for the jwt security token,

@@ -1,6 +1,7 @@
 using Domain.Exceptions;
 using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
 namespace Infrastructure.Authentication;
@@ -25,8 +26,11 @@ public class GenerateTokenService : IGenerateTokenService
             throw new HouseholdDoesNotExistException();
         }
         
+        // If grocerylist exist add this to the claim 
+        var groceryList = await _dbContext.GroceryList.Where(hId => hId.HouseholdId == householdId).FirstOrDefaultAsync();
+
         // Generate JWT
-        string token = _jwtProvider.Generate(household);
+        string token = _jwtProvider.Generate(household, groceryList);
         
         // Return JWT
         return token;

@@ -4,5 +4,5 @@ namespace Infrastructure.Authentication.Interfaces;
 
 public interface IJwtProvider
 {
-    string Generate(HouseholdEntity household);
+    string Generate(HouseholdEntity household, GroceryListEntity? groceryListId);
 }

@@ -14,11 +14,13 @@ public static class AuthenticationExtension
         service.AddScoped<IJwtProvider, JwtProvider>();
         service.AddScoped<IClaimAuthorizationService, ClaimAuthorizationService>();
         service.ConfigureOptions<JwtOptionsSetup>();
+        
+        
         var jwtOptions = new JwtOptions();
         new JwtOptionsSetup(conf).Configure(jwtOptions);
-
         var set = new JwtBearerOptionsSetup(jwtOptions);
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => set.Configure(o));
+        
         service.AddAuthorization(o =>
         {
             // SiteAdmin

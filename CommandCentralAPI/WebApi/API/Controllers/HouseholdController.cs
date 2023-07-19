@@ -48,7 +48,7 @@ public class HouseholdController : ControllerBase
     {
         try
         {
-            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, id);
             return Ok(await _household.GetByIdAsync(id));
         }
         catch (AuthenticationException)
@@ -78,7 +78,7 @@ public class HouseholdController : ControllerBase
     {
         try
         {
-            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue("household"), id);
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, id);
         }
         catch (AuthenticationException)
         {

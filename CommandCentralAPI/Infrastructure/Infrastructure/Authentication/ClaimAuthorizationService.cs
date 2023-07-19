@@ -12,4 +12,12 @@ public class ClaimAuthorizationService : IClaimAuthorizationService
             throw new AuthenticationException();
         }
     }
+
+    public void ConfirmGroceryListClaim(string claim, int groceryListId)
+    {
+        if (Convert.ToInt32(claim) != groceryListId)
+        {
+            throw new AuthenticationException();
+        }
+    }
 }
