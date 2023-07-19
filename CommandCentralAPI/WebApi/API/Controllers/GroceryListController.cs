@@ -1,7 +1,11 @@
+using System.Security.Authentication;
+using System.Security.Claims;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Exceptions.GroceryList;
 using Domain.Models.ErrorResponses;
+using Infrastructure.Authentication;
+using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,18 +17,23 @@ public class GroceryListController : ControllerBase
 {
     private readonly ILogger<GroceryListController> _logger;
     private readonly IGroceryListService _groceryList;
+    private readonly IClaimAuthorizationService _claimAuthorization;
+    
 
-    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList)
+    public GroceryListController(ILogger<GroceryListController> logger, IGroceryListService groceryList, IClaimAuthorizationService claimAuthorization)
     {
         _logger = logger;
         _groceryList = groceryList;
+        _claimAuthorization = claimAuthorization;
     }
 
     [HttpGet("{household_id}")]
+    [CustomAuthorize(Permission.Member)]
     public async Task<ActionResult<GroceryListEntity>> GetGroceryList(int household_id)
     {
         try
         {
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, household_id);
             return Ok(await _groceryList.GetAsyncByHouseholdIdAsync(household_id));
         }
         catch (GroceryListDoesNotExistException)
@@ -32,13 +41,20 @@ public class GroceryListController : ControllerBase
             var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
+        }
     }
     
     [HttpPost("{household_id}")]
+    [CustomAuthorize(Permission.HouseholdAdmin)]
     public async Task<ActionResult> CreateGroceryList(int household_id)
     {
         try
         {
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, household_id);
             await _groceryList.CreateAsync(household_id);
             return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{household_id}", null);
         }
@@ -54,13 +70,20 @@ public class GroceryListController : ControllerBase
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
+        }
     }
 
     [HttpDelete("{household_id}")]
+    [CustomAuthorize(Permission.HouseholdAdmin)]
     public async Task<IActionResult> DeleteGroceryList(int household_id)
     {
         try
         {
+            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, household_id);
             await _groceryList.DeleteAsync(household_id);
             return NoContent();
         }
@@ -69,6 +92,11 @@ public class GroceryListController : ControllerBase
             var error = new GroceryListErrors().GroceryListDoesNotExist(household_id,
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
+        }
+        catch (AuthenticationException)
+        {
+            var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
+            return Unauthorized(error);
         }
     }
 }

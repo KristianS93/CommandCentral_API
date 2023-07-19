@@ -1,7 +1,7 @@
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 
-namespace API;
+namespace API.Extensions;
 
 public static class InfrastructureExtension
 {
@@ -16,7 +16,6 @@ public static class InfrastructureExtension
         service.AddScoped<IHouseholdService, HouseholdService>();
         service.AddScoped<IGroceryListService, GroceryListService>();
         service.AddScoped<IGroceryListItemService, GroceryListItemService>();
-
         return service;
     }
 }

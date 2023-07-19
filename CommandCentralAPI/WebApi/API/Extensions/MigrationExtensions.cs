@@ -2,7 +2,7 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
-namespace API;
+namespace API.Extensions;
 
 public static class MigationExtensions
 {

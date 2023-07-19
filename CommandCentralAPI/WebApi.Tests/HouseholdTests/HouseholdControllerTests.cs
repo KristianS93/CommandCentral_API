@@ -1,6 +1,7 @@
 using API.Controllers;
 using DatabaseFixture.Tests;
 using Domain.Entities;
+using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,9 +23,10 @@ public class HouseholdControllerTests : IClassFixture<TestDatabaseFixture>
         // Arrange 
         using var context = Fixture.CreateContext();
         var loggerMockController = Mock.Of<ILogger<HouseholdController>>();
+        var claimServiceMock = Mock.Of<IClaimAuthorizationService>();
         var loggerMockService= Mock.Of<ILogger<HouseholdService>>();
         var service = new HouseholdService(context, loggerMockService);
-        var controller = new HouseholdController(loggerMockController, service);
+        var controller = new HouseholdController(loggerMockController, service, claimServiceMock);
         var expected = new List<HouseholdEntity>
         {
             new HouseholdEntity { Id = 1, Name = "Kristians hus" },
