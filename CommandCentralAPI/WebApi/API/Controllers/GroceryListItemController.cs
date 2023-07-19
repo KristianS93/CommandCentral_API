@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[CustomAuthorize(Permission.Member)] // Member should be able to do everything here.
+[CustomAuthorize(Permission.Member)] // Member should be able to do everything here. ....
 public class GroceryListItemController : ControllerBase
 {
     private readonly ILogger<GroceryListItemController> _logger;
@@ -31,6 +31,7 @@ public class GroceryListItemController : ControllerBase
         try
         {
             _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
+            _claimAuthorization.ConfirmItemOnList(grocerylist_id, grocerylist_item_id);
             var item = await _groceryListItem.GetByIdAsync(grocerylist_item_id);
             return Ok(item);
         }
@@ -78,6 +79,7 @@ public class GroceryListItemController : ControllerBase
         try
         {
             _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
+            _claimAuthorization.ConfirmItemOnList(grocerylist_id, item.GroceryListItemId);
             await _groceryListItem.UpdateAsync(item);
             return NoContent();
         }
@@ -106,6 +108,7 @@ public class GroceryListItemController : ControllerBase
         try
         {
             _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
+            _claimAuthorization.ConfirmItemOnList(grocerylist_id, grocerylist_item_id);
             await _groceryListItem.DeleteAsync(grocerylist_item_id);
             return NoContent();
         }
