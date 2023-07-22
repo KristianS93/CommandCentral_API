@@ -95,16 +95,17 @@ public class HouseholdController : ControllerBase
     }
 
     // Consider who should be able to delete
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [CustomAuthorize(Permission.SiteAdmin)]
-    public async Task<IActionResult> DeleteHousehold(int id)
+    public async Task<IActionResult> DeleteHousehold()
     {
         try
         {
-            await _household.DeleteAsync(id);
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            await _household.DeleteAsync(householdId);
             return NoContent();
         }
-        catch (HouseholdDoesNotExistException e)
+        catch (HouseholdDoesNotExistException)
         {
             var error = new HouseHoldErrors().HouseholdDoesNotExist(
                 ControllerContext.ActionDescriptor.ControllerName);
