@@ -30,7 +30,7 @@ public class JwtProvider : IJwtProvider
             new Claim(JwtRegisteredClaimNames.Sub, Guid.NewGuid().ToString()),
             new Claim(Claims.Household.ToString(), household.Id.ToString()),
             new Claim(Claims.GroceryList.ToString(), groceryListId),
-            new Claim(ClaimTypes.Role, Permission.Member.ToString())
+            new Claim(ClaimTypes.Role, Permission.SiteAdmin.ToString())
         };
 
         // Here we create the signing credentials for the jwt security token,

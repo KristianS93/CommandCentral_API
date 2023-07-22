@@ -27,7 +27,7 @@ public class HouseholdController : ControllerBase
     }
 
     [HttpGet]
-    [Route("[controller]/Admin/Households")]
+    [Route("/Admin/Households")]
     [CustomAuthorize(Permission.SiteAdmin)]
     public async Task<ActionResult<List<HouseholdEntity>>> GetHouseholds()
     {
