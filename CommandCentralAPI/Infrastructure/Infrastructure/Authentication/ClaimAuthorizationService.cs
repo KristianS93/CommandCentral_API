@@ -14,18 +14,21 @@ public class ClaimAuthorizationService : IClaimAuthorizationService
         _dbContext = dbContext;
     }
 
-    public void ConfirmHouseholdClaim(string claim, int householdId)
+    // public void ConfirmHouseholdClaim(string claim, int householdId)
+    // {
+    //     if (Convert.ToInt32(claim) != householdId)
+    //     {
+    //         throw new AuthenticationException();
+    //     }
+    // }
+    //
+    public int GetIntegerClaimId(string claim)
     {
-        if (Convert.ToInt32(claim) != householdId)
+        try
         {
-            throw new AuthenticationException();
-        }
-    }
-
-    public void ConfirmGroceryListClaim(string claim, int groceryListId)
-    {
-        if (Convert.ToInt32(claim) != groceryListId)
-        {
+            return Convert.ToInt32(claim);
+            
+        } catch (Exception){
             throw new AuthenticationException();
         }
     }
