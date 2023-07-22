@@ -25,13 +25,13 @@ public class GroceryListItemController : ControllerBase
         _claimAuthorization = claimAuthorization;
     }
     
-    [HttpGet("GroceryList/{grocerylist_id}/Item/{grocerylist_item_id}")]
-    public async Task<ActionResult<GroceryListEntity>> GetByGroceryListItemId(int grocerylist_id, int grocerylist_item_id)
+    [HttpGet("GroceryList/Item/{grocerylist_item_id}")]
+    public async Task<ActionResult<GroceryListEntity>> GetByGroceryListItemId(int grocerylist_item_id)
     {
         try
         {
-            _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
-            _claimAuthorization.ConfirmItemOnList(grocerylist_id, grocerylist_item_id);
+            var id = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
+                _claimAuthorization.ConfirmItemOnList(id, grocerylist_item_id);
             var item = await _groceryListItem.GetByIdAsync(grocerylist_item_id);
             return Ok(item);
         }
@@ -48,20 +48,19 @@ public class GroceryListItemController : ControllerBase
         }
     }
 
-    [HttpPost("[controller]/{grocerylist_id}")]
+    [HttpPost("GroceryList/Item/")]
     public async Task<ActionResult> CreateItem(int grocerylist_id, GroceryListItemEntity item)
     {
-        item.GroceryListId = grocerylist_id;
         try
         {
-            _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
+            item.GroceryListId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
             await _groceryListItem.CreateAsync(item);
             //created
             return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{item.GroceryListItemId}", null);
         }
         catch (GroceryListDoesNotExistException)
         {
-            var error = new GroceryListErrors().GroceryListDoesNotExist(item.GroceryListId,
+            var error = new GroceryListErrors().GroceryListDoesNotExist(
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
@@ -72,20 +71,19 @@ public class GroceryListItemController : ControllerBase
         }
     }
 
-    [HttpPut("[controller]/{grocerylist_id}")]
-    public async Task<ActionResult> UpdateItem(int grocerylist_id, GroceryListItemEntity item)
+    [HttpPut("GroceryList/Item")]
+    public async Task<ActionResult> UpdateItem(GroceryListItemEntity item)
     {
-        item.GroceryListId = grocerylist_id;
         try
         {
-            _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
-            _claimAuthorization.ConfirmItemOnList(grocerylist_id, item.GroceryListItemId);
+            item.GroceryListId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
+            _claimAuthorization.ConfirmItemOnList(item.GroceryListId, item.GroceryListItemId);
             await _groceryListItem.UpdateAsync(item);
             return NoContent();
         }
         catch (GroceryListDoesNotExistException)
         {
-            var error = new GroceryListErrors().GroceryListDoesNotExist(item.GroceryListId,
+            var error = new GroceryListErrors().GroceryListDoesNotExist(
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
@@ -102,13 +100,13 @@ public class GroceryListItemController : ControllerBase
         }
     }
     
-    [HttpDelete("GroceryList/{grocerylist_id}/Item/{grocerylist_item_id}")]
-    public async Task<ActionResult> DeleteItem(int grocerylist_id, int grocerylist_item_id)
+    [HttpDelete("GroceryList/Item/{grocerylist_item_id}")]
+    public async Task<ActionResult> DeleteItem(int grocerylist_item_id)
     {
         try
         {
-            _claimAuthorization.ConfirmGroceryListClaim(User.FindFirstValue(Claims.GroceryList.ToString())!, grocerylist_id);
-            _claimAuthorization.ConfirmItemOnList(grocerylist_id, grocerylist_item_id);
+            var groceryListId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
+            _claimAuthorization.ConfirmItemOnList(groceryListId, grocerylist_item_id);
             await _groceryListItem.DeleteAsync(grocerylist_item_id);
             return NoContent();
         }

@@ -6,6 +6,7 @@ using Domain.Models.ErrorResponses;
 using Infrastructure.Authentication;
 using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -26,6 +27,7 @@ public class HouseholdController : ControllerBase
     }
 
     [HttpGet]
+    [Route("[controller]/Admin/Households")]
     [CustomAuthorize(Permission.SiteAdmin)]
     public async Task<ActionResult<List<HouseholdEntity>>> GetHouseholds()
     {
@@ -42,14 +44,14 @@ public class HouseholdController : ControllerBase
         }
     }
     
-    [HttpGet("{id}")]
+    [HttpGet]
     [CustomAuthorize(Permission.Member)]
-    public async Task<ActionResult<HouseholdEntity>> GetHousehold(int id)
+    public async Task<ActionResult<HouseholdEntity>> GetHousehold()
     {
         try
         {
-            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, id);
-            return Ok(await _household.GetByIdAsync(id));
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            return Ok(await _household.GetByIdAsync(householdId));
         }
         catch (AuthenticationException)
         {
@@ -58,7 +60,7 @@ public class HouseholdController : ControllerBase
         }
         catch (HouseholdDoesNotExistException e)
         {
-            var error = new HouseHoldErrors().HouseholdDoesNotExist(id, ControllerContext.ActionDescriptor.ControllerName);
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
     }
@@ -72,27 +74,22 @@ public class HouseholdController : ControllerBase
         return Created($"{ControllerContext.ActionDescriptor.ControllerName}/{household.Id}", household);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut]
     [CustomAuthorize(Permission.HouseholdAdmin)]
-    public async Task<IActionResult> UpdateHousehold(int id, HouseholdEntity item)
+    public async Task<IActionResult> UpdateHousehold(HouseholdEntity item)
     {
         try
         {
-            _claimAuthorization.ConfirmHouseholdClaim(User.FindFirstValue(Claims.Household.ToString())!, id);
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            item.Id = householdId;
         }
         catch (AuthenticationException)
         {
             var error = new AuthenticationErrors().AccessDenied(ControllerContext.ActionDescriptor.ControllerName);
             return Unauthorized(error);
         }
-        // this validation can stay since it does not require db.
-        if (id != item.Id)
-        {
-            var error = new HouseHoldErrors()
-                .HouseholdIdDoesNotMatchUpdatedHousehold(id, ControllerContext.ActionDescriptor.ControllerName,item.Id);
-            return BadRequest(error);
-        }
-
+        
+        // validation of the household name..
         await _household.UpdateAsync(item);
         return NoContent();
     }
@@ -109,7 +106,7 @@ public class HouseholdController : ControllerBase
         }
         catch (HouseholdDoesNotExistException e)
         {
-            var error = new HouseHoldErrors().HouseholdDoesNotExist(id,
+            var error = new HouseHoldErrors().HouseholdDoesNotExist(
                 ControllerContext.ActionDescriptor.ControllerName);
             return NotFound(error);
         }
