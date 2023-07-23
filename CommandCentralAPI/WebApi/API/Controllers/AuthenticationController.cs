@@ -1,5 +1,7 @@
+using Domain.Entities.Authentication;
 using Domain.Exceptions;
 using Infrastructure.Authentication.Interfaces;
+using Infrastructure.Authentication.MemberAuthentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -8,19 +10,19 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class AuthenticationController : ControllerBase
 {
-    private readonly IGenerateTokenService _generateTokenService;
+    private readonly IMemberService _memberService;
 
-    public AuthenticationController(IGenerateTokenService generateTokenService)
+    public AuthenticationController(IMemberService memberService)
     {
-        _generateTokenService = generateTokenService;
+        _memberService = memberService;
     }
 
-    [HttpPost("{household_id}")]
-    public async Task<ActionResult<string>> AuthenticateHouseholdAsync(int household_id)
+    [HttpPost]
+    public async Task<ActionResult<string>> AuthenticateHouseholdAsync(MemberEntity member)
     {
         try
         {
-            return Ok(await _generateTokenService.GenerateToken(household_id));
+            return Ok(await _memberService.LoginReturnTokenAsync(member));
         }
         catch (HouseholdDoesNotExistException)
         {

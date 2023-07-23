@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Entities.Authentication;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data;
@@ -6,6 +7,7 @@ namespace Persistence.Data;
 public interface IApiDbContext
 {
     DbSet<TodoItem> TodoItems { get; set; }
+    DbSet<MemberEntity> Members { get; set; }
     DbSet<HouseholdEntity> Household { get; set; }
     DbSet<GroceryListEntity> GroceryList { get; set; }
     DbSet<GroceryListItemEntity> GroceryListItem { get; set; }

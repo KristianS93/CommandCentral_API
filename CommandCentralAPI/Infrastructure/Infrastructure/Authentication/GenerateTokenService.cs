@@ -1,4 +1,5 @@
 using Domain.Exceptions;
+using Domain.Models.Authentication;
 using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ public class GenerateTokenService : IGenerateTokenService
         _dbContext = dbContext;
     }
 
-    public async Task<string> GenerateToken(int householdId)
+    public async Task<string> GenerateToken(int householdId, Permission permission)
     {
         // Get household
         var household = await _dbContext.Household.FindAsync(householdId);
@@ -30,7 +31,7 @@ public class GenerateTokenService : IGenerateTokenService
         var groceryList = await _dbContext.GroceryList.Where(hId => hId.HouseholdId == householdId).FirstOrDefaultAsync();
 
         // Generate JWT
-        string token = _jwtProvider.Generate(household, groceryList);
+        string token = _jwtProvider.Generate(household, groceryList, permission);
         
         // Return JWT
         return token;

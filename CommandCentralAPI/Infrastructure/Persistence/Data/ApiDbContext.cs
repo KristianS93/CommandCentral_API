@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Entities.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -31,6 +32,7 @@ public class ApiDbContext : DbContext, IApiDbContext
             .OnDelete(DeleteBehavior.Cascade);
     }
 
+    public DbSet<MemberEntity> Members { get; set; }
     public DbSet<HouseholdEntity> Household { get; set; }
     public DbSet<GroceryListEntity> GroceryList { get; set; }
     public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
