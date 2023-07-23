@@ -1,4 +1,6 @@
 using Domain.Entities;
+using Domain.Entities.Authentication;
+using Domain.Models.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
@@ -37,6 +39,24 @@ public static class MigationExtensions
     {
         if (!_dbContext.Household.Any())
         {
+            // members 
+            var ibi = new MemberEntity()
+            {
+                Username = "Ibi", 
+                Password = "10000.oY9tST/RSs/chd14ilSxdg==.IulbmsdsHmUX/Aam5k8+HBIwHNjQpsaIB+QNRpMwpj0=", 
+                HouseholdId = 1, 
+                Permission = Permission.Member
+            };
+            var kristian = new MemberEntity()
+            {
+                Username = "Kristian",
+                Password = "10000.tqNBb8jjQuJBu1BlN0tLWw==.YpA67Fwa2Y6nGRPQHYSDREbw7KJne0N7fGqsVtS9HVE=",
+                HouseholdId = 1, 
+                Permission = Permission.SiteAdmin
+            };
+            _dbContext.AddRange(ibi, kristian);
+            _dbContext.SaveChanges();
+            
             // Todoitems
             var item1 = new TodoItem { Title = "My title", IsCompleted = false };
             var item2 = new TodoItem { Title = "buy milk", IsCompleted = true };

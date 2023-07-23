@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Domain.Entities;
+using Domain.Models.Authentication;
 using Infrastructure.Authentication.Interfaces;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,7 @@ public class JwtProvider : IJwtProvider
         _options = options.Value;
     }
 
-    public string Generate(HouseholdEntity household, GroceryListEntity? groceryList)
+    public string Generate(HouseholdEntity household, GroceryListEntity? groceryList, Permission permission)
     {
         var groceryListId = "null";
         if (groceryList != null)
@@ -30,7 +31,7 @@ public class JwtProvider : IJwtProvider
             new Claim(JwtRegisteredClaimNames.Sub, Guid.NewGuid().ToString()),
             new Claim(Claims.Household.ToString(), household.Id.ToString()),
             new Claim(Claims.GroceryList.ToString(), groceryListId),
-            new Claim(ClaimTypes.Role, Permission.SiteAdmin.ToString())
+            new Claim(ClaimTypes.Role, permission.ToString())
         };
 
         // Here we create the signing credentials for the jwt security token,

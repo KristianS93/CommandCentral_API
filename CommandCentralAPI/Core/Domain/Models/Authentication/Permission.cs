@@ -1,4 +1,4 @@
-namespace Infrastructure.Authentication;
+namespace Domain.Models.Authentication;
 
 public enum Permission
 {

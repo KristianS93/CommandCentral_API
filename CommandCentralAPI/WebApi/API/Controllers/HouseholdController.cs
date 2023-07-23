@@ -2,6 +2,7 @@ using System.Security.Authentication;
 using System.Security.Claims;
 using Domain.Entities;
 using Domain.Exceptions;
+using Domain.Models.Authentication;
 using Domain.Models.ErrorResponses;
 using Infrastructure.Authentication;
 using Infrastructure.Authentication.Interfaces;

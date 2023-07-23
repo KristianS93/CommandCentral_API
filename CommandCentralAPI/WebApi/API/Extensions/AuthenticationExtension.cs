@@ -1,7 +1,9 @@
 using System.Text;
 using API.Extensions.Options;
+using Domain.Models.Authentication;
 using Infrastructure.Authentication;
 using Infrastructure.Authentication.Interfaces;
+using Infrastructure.Authentication.MemberAuthentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace API.Extensions;
@@ -12,6 +14,8 @@ public static class AuthenticationExtension
     {
         service.AddScoped<IGenerateTokenService, GenerateTokenService>();
         service.AddScoped<IJwtProvider, JwtProvider>();
+        service.AddScoped<IPasswordHasher, PasswordHasher>();
+        service.AddScoped<IMemberService, MemberService>();
         service.AddScoped<IClaimAuthorizationService, ClaimAuthorizationService>();
         service.ConfigureOptions<JwtOptionsSetup>();
         

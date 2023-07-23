@@ -1,3 +1,4 @@
+using Domain.Models.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Infrastructure.Authentication;

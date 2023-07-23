@@ -5,7 +5,7 @@ using Domain.Models.Authentication;
 namespace Domain.Entities.Authentication;
 
 [Table("members")]
-public class Members
+public class MemberEntity
 {
     [Key]
     [Column("id")]
@@ -19,9 +19,8 @@ public class Members
     [Column("password")]
     public string Password { get; set; }
     
-    [Required]
     [Column("authority")]
-    public Permission Type { get; set; }
+    public Permission Permission { get; set; }
     
     [Column("household_id")]
     public int HouseholdId { get; set; }
