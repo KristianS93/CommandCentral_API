@@ -25,6 +25,22 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "members",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    username = table.Column<string>(type: "text", nullable: false),
+                    password = table.Column<string>(type: "text", nullable: false),
+                    authority = table.Column<int>(type: "integer", nullable: false),
+                    household_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_members", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "todo_item",
                 columns: table => new
                 {
@@ -120,6 +136,9 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "grocerylist_item");
+
+            migrationBuilder.DropTable(
+                name: "members");
 
             migrationBuilder.DropTable(
                 name: "todo_item");
