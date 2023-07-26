@@ -21,12 +21,12 @@ public static class AuthenticationExtension
         
         
         var jwtOptions = new JwtOptions();
-        conf.GetSection("JwtOptions").Bind(jwtOptions);
-        // new JwtOptionsSetup(conf).Configure(jwtOptions);
-        if (String.IsNullOrEmpty(jwtOptions.SecretKey))
-        {
-            throw new ArgumentException("No secret key in jwt options");
-        }
+        // conf.GetSection("JwtOptions").Bind(jwtOptions);
+        new JwtOptionsSetup(conf).Configure(jwtOptions);
+        // if (String.IsNullOrEmpty(jwtOptions.SecretKey))
+        // {
+        //     throw new ArgumentException("No secret key in jwt options");
+        // }
         var set = new JwtBearerOptionsSetup(jwtOptions);
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o => set.Configure(o));
         
