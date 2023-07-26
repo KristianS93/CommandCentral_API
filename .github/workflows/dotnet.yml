@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres
@@ -22,20 +22,32 @@ jobs:
           POSTGRES_DB: commandcentraltest_db
         ports:
           - 5432:5432
-        
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      working-directory: ./CommandCentralAPI
-      run: dotnet restore
-    - name: Build
-      working-directory: ./CommandCentralAPI
-      run: dotnet build --no-restore
-    - name: Test
-      working-directory: ./CommandCentralAPI
-      run: dotnet test --no-build --verbosity normal
+      - uses: actions/checkout@v3
+
+      # Build and restore the main project (CommandCentralAPI)
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore main project dependencies
+        working-directory: ./CommandCentralAPI
+        run: dotnet restore
+      - name: Build main project
+        working-directory: ./CommandCentralAPI
+        run: dotnet build --no-restore
+
+      # Build and restore the test project (CommandCentralAPI.Tests)
+      - name: Restore test project dependencies
+        working-directory: ./CommandCentralAPI.Tests
+        run: dotnet restore
+      - name: Build test project
+        working-directory: ./CommandCentralAPI.Tests
+        run: dotnet build --no-restore
+
+      # Run tests
+      - name: Test
+        working-directory: ./CommandCentralAPI.Tests
+        run: dotnet test --no-build --verbosity normal
+

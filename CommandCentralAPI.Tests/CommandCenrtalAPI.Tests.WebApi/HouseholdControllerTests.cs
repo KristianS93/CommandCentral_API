@@ -1,13 +1,13 @@
 using API.Controllers;
-using DatabaseFixture.Tests;
+using DatabaseFixture;
 using Domain.Entities;
 using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Tests.HouseholdTests;
+namespace CommandCenrtalAPI.Tests.WebApi;
 
 public class HouseholdControllerTests : IClassFixture<TestDatabaseFixture>
 {
