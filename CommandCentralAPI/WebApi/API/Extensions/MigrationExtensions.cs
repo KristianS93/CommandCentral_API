@@ -37,7 +37,7 @@ public static class MigationExtensions
 
     public static void SeedDatabase()
     {
-        if (!_dbContext.Household.Any())
+        if (!_dbContext.Members.Any())
         {
             // members 
             var ibi = new MemberEntity()
