@@ -1,9 +1,9 @@
 using Domain.Entities;
+using Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Persistence.Data;
 
-namespace DatabaseFixture.Tests;
+namespace DatabaseFixture;
 
 public class TestDatabaseFixture : IDisposable
 {
@@ -46,7 +46,8 @@ public class TestDatabaseFixture : IDisposable
         var household1 = new HouseholdEntity { Name = "Kristians hus" };
         var household2 = new HouseholdEntity { Name = "Ibis hus" };
         var household3 = new HouseholdEntity { Name = "No grocery list" };
-        context.AddRange(household1, household2, household3);
+        var household4 = new HouseholdEntity { Name = "New house" };
+        context.AddRange(household1, household2, household3, household4);
         context.SaveChanges();
             
         // add grocerylists

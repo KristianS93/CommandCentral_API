@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace DatabaseFixture.Tests;
+namespace DatabaseFixture;
 
 public class ConnectionTests: IClassFixture<TestDatabaseFixture>
 {

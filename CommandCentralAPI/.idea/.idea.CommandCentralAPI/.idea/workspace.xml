@@ -8,7 +8,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="" />
+    <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCenrtalAPI.Tests.WebApi/HouseholdControllerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/CommandCentralAPI.Tests.DatabaseFixture.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/ConnectionTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/GroceryListItemTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/GroceryListTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/HouseholdServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/vcs.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,31 +55,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.57644993&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dev-space/Documents/GitRepos/CommandCentral_API/CC&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.57644993",
+    "last_opened_file_path": "/home/dev-space/Documents/GitRepos/CommandCentral_API/CC",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ],
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/home/dev-space/.config/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
-      &quot;/home/dev-space/.config/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
-      &quot;/home/dev-space/.local/share/Symbols/src&quot;
+    "rider.external.source.directories": [
+      "/Users/kks/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/Users/kks/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/Users/kks/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.API: http">
     <configuration name="API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WebApi/API/API.csproj" />
@@ -127,6 +137,7 @@
       <workItem from="1689723089839" duration="4828000" />
       <workItem from="1689897326417" duration="160000" />
       <workItem from="1690116403705" duration="1220000" />
+      <workItem from="1690410235499" duration="1317000" />
     </task>
     <servers />
   </component>

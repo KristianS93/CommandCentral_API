@@ -1,11 +1,11 @@
-using DatabaseFixture.Tests;
+using DatabaseFixture;
 using Domain.Entities;
 using Domain.Exceptions.GroceryList;
 using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace Infrastructure.Tests;
+namespace CommandCentralApi.Tests.Infrastructure;
 
 public class GroceryListItemTests : IClassFixture<TestDatabaseFixture>
 {

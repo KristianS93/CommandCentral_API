@@ -1,14 +1,12 @@
-using DatabaseFixture.Tests;
+using DatabaseFixture;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Exceptions.GroceryList;
 using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Moq;
-using Xunit.Abstractions;
 
-namespace Infrastructure.Tests;
+namespace CommandCentralApi.Tests.Infrastructure;
 
 public class GroceryListTests : IClassFixture<TestDatabaseFixture>
 {

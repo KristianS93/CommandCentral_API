@@ -1,11 +1,11 @@
-using DatabaseFixture.Tests;
+using DatabaseFixture;
 using Domain.Entities;
 using Domain.Exceptions;
 using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace Infrastructure.Tests;
+namespace CommandCentralApi.Tests.Infrastructure;
 
 public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
 {
@@ -41,10 +41,10 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
         // Arrange
         using var context = Fixture.CreateContext();
         var service = new HouseholdService(context, _loggerMock);
-        var expected = new HouseholdEntity { Id = 1, Name = "Kristians hus" };
+        var expected = new HouseholdEntity { Id = 4, Name = "New house" };
         
         // Act
-        var actual = await service.GetByIdAsync(1);
+        var actual = await service.GetByIdAsync(4);
         
         // Assert
         Assert.Equivalent(expected, actual);
@@ -58,7 +58,7 @@ public class HouseholdServiceTests : IClassFixture<TestDatabaseFixture>
         var service = new HouseholdService(context, _loggerMock);
         
         // Assert
-        await Assert.ThrowsAsync<HouseholdDoesNotExistException>(() => service.GetByIdAsync(5));
+        await Assert.ThrowsAsync<HouseholdDoesNotExistException>(() => service.GetByIdAsync(1000));
     }
 
     [Theory]
