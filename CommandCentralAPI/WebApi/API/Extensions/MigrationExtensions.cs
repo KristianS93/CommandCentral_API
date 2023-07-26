@@ -25,7 +25,7 @@ public static class MigationExtensions
             // we only check household since it is essential
             // maybe further should be added 
             // Household.Any();
-            dbcontext.Household.Any();
+            dbcontext.Members.Any();
         }
         catch (Exception e)
         {
