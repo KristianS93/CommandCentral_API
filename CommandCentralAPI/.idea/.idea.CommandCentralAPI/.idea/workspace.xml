@@ -9,15 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCenrtalAPI.Tests.WebApi/HouseholdControllerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/CommandCentralAPI.Tests.DatabaseFixture.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/ConnectionTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/GroceryListItemTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/GroceryListTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralApi.Tests.Infrastructure/HouseholdServiceTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CommandCentralAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CommandCentralAPI.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +130,7 @@
       <workItem from="1689723089839" duration="4828000" />
       <workItem from="1689897326417" duration="160000" />
       <workItem from="1690116403705" duration="1220000" />
-      <workItem from="1690410235499" duration="1317000" />
+      <workItem from="1690410235499" duration="3080000" />
     </task>
     <servers />
   </component>
