@@ -12,9 +12,10 @@ public static class MigationExtensions
     public static void ApplyMigration(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
-
+    
         var dbcontext = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
         _dbContext = dbcontext;
+        _dbContext.Database.EnsureDeleted();
         while (!dbcontext.Database.CanConnect())
         {
             Thread.Sleep(1000);
