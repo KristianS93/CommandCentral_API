@@ -15,7 +15,6 @@ public static class MigationExtensions
     
         var dbcontext = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
         _dbContext = dbcontext;
-        _dbContext.Database.EnsureDeleted();
         while (!dbcontext.Database.CanConnect())
         {
             Thread.Sleep(1000);
