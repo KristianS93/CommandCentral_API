@@ -14,6 +14,9 @@ public interface IApiDbContext
     DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
 
     DbSet<WeekPlanEntity> WeekPlan { get; set; }
+    DbSet<TagEntity> Tag { get; set; }
+
+    DbSet<MealEntity> Meal { get; set; }
 
     /// <summary>
     ///

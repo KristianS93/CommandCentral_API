@@ -46,7 +46,12 @@ public class ApiDbContext : DbContext, IApiDbContext
             .WithMany()
             .HasForeignKey("household")
             .OnDelete(DeleteBehavior.Cascade);
-        
+
+        modelBuilder.Entity<MealEntity>()
+            .HasOne<HouseholdEntity>()
+            .WithMany()
+            .HasForeignKey("household")
+            .OnDelete(DeleteBehavior.Cascade);
         
         // time stamp behaviors
         ConfigureTimestamps<BaseEntity>(modelBuilder);
@@ -68,6 +73,8 @@ public class ApiDbContext : DbContext, IApiDbContext
     public DbSet<GroceryListEntity> GroceryList { get; set; }
     public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
     public DbSet<WeekPlanEntity> WeekPlan { get; set; }
+    public DbSet<TagEntity> Tag { get; set; }
+    public DbSet<MealEntity> Meal { get; set; }
     public DbSet<TodoItem> TodoItems { get; set; }
     public async Task<int> SaveChangesAsync()
     {
