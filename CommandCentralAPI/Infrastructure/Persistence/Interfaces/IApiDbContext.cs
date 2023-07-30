@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Entities.Authentication;
+using Domain.Entities.MealPlanner;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data;
@@ -11,6 +12,14 @@ public interface IApiDbContext
     DbSet<HouseholdEntity> Household { get; set; }
     DbSet<GroceryListEntity> GroceryList { get; set; }
     DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
+
+    DbSet<WeekPlanEntity> WeekPlan { get; set; }
+    DbSet<TagEntity> Tag { get; set; }
+
+    DbSet<MealEntity> Meal { get; set; }
+
+    DbSet<IngredientEntity> Ingredient { get; set; }
+
     /// <summary>
     ///
     /// <exception cref="DbUpdateException">An error is encountered while saving to the database.</exception>
