@@ -18,6 +18,8 @@ public interface IApiDbContext
 
     DbSet<MealEntity> Meal { get; set; }
 
+    DbSet<IngredientEntity> Ingredient { get; set; }
+
     /// <summary>
     ///
     /// <exception cref="DbUpdateException">An error is encountered while saving to the database.</exception>
