@@ -12,7 +12,7 @@ public static class MigationExtensions
     public static void ApplyMigration(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
-
+    
         var dbcontext = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
         _dbContext = dbcontext;
         while (!dbcontext.Database.CanConnect())
@@ -25,7 +25,7 @@ public static class MigationExtensions
             // we only check household since it is essential
             // maybe further should be added 
             // Household.Any();
-            dbcontext.Household.Any();
+            dbcontext.Members.Any();
         }
         catch (Exception e)
         {
@@ -37,7 +37,7 @@ public static class MigationExtensions
 
     public static void SeedDatabase()
     {
-        if (!_dbContext.Household.Any())
+        if (!_dbContext.Members.Any())
         {
             // members 
             var ibi = new MemberEntity()
