@@ -13,6 +13,9 @@ public class MealEntity : BaseEntity
     public string Description { get; set; }
     [Column("meal_direction")]
     public string Directions { get; set; }
+
+    [Column("tags")]
+    public string Tags { get; set; }
     
     [Column("household_id")]
     [Required]
