@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Domain.Entities.MealPlanner;
 
+[Table("week_plan")]
 public class WeekPlanEntity : BaseEntity
 {
     
