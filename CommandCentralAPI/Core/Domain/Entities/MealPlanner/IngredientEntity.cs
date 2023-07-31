@@ -12,11 +12,10 @@ public class IngredientEntity : BaseEntity
     [Column("ingredient_amount")]
     public string Amount { get; set; }
 
-    [Column("meal_id")]
     [Required]
-    [JsonIgnore]
+    [Column("meal_id")] 
     public int MealId { get; set; }
     
     [JsonIgnore]
-    public MealEntity Meal { get; set; }
+    public MealEntity? Meal { get; set; }
 }

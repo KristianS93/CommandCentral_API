@@ -1,4 +1,6 @@
 using Infrastructure.Interfaces;
+using Infrastructure.Interfaces.MealPlanner;
+using Infrastructure.Repositories.MealPlanner;
 using Infrastructure.Services;
 
 namespace API.Extensions;
@@ -16,6 +18,7 @@ public static class InfrastructureExtension
         service.AddScoped<IHouseholdService, HouseholdService>();
         service.AddScoped<IGroceryListService, GroceryListService>();
         service.AddScoped<IGroceryListItemService, GroceryListItemService>();
+        service.AddScoped<IIngredientRepository, IngredientRepository>();
         return service;
     }
 }
