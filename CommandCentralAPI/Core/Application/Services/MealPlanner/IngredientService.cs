@@ -3,7 +3,7 @@ using Domain.Entities.MealPlanner;
 
 namespace Application.Services.MealPlanner;
 
-public class IngredientService : IIngredientService<IngredientEntity>
+public class IngredientService : IIngredientService
 {
     private const string MissingNameOrAmount = "Missing name or amount!";
     

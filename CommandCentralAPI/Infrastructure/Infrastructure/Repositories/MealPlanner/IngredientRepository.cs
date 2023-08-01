@@ -10,9 +10,9 @@ public class IngredientRepository : IIngredientRepository
 {
     private readonly ILogger<IIngredientRepository> _logger;
     private readonly IApiDbContext _dbContext;
-    private readonly IIngredientService<IngredientEntity> _ingredientService;
+    private readonly IIngredientService _ingredientService;
 
-    public IngredientRepository(IApiDbContext dbContext, IIngredientService<IngredientEntity> ingredientService, ILogger<IIngredientRepository> logger)
+    public IngredientRepository(IApiDbContext dbContext, IIngredientService ingredientService, ILogger<IIngredientRepository> logger)
     {
         _dbContext = dbContext;
         _ingredientService = ingredientService;

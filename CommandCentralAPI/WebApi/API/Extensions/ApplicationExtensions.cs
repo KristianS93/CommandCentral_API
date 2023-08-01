@@ -8,7 +8,8 @@ public static class ApplicationExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection service)
     {
-        service.AddScoped<IIngredientService<IngredientEntity>, IngredientService>();
+        service.AddScoped<IIngredientService, IngredientService>();
+        service.AddScoped<IMealService, MealService>();
 
         return service;
     }

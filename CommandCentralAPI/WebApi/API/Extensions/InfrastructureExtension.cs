@@ -19,6 +19,7 @@ public static class InfrastructureExtension
         service.AddScoped<IGroceryListService, GroceryListService>();
         service.AddScoped<IGroceryListItemService, GroceryListItemService>();
         service.AddScoped<IIngredientRepository, IngredientRepository>();
+        service.AddScoped<IMealRepository, MealRepository>();
         return service;
     }
 }

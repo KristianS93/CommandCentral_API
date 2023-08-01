@@ -9,19 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 [CustomAuthorize(Permission.Member)]
 public class IngredientController : ControllerBase
 {
     private readonly IIngredientRepository _ingredientRepository;
     private readonly ILogger<IngredientController> _logger;
-    private readonly IClaimAuthorizationService _claimAuthorization;
+    private readonly int _householdId;
 
     public IngredientController(IIngredientRepository ingredientRepository, ILogger<IngredientController> logger, IClaimAuthorizationService claimAuthorization)
     {
         _ingredientRepository = ingredientRepository;
         _logger = logger;
-        _claimAuthorization = claimAuthorization;
+        _householdId = claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
     }
 
     [HttpGet]
@@ -30,8 +29,7 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
-            return Ok(await _ingredientRepository.GetByIdAsync(Id, householdId));
+            return Ok(await _ingredientRepository.GetByIdAsync(Id, _householdId));
         }
         // this exception handling should be changed to it follows the correct
         // pattern for error responses..
@@ -42,11 +40,11 @@ public class IngredientController : ControllerBase
     }
 
     [HttpPost]
+    [Route("[controller]")]
     public async Task<ActionResult<IngredientEntity>> CreateIngredient(IngredientEntity ingredient)
     {
         try
         {
-            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
             return Created($"{ControllerContext.ActionDescriptor.ControllerName}/", await _ingredientRepository.CreateAsync(ingredient));
         }
         catch (Exception e)
@@ -56,12 +54,12 @@ public class IngredientController : ControllerBase
     }
 
     [HttpPut]
+    [Route("[controller]")]
     public async Task<IActionResult> UpdateIngredient(IngredientEntity ingredient)
     {
         try
         {
-            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
-            await _ingredientRepository.UpdateAsync(ingredient, householdId);
+            await _ingredientRepository.UpdateAsync(ingredient, _householdId);
             return Ok();
         }
         catch (Exception e)
@@ -76,8 +74,7 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
-            await _ingredientRepository.DeleteAsync(Id, householdId);
+            await _ingredientRepository.DeleteAsync(Id, _householdId);
             return Ok();
         }
         catch (Exception e)
