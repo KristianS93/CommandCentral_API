@@ -16,13 +16,13 @@ public class IngredientController : ControllerBase
 {
     private readonly IIngredientRepository _ingredientRepository;
     private readonly ILogger<IngredientController> _logger;
-    private readonly int _householdId;
+    private readonly IClaimAuthorizationService _claimAuthorization;
 
     public IngredientController(IIngredientRepository ingredientRepository, ILogger<IngredientController> logger, IClaimAuthorizationService claimAuthorization)
     {
         _ingredientRepository = ingredientRepository;
         _logger = logger;
-        _householdId = claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+        _claimAuthorization = claimAuthorization;
     }
 
     [HttpGet]
@@ -31,7 +31,8 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            return Ok(await _ingredientRepository.GetByIdAsync(Id, _householdId));
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            return Ok(await _ingredientRepository.GetByIdAsync(Id, householdId));
         }
         // this exception handling should be changed to it follows the correct
         // pattern for error responses..
@@ -47,7 +48,8 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/", await _ingredientRepository.CreateAsync(ingredient, _householdId));
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/", await _ingredientRepository.CreateAsync(ingredient, householdId));
         }
         catch (Exception e)
         {
@@ -61,7 +63,8 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            await _ingredientRepository.UpdateAsync(ingredient, _householdId);
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            await _ingredientRepository.UpdateAsync(ingredient, householdId);
             return Ok();
         }
         catch (Exception e)
@@ -76,7 +79,8 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            await _ingredientRepository.DeleteAsync(Id, _householdId);
+            var householdId = _claimAuthorization.GetIntegerClaimId(User.FindFirstValue(Claims.Household.ToString())!);
+            await _ingredientRepository.DeleteAsync(Id, householdId);
             return Ok();
         }
         catch (Exception e)
