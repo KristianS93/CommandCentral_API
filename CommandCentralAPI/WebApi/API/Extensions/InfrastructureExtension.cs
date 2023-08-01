@@ -1,7 +1,10 @@
+using Application.Interfaces.MealPlanner;
+using Domain.Entities.MealPlanner;
 using Infrastructure.Interfaces;
 using Infrastructure.Interfaces.MealPlanner;
 using Infrastructure.Repositories.MealPlanner;
 using Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
 

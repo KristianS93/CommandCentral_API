@@ -1,9 +1,11 @@
 using System.Security.Claims;
+using Application.Interfaces.MealPlanner;
 using Domain.Entities.MealPlanner;
 using Domain.Models.Authentication;
 using Infrastructure.Authentication;
 using Infrastructure.Authentication.Interfaces;
 using Infrastructure.Interfaces.MealPlanner;
+using Infrastructure.Repositories.MealPlanner;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -45,7 +47,7 @@ public class IngredientController : ControllerBase
     {
         try
         {
-            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/", await _ingredientRepository.CreateAsync(ingredient));
+            return Created($"{ControllerContext.ActionDescriptor.ControllerName}/", await _ingredientRepository.CreateAsync(ingredient, _householdId));
         }
         catch (Exception e)
         {

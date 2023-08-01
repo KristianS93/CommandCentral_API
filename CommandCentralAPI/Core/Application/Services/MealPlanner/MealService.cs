@@ -7,21 +7,41 @@ public class MealService : IMealService
 {
     public MealEntity GetByItem(MealEntity? item)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(item);
+        return item;
     }
 
     public MealEntity Create(MealEntity? item)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(item);
+        if (String.IsNullOrEmpty(item.Name) || item.Name.Any(Char.IsLetter))
+        {
+            throw new ArgumentException("Missing name, or wrong format!");
+        }
+
+        var createdAt = DateTime.Now;
+        item.CreatedAt = createdAt;
+        item.LastModified = createdAt;
+
+        return item;
     }
 
     public MealEntity Delete(MealEntity? item)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(item);
+        return item;
     }
 
     public MealEntity Update(MealEntity? item)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(item);
+        if (String.IsNullOrEmpty(item.Name) || item.Name.Any(Char.IsLetter))
+        {
+            throw new ArgumentException("Missing name, or wrong format!");
+        }
+        
+        // update
+        item.LastModified = DateTime.Now;
+        return item;
     }
 }

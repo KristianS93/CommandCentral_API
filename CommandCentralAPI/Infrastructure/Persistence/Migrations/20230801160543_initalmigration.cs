@@ -101,9 +101,9 @@ namespace Persistence.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false),
                     meal_name = table.Column<string>(type: "text", nullable: false),
-                    meal_description = table.Column<string>(type: "text", nullable: false),
-                    meal_direction = table.Column<string>(type: "text", nullable: false),
-                    tags = table.Column<string>(type: "text", nullable: false),
+                    meal_description = table.Column<string>(type: "text", nullable: true),
+                    meal_direction = table.Column<string>(type: "text", nullable: true),
+                    tags = table.Column<string>(type: "text", nullable: true),
                     household_id = table.Column<int>(type: "integer", nullable: false),
                     household = table.Column<int>(type: "integer", nullable: true)
                 },

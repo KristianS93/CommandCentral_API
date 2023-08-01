@@ -17,7 +17,6 @@ public class IngredientService : IIngredientService
     {
         
         // Validation
-        Console.WriteLine("In create service");
         if (String.IsNullOrEmpty(item.Name) || String.IsNullOrEmpty(item.Amount))
         {
             throw new ArgumentException(MissingNameOrAmount);
