@@ -1,20 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Domain.Common;
 using Domain.Entities.Household;
 
-namespace Domain.Entities.MealPlanner;
+namespace Domain.Entities.GroceryList;
 
-public class TagEntity : BaseEntity
+public class GroceryListEntity : BaseEntity
 {
-    
-    public string TagName { get; set; } = String.Empty;
-    
-    public int MealId { get; set; }
-    
     public int HouseholdId { get; set; }
-
-    public MealEntity? Meal { get; set; }
-
+    
     public HouseholdEntity? Household { get; set; }
 }

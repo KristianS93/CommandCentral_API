@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Entities.GroceryList;
 using Domain.Exceptions.GroceryList;
 
 namespace Infrastructure.Interfaces;

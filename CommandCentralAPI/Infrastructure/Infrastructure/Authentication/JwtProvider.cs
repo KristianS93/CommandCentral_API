@@ -2,6 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Domain.Entities;
+using Domain.Entities.GroceryList;
+using Domain.Entities.Household;
 using Domain.Models.Authentication;
 using Infrastructure.Authentication.Interfaces;
 using Microsoft.Extensions.Options;

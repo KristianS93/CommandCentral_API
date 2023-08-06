@@ -1,6 +1,7 @@
 using System.Security.Authentication;
 using System.Security.Claims;
 using Domain.Entities;
+using Domain.Entities.Household;
 using Domain.Exceptions;
 using Domain.Models.Authentication;
 using Domain.Models.ErrorResponses;

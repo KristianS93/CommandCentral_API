@@ -1,21 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Domain.Common;
 
 namespace Domain.Entities.MealPlanner;
-[Table("ingredient")]
 public class IngredientEntity : BaseEntity
 {
-    [Column("ingredient_name")]
-    public string Name { get; set; }
-    
-    [Column("ingredient_amount")]
-    public string Amount { get; set; }
+    public string Name { get; set; } = String.Empty;
 
-    [Required]
-    [Column("meal_id")] 
+    public string Amount { get; set; } = String.Empty;
+
     public int MealId { get; set; }
     
-    [JsonIgnore]
     public MealEntity? Meal { get; set; }
 }

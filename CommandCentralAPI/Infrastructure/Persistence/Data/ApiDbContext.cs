@@ -1,5 +1,8 @@
+using Domain.Common;
 using Domain.Entities;
 using Domain.Entities.Authentication;
+using Domain.Entities.GroceryList;
+using Domain.Entities.Household;
 using Domain.Entities.MealPlanner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

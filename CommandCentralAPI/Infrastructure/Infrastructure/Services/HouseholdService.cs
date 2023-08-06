@@ -1,5 +1,6 @@
 using System.Text;
 using Domain.Entities;
+using Domain.Entities.Household;
 using Domain.Exceptions;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
