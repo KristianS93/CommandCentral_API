@@ -9,8 +9,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/CommandCentralAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CommandCentralAPI.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/IngredientService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/IngredientService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/MealService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/MealService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/MealPlanner/MealEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/MealPlanner/MealEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IBaseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IBaseRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IIngredientRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IIngredientRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IMealRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IMealRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/IngredientRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/IngredientRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/MealRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/MealRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230730212303_initalmigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230730212303_initalmigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/IngredientController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/IngredientController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/InfrastructureExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Extensions/InfrastructureExtension.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,9 +79,9 @@
       "TEXT"
     ],
     "rider.external.source.directories": [
-      "/Users/kks/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
-      "/Users/kks/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
-      "/Users/kks/.local/share/Symbols/src"
+      "/home/dev-space/.config/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
+      "/home/dev-space/.config/JetBrains/Rider2023.1/resharper-host/SourcesCache",
+      "/home/dev-space/.local/share/Symbols/src"
     ]
   }
 }]]></component>
@@ -131,6 +143,7 @@
       <workItem from="1689897326417" duration="160000" />
       <workItem from="1690116403705" duration="1220000" />
       <workItem from="1690410235499" duration="3080000" />
+      <workItem from="1690897163407" duration="10128000" />
     </task>
     <servers />
   </component>

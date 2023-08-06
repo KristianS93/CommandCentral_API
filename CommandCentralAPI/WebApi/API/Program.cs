@@ -21,6 +21,7 @@ builder.Services.AddDataProtection();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

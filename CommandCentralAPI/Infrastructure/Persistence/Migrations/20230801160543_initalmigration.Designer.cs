@@ -12,7 +12,7 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230730212303_initalmigration")]
+    [Migration("20230801160543_initalmigration")]
     partial class initalmigration
     {
         /// <inheritdoc />
@@ -253,12 +253,10 @@ namespace Persistence.Migrations
                     b.HasBaseType("Domain.Entities.BaseEntity");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("meal_description");
 
                     b.Property<string>("Directions")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("meal_direction");
 
@@ -272,7 +270,6 @@ namespace Persistence.Migrations
                         .HasColumnName("meal_name");
 
                     b.Property<string>("Tags")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("tags");
 

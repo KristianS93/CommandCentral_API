@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Entities.Authentication;
+using Domain.Entities.MealPlanner;
 using Domain.Models.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
@@ -84,6 +85,27 @@ public static class MigationExtensions
             var gItem3 = new GroceryListItemEntity { ItemName = "Boller", ItemAmount = 5, GroceryListId = grocerylist1.Id };
             var gItem4 = new GroceryListItemEntity { ItemName = "Specialized cykel", ItemAmount = 2, GroceryListId = grocerylist2.Id };
             _dbContext.GroceryListItem.AddRange(gItem1, gItem2, gItem3, gItem4);
+            _dbContext.SaveChanges();
+
+            var now = DateTime.Now;
+            var meal = new MealEntity()
+            {
+                CreatedAt = now, LastModified = now, Name = "Husets speciale", Description = "Lækker pasta ret",
+                Directions = "1. Put alt ned i en skål. 2. lav maden", HouseholdId = household1.Id, Tags = "#Dinner#Pasta#Warm"
+            };
+            _dbContext.Meal.Add(meal);
+            _dbContext.SaveChanges();
+
+            var iNow = DateTime.Now;
+            var ingredient1 = new IngredientEntity()
+            {
+                CreatedAt = iNow,
+                LastModified = iNow,
+                Name = "Pasta",
+                Amount = "300 gram",
+                MealId = meal.Id
+            };
+            _dbContext.Ingredient.Add(ingredient1);
             _dbContext.SaveChanges();
 
         }
