@@ -8,9 +8,9 @@ namespace Domain.Common;
 /// </summary>
 public abstract class BaseEntity
 {
+    [Key]
     public int Id { get; set; }
-
-    public DateTime CreatedAt { get; set; }
+    public virtual DateTime CreatedAt { get; set; }
     
-    public DateTime LastModified { get; set; }
+    public virtual DateTime LastModified { get; set; }
 }
