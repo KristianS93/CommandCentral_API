@@ -9,11 +9,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CommandCentralAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CommandCentralAPI.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/IdentityServicesRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/IdentityServicesRegistration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807144327_identity-im.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807144327_identity-im.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/AuthDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,9 +72,9 @@
       "TEXT"
     ],
     "rider.external.source.directories": [
-      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
-      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/SourcesCache",
-      "/home/dev-space/.local/share/Symbols/src"
+      "/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
+      "/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache",
+      "/Users/kks/.local/share/Symbols/src"
     ]
   }
 }]]></component>
@@ -132,6 +138,7 @@
       <workItem from="1690410235499" duration="3080000" />
       <workItem from="1690897163407" duration="10128000" />
       <workItem from="1691359885345" duration="25374000" />
+      <workItem from="1691429302939" duration="2789000" />
     </task>
     <servers />
   </component>

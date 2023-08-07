@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Contracts.Household;
 using Application.Contracts.Identity;
 using Application.Exceptions;
 using Application.Models.Identity;
@@ -17,17 +18,18 @@ public class AuthService : IAuthService
     private readonly UserManager<ApplicationMember> _userManager;
     private readonly IOptions<JwtSettings> _jwtSettings;
     private readonly SignInManager<ApplicationMember> _signInManager;
+    private readonly IHouseholdRepository _householdRepository;
 
-    public AuthService(UserManager<ApplicationMember> userManager, IOptions<JwtSettings> jwtSettings, SignInManager<ApplicationMember> signInManager)
+    public AuthService(UserManager<ApplicationMember> userManager, IOptions<JwtSettings> jwtSettings, SignInManager<ApplicationMember> signInManager, IHouseholdRepository householdRepository)
     {
         _userManager = userManager;
         _jwtSettings = jwtSettings;
         _signInManager = signInManager;
+        _householdRepository = householdRepository;
     }
     public async Task<AuthResponse> Login(AuthRequest request)
     {
         var user = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == request.UserName);
-        // FindByEmailAsync(request.UserName);
         if (user == null)
         {
             throw new NotFoundException($"User with {request.UserName} is not found.", request.UserName);
@@ -52,36 +54,7 @@ public class AuthService : IAuthService
         
         return response;
     }
-
-    private async Task<JwtSecurityToken> GenerateToken(ApplicationMember user)
-    {
-        var userClaims = await _userManager.GetClaimsAsync(user);
-        var roles = await _userManager.GetRolesAsync(user);
-
-        var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
-
-        var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim("uid", user.Id)
-            }
-            .Union(userClaims)
-            .Union(roleClaims);
-        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Value.Key));
-        var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
-
-        var jwtSecurityToken = new JwtSecurityToken(
-            issuer: _jwtSettings.Value.Issuer,
-            audience: _jwtSettings.Value.Audience,
-            claims: claims,
-            expires: DateTime.Now.AddMinutes(_jwtSettings.Value.DurationInMinutes),
-            signingCredentials: signingCredentials);
-
-        return jwtSecurityToken;
-    }
-
+    
     public async Task<RegistrationResponse> Register(RegistrationRequest request)
     {
         var user = new ApplicationMember
@@ -90,7 +63,7 @@ public class AuthService : IAuthService
             FirstName = request.FirstName,
             LastName = request.LastName,
             UserName = request.UserName,
-            EmailConfirmed = true
+            EmailConfirmed = true,
         };
 
         var result = await _userManager.CreateAsync(user, request.Password);
@@ -106,5 +79,52 @@ public class AuthService : IAuthService
             str.AppendFormat("- {0}\n", err.Description);
         }
         throw new BadRequestException($"{str}");
+    }
+
+    private async Task<JwtSecurityToken> GenerateToken(ApplicationMember user)
+    {
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        var roles = await _userManager.GetRolesAsync(user);
+        
+        //Get household id
+        var householdIdStr = "";
+        if (user.HouseholdId != null)
+        {
+            
+            var household = await _householdRepository.GetByIdAsync(user.HouseholdId.GetValueOrDefault());
+            if (household == null)
+            {
+                householdIdStr = "null";
+            }
+            else
+            {
+                householdIdStr = household.Id.ToString();
+            }
+        }
+        
+
+        var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
+
+        var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("uid", user.Id),
+                new Claim(Claims.Household.ToString(), householdIdStr)
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Value.Key));
+        var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+
+        var jwtSecurityToken = new JwtSecurityToken(
+            issuer: _jwtSettings.Value.Issuer,
+            audience: _jwtSettings.Value.Audience,
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(_jwtSettings.Value.DurationInMinutes),
+            signingCredentials: signingCredentials);
+
+        return jwtSecurityToken;
     }
 }

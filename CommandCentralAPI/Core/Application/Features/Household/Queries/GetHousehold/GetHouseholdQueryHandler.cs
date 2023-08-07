@@ -1,4 +1,5 @@
 using Application.Contracts.Household;
+using Application.Contracts.Identity;
 using AutoMapper;
 using Domain.Entities.Household;
 using MediatR;
@@ -17,6 +18,8 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, House
     }
     public async Task<HouseholdDto> Handle(GetHouseholdQuery request, CancellationToken cancellationToken)
     {
+        // Get household id
+        
         // Query database
         var household = await _householdRepository.GetByIdAsync(request.Id);
         

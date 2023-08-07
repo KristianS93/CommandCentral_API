@@ -48,7 +48,8 @@ public static class AuthMigrationConfiguration
             UserName = "webadmin",
             NormalizedUserName = "WEBADMIN",
             PasswordHash = hasher.HashPassword(null, "password"),
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            HouseholdId = 1,
         };
         var user = new ApplicationMember
         {
@@ -60,7 +61,8 @@ public static class AuthMigrationConfiguration
             UserName = "webuser",
             NormalizedUserName = "WEBUSER",
             PasswordHash = hasher.HashPassword(null, "userpassword"),
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            HouseholdId = 2
         };
         _dbContext.AddRange(admin, user);
         _dbContext.SaveChanges();

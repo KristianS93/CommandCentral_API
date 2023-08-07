@@ -51,6 +51,10 @@ namespace Identity.Migrations
                         .HasColumnType("text")
                         .HasColumnName("first_name");
 
+                    b.Property<int?>("HouseholdId")
+                        .HasColumnType("integer")
+                        .HasColumnName("household_id");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text")

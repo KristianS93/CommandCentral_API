@@ -40,6 +40,7 @@ public static class IdentityServicesRegistration
 
         services.AddTransient<IAuthService, AuthService>();
         services.AddTransient<IUserService, UserService>();
+        services.AddScoped<IClaimAuthorizationService, ClaimAuthorizationService>();
         
         services.AddAuthentication(
             options =>
@@ -61,6 +62,24 @@ public static class IdentityServicesRegistration
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!))
             };
         });
+
+        services.AddAuthorization(options =>
+        {
+            // Only siteadmin can access siteadmin endpoints
+            options.AddPolicy(Permission.SiteAdmin.ToString(), p=> 
+                p.RequireRole(Permission.SiteAdmin.ToString()));
+            
+            // Owner of household, can update and delete household
+            // can also be accessed by siteadmins.
+            options.AddPolicy(Permission.Owner.ToString(), p => 
+                p.RequireRole(Permission.Owner.ToString(), Permission.SiteAdmin.ToString()));
+            
+            // Member of household, can utilize all basic functionality
+            // However they cannot edit the household or delete
+            // Endpoints accessible for a member is also accessible for owners, siteadmins
+            options.AddPolicy(Permission.Member.ToString(), p => 
+                p.RequireRole(Permission.Member.ToString(), Permission.Owner.ToString(), Permission.SiteAdmin.ToString()));
+        } );
         
         return services;
     }
