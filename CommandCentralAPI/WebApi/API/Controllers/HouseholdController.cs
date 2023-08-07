@@ -1,4 +1,3 @@
-using System.Security.Authentication;
 using System.Security.Claims;
 using Application.Contracts.Identity;
 using Application.Features.Household.Commands.CreateHousehold;

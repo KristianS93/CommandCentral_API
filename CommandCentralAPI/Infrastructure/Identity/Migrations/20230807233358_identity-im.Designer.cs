@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20230807183839_identity-im")]
+    [Migration("20230807233358_identity-im")]
     partial class identityim
     {
         /// <inheritdoc />
@@ -53,6 +53,10 @@ namespace Identity.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("first_name");
+
+                    b.Property<int?>("GroceryListId")
+                        .HasColumnType("integer")
+                        .HasColumnName("grocery_list_id");
 
                     b.Property<int?>("HouseholdId")
                         .HasColumnType("integer")

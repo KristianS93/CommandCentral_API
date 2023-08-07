@@ -18,8 +18,6 @@ public class GetHouseholdQueryHandler : IRequestHandler<GetHouseholdQuery, House
     }
     public async Task<HouseholdDto> Handle(GetHouseholdQuery request, CancellationToken cancellationToken)
     {
-        // Get household id
-        
         // Query database
         var household = await _householdRepository.GetByIdAsync(request.Id);
         

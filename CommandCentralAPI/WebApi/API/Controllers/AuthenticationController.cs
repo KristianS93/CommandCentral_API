@@ -18,6 +18,7 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
     {
+        Console.WriteLine("!!!!!!!!TRYING TO LOG IN!!!!!!!!");
         return Ok(await _authService.Login(request));
     }
     

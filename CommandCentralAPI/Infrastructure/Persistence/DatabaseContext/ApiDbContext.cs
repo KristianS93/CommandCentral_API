@@ -85,8 +85,8 @@ public class ApiDbContext : DbContext
     
     // public DbSet<MemberEntity> Members { get; set; }
     public DbSet<HouseholdEntity> Household { get; set; }
-    // public DbSet<GroceryListEntity> GroceryList { get; set; }
-    // public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
+    public DbSet<GroceryListEntity> GroceryList { get; set; }
+    public DbSet<GroceryListItemEntity> GroceryListItem { get; set; }
     // public DbSet<WeekPlanEntity> WeekPlan { get; set; }
     // public DbSet<TagEntity> Tag { get; set; }
     // public DbSet<MealEntity> Meal { get; set; }

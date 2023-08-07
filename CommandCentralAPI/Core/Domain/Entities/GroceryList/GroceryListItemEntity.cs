@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Domain.Common;
 
 namespace Domain.Entities.GroceryList;
+[Table("grocerylist_item")]
 public class GroceryListItemEntity : BaseEntity
 {
     public string ItemName { get; set; } = String.Empty;

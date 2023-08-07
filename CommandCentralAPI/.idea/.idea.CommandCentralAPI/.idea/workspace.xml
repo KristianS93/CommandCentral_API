@@ -9,16 +9,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListItemEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListItemEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/IdentityServicesRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/IdentityServicesRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807144327_identity-im.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807144327_identity-im.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807183839_identity-im.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807183839_identity-im.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/AuthDbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Configurations/MigrationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Configurations/MigrationConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/DatabaseContext/ApiDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/DatabaseContext/ApiDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230807131609_initalmigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230807131609_initalmigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/PersistenceServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/PersistenceServiceRegistration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemControllerOld.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,31 +65,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.57644993",
-    "last_opened_file_path": "/home/dev-space/Documents/GitRepos/CommandCentral_API/CC",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.57644993&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dev-space/Documents/GitRepos/CommandCentral_API/CC&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ],
-    "rider.external.source.directories": [
-      "/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
-      "/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache",
-      "/Users/kks/.local/share/Symbols/src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/kks/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache&quot;,
+      &quot;/Users/kks/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.API: http">
     <configuration name="API: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WebApi/API/API.csproj" />
@@ -139,6 +151,7 @@
       <workItem from="1690897163407" duration="10128000" />
       <workItem from="1691359885345" duration="25374000" />
       <workItem from="1691429302939" duration="2789000" />
+      <workItem from="1691445437656" duration="7012000" />
     </task>
     <servers />
   </component>

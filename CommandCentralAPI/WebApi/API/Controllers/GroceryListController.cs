@@ -31,7 +31,7 @@
 //
 //     [HttpGet]
 //     [CustomAuthorize(Permission.Member)]
-//     public async Task<ActionResult<GroceryListEntity>> GetGroceryList()
+//     public async Task<ActionResult<GroceryListEntity>> GetAllGroceryListItemsQuery()
 //     {
 //         try
 //         {

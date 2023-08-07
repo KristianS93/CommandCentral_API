@@ -34,6 +34,7 @@ namespace Identity.Migrations
                     first_name = table.Column<string>(type: "text", nullable: false),
                     last_name = table.Column<string>(type: "text", nullable: false),
                     household_id = table.Column<int>(type: "integer", nullable: true),
+                    grocery_list_id = table.Column<int>(type: "integer", nullable: true),
                     user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),

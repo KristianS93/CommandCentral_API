@@ -1,10 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Application.Contracts.GroceryList;
 using Application.Contracts.Household;
 using Application.Contracts.Identity;
 using Application.Exceptions;
 using Application.Models.Identity;
+using Domain.Entities.GroceryList;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +21,19 @@ public class AuthService : IAuthService
     private readonly IOptions<JwtSettings> _jwtSettings;
     private readonly SignInManager<ApplicationMember> _signInManager;
     private readonly IHouseholdRepository _householdRepository;
+    private readonly IGroceryListRepository _groceryListRepository;
 
-    public AuthService(UserManager<ApplicationMember> userManager, IOptions<JwtSettings> jwtSettings, SignInManager<ApplicationMember> signInManager, IHouseholdRepository householdRepository)
+    public AuthService(UserManager<ApplicationMember> userManager, 
+        IOptions<JwtSettings> jwtSettings, 
+        SignInManager<ApplicationMember> signInManager, 
+        IHouseholdRepository householdRepository,
+        IGroceryListRepository groceryListRepository)
     {
         _userManager = userManager;
         _jwtSettings = jwtSettings;
         _signInManager = signInManager;
         _householdRepository = householdRepository;
+        _groceryListRepository = groceryListRepository;
     }
     public async Task<AuthResponse> Login(AuthRequest request)
     {
@@ -85,12 +93,14 @@ public class AuthService : IAuthService
     {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var roles = await _userManager.GetRolesAsync(user);
+
+        Console.WriteLine("!!!!!!!!!!!!in token generation!!!!!!!!!!!!!");
         
         //Get household id
         var householdIdStr = "";
+        var groceryListIdStr = "";
         if (user.HouseholdId != null)
         {
-            
             var household = await _householdRepository.GetByIdAsync(user.HouseholdId.GetValueOrDefault());
             if (household == null)
             {
@@ -99,10 +109,20 @@ public class AuthService : IAuthService
             else
             {
                 householdIdStr = household.Id.ToString();
+                Console.WriteLine("############## FOUND HOUSEHOLD ###############");
+                
+                // GroceryList
+                if (user.GroceryListId != null)
+                {
+                    var groceryList = await _groceryListRepository.GetGroceryListByHouseholdIdAsync(household.Id);
+                    groceryListIdStr = groceryList.Id.ToString();
+                    Console.WriteLine("############## FOUND GROCERYLIST ###############");
+                }
             }
         }
-        
 
+        Console.WriteLine("############## AFTER HOUSEHOLD AND GROCERYLIST ###############");
+        
         var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
 
         var claims = new[]
@@ -111,7 +131,8 @@ public class AuthService : IAuthService
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("uid", user.Id),
-                new Claim(Claims.Household.ToString(), householdIdStr)
+                new Claim(Claims.Household.ToString(), householdIdStr),
+                new Claim(Claims.GroceryList.ToString(), groceryListIdStr)
             }
             .Union(userClaims)
             .Union(roleClaims);
@@ -124,7 +145,8 @@ public class AuthService : IAuthService
             claims: claims,
             expires: DateTime.Now.AddMinutes(_jwtSettings.Value.DurationInMinutes),
             signingCredentials: signingCredentials);
-
+        
+        Console.WriteLine("###### TOKEN GENERATED ###########");
         return jwtSecurityToken;
     }
 }

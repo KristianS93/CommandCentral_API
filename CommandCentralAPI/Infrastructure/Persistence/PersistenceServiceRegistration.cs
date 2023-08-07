@@ -1,3 +1,4 @@
+using Application.Contracts.GroceryList;
 using Application.Contracts.Household;
 using Application.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,8 @@ public static class PersistenceServiceRegistration
         
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IHouseholdRepository, HouseholdRepository>();
+        services.AddScoped<IGroceryListRepository, GroceryListRepository>();
+        services.AddScoped<IGroceryListItemRepository, GroceryListItemRepository>();
         return services;
     }
 }

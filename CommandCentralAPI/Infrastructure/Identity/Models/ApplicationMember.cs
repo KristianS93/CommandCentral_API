@@ -9,4 +9,6 @@ public class ApplicationMember : IdentityUser
     public string LastName { get; set; } = string.Empty;
 
     public int? HouseholdId { get; set; }
+
+    public int? GroceryListId { get; set; }
 }

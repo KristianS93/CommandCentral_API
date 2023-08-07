@@ -1,3 +1,4 @@
+using Domain.Entities.GroceryList;
 using Domain.Entities.Household;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ public static class MigrationConfiguration
     {
         SeedHousehold();
     }
-
+    
     public static void SeedHousehold()
     {
         var house1 = new HouseholdEntity
@@ -64,6 +65,65 @@ public static class MigrationConfiguration
             LastModified = DateTime.Now
         };
         _dbContext.AddRange(house1, house2, house3);
+        _dbContext.SaveChanges();
+
+        var groceryList1 = new GroceryListEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            HouseholdId = house1.Id,
+        };
+
+        var groceryList2 = new GroceryListEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            HouseholdId = house2.Id,
+        };
+
+        // var groceryList3 = new GroceryListEntity
+        // {
+        //     CreatedAt = DateTime.Now,
+        //     LastModified = DateTime.Now,
+        //     HouseholdId = house3.Id,
+        // };
+        _dbContext.AddRange(groceryList1, groceryList2);
+        _dbContext.SaveChanges();
+        
+        var gItem1List1 = new GroceryListItemEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            ItemName = "Mælk",
+            ItemAmount = 3,
+            GroceryListId = groceryList1.Id,
+        };
+        var gItem2List1 = new GroceryListItemEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            ItemName = "Toilet papir",
+            ItemAmount = 1,
+            GroceryListId = groceryList1.Id,
+        };
+        var gItem3List1 = new GroceryListItemEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            ItemName = "Boller",
+            ItemAmount = 5,
+            GroceryListId = groceryList1.Id,
+        };
+        var gItem4List2 = new GroceryListItemEntity
+        {
+            CreatedAt = DateTime.Now,
+            LastModified = DateTime.Now,
+            ItemName = "Specialized cykel",
+            ItemAmount = 2,
+            GroceryListId = groceryList2.Id,
+        };
+        
+        _dbContext.AddRange(gItem1List1, gItem2List1, gItem3List1, gItem4List2);
         _dbContext.SaveChanges();
     }
 }
