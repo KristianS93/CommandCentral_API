@@ -1,4 +1,6 @@
 using Application;
+using Identity;
+using Identity.Configurations;
 using Infrastructure;
 using Persistence;
 using Persistence.Configurations;
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
@@ -30,10 +33,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.ApplyMigration();
+    app.ApplyAuthMigration();
 }
 else
 {
     app.ApplyMigration();
+    app.ApplyAuthMigration();
 }
 
 

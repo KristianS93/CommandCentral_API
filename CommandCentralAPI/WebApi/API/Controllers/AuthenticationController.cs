@@ -1,33 +1,29 @@
-// using Domain.Entities.Authentication;
-// using Domain.Exceptions;
-// using Infrastructure.Authentication.Interfaces;
-// using Infrastructure.Authentication.MemberAuthentication;
-// using Microsoft.AspNetCore.Mvc;
-//
-// namespace API.Controllers;
-//
-// [ApiController]
-// [Route("[controller]")]
-// public class AuthenticationController : ControllerBase
-// {
-//     private readonly IMemberService _memberService;
-//
-//     public AuthenticationController(IMemberService memberService)
-//     {
-//         _memberService = memberService;
-//     }
-//
-//     [HttpPost]
-//     public async Task<ActionResult<string>> AuthenticateHouseholdAsync(MemberEntity member)
-//     {
-//         try
-//         {
-//             return Ok(await _memberService.LoginReturnTokenAsync(member));
-//         }
-//         catch (HouseholdDoesNotExistException)
-//         {
-//             // husk at ændre til korrekt error response.
-//             return BadRequest();
-//         }
-//     }
-// }
+using Application.Contracts.Identity;
+using Application.Models.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Controllers;
+
+[Route("[controller]")]
+[ApiController]
+public class AuthenticationController : ControllerBase
+{
+    private readonly IAuthService _authService;
+
+    public AuthenticationController(IAuthService authService)
+    {
+        _authService = authService;
+    }
+    
+    [HttpPost("login")]
+    public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
+    {
+        return Ok(await _authService.Login(request));
+    }
+    
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponse>> Register(RegistrationRequest request)
+    {
+        return Ok(await _authService.Register(request));
+    }
+}

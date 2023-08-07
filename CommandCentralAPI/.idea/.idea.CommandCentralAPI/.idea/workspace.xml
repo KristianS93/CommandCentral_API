@@ -10,73 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/GroceryList/GroceryListDoesNotExistException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/GroceryList/GroceryListDuplicateException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/GroceryList/ItemDoesNotExistException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/Household/HouseholdDoesNotExistException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/MealPlanner/IngredientDoesNotExistException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Interfaces/IBaseService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Interfaces/MealPlanner/IIngredientService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Interfaces/MealPlanner/IMealService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/Authentication/Permission.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/ErrorResponses/AuthenticationErrors.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/ErrorResponses/GroceryListErrors.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/ErrorResponses/GroceryListItemErrors.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/ErrorResponses/HouseHoldErrors.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Models/IErrorResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/IngredientService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Services/MealPlanner/MealService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Domain/Common/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Common/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/Household/HouseholdEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/Household/HouseholdEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/ClaimAuthorizationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/Claims.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/CustomAuthorize.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/GenerateTokenService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/Interfaces/IClaimAuthorizationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/Interfaces/IGenerateTokenService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/Interfaces/IJwtProvider.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/JwtOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/JwtProvider.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/MemberAuthentication/IMemberService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/MemberAuthentication/IPasswordHasher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/MemberAuthentication/MemberService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Authentication/MemberAuthentication/PasswordHasher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IBaseRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IGroceryListItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IGroceryListService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/IHouseholdService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/ITodoService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IIngredientRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Interfaces/MealPlanner/IMealRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/BaseMealPlanRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/IngredientRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Repositories/MealPlanner/MealRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Services/GroceryListItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Services/GroceryListService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Services/HouseholdService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Infrastructure/Services/TodoService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Data/ApiDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/DatabaseContext/ApiDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Interfaces/IApiDbContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230801160543_initalmigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230801160543_initalmigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Persistence.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CommandCentralAPI.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CommandCentralAPI.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IAuthService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/IngredientController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/IngredientController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/MealController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/MealController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/TodoController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/ApplicationExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/AuthenticationExtension.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/InfrastructureExtension.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/MigrationExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/Options/JwtBearerOptionsSetup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/Options/JwtOptionsSetup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Extensions/PersistenceExtension.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +34,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3e7a5d9e8f1e8fc8895e3999e4b986ebd69c6f311e8a7f7ba94f4560a54a89/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Shared/HouseholdDetailsDto.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -194,7 +131,7 @@
       <workItem from="1690116403705" duration="1220000" />
       <workItem from="1690410235499" duration="3080000" />
       <workItem from="1690897163407" duration="10128000" />
-      <workItem from="1691359885345" duration="21562000" />
+      <workItem from="1691359885345" duration="25374000" />
     </task>
     <servers />
   </component>
