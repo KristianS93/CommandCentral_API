@@ -1,3 +1,4 @@
+using API.Middleware;
 using Application;
 using Identity;
 using Identity.Configurations;
@@ -26,6 +27,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDataProtection();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
