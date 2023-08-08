@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\GroceryListItem\Queries\GetGroceryListItem\" />
       <Folder Include="Features\GroceryList\Commands\" />
       <Folder Include="Features\GroceryList\Queries\GetGroceryListDetails\" />
     </ItemGroup>

@@ -11,27 +11,9 @@
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItemRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListItemEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Domain/Entities/GroceryList/GroceryListItemEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Configurations/AuthMigrationConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807183839_identity-im.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/20230807183839_identity-im.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Migrations/AuthDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Models/ApplicationMember.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Configurations/MigrationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Configurations/MigrationConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/DatabaseContext/ApiDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/DatabaseContext/ApiDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230807131609_initalmigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/20230807131609_initalmigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/PersistenceServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/PersistenceServiceRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/AuthenticationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemControllerOld.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/HouseholdController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/NotFoundException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Exceptions/NotFoundException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +133,7 @@
       <workItem from="1690897163407" duration="10128000" />
       <workItem from="1691359885345" duration="25374000" />
       <workItem from="1691429302939" duration="2789000" />
-      <workItem from="1691445437656" duration="7012000" />
+      <workItem from="1691445437656" duration="9754000" />
     </task>
     <servers />
   </component>
