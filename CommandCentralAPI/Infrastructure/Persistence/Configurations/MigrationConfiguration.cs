@@ -16,24 +16,22 @@ public static class MigrationConfiguration
         
         var dbcontext = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
         _dbContext = dbcontext;
+        Thread.Sleep(1000);
         while (!dbcontext.Database.CanConnect())
         {
-            Console.WriteLine("Testing DB");
+            Console.WriteLine("Trying to connect to entity db, retry in 1 sec...");
             Thread.Sleep(1000);
         }
-        Console.WriteLine("test Household exist");
         try
         {
             // we only check household since it is essential
             // maybe further should be added 
             // Household.Any();
             dbcontext.Household.Any();
-            Console.WriteLine("Household exist");
         }
         catch (Exception)
         {
             // Since Household didnt exist, migrate the latest migration.
-            Console.WriteLine("need to migrate");
             dbcontext.Database.Migrate();
             SeedDatabase();
         }
@@ -41,7 +39,10 @@ public static class MigrationConfiguration
 
     public static void SeedDatabase()
     {
-        SeedHousehold();
+        if (!_dbContext.Household.Any())
+        {
+            SeedHousehold();
+        }
     }
     
     public static void SeedHousehold()

@@ -18,7 +18,7 @@ public static class AuthMigrationConfiguration
         _dbContext = dbcontext;
         while (!dbcontext.Database.CanConnect())
         {
-            Console.WriteLine("Testing DB");
+            Console.WriteLine("Trying to connect to identity db, retry in 1 sec...");
             Thread.Sleep(1000);
         }
         if (dbcontext.Database.CanConnect())
@@ -30,9 +30,12 @@ public static class AuthMigrationConfiguration
 
     public static void SeedDatabase()
     {
-        RoleConfiguration();
-        UserSeed();
-        UserRoleSeed();
+        if (!_dbContext.Users.Any())
+        {
+            RoleConfiguration();
+            UserSeed();
+            UserRoleSeed();
+        }
     }
 
     public static void UserSeed()
