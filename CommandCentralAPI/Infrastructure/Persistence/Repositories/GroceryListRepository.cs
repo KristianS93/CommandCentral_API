@@ -20,4 +20,9 @@ public class GroceryListRepository : GenericRepository<GroceryListEntity>, IGroc
         return await _dbContext.Set<GroceryListEntity>().AsNoTracking()
             .FirstOrDefaultAsync(e => e.HouseholdId == householdId);
     }
+
+    public async Task<bool> IsOwnerOfGroceryList(int groceryListId, int householdId)
+    {
+        return await _dbContext.GroceryList.AnyAsync(e => e.Id == groceryListId && e.HouseholdId == householdId);
+    }
 }

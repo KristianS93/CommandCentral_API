@@ -6,6 +6,8 @@ namespace Application.Contracts.GroceryList;
 public interface IGroceryListRepository : IGenericRepository<GroceryListEntity>
 {
     Task<GroceryListEntity?> GetGroceryListByHouseholdIdAsync(int householdId);
+
+    Task<bool> IsOwnerOfGroceryList(int groceryListId, int householdId);
     // Task DeleteAsync(GroceryListEntity groceryList);
     // Task CreateAsync(GroceryListEntity groceryList);
 }

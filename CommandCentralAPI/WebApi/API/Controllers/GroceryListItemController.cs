@@ -4,10 +4,8 @@ using Application.Features.GroceryListItem.Commands.CreateGroceryListItem;
 using Application.Features.GroceryListItem.Commands.DeleteGroceryListItem;
 using Application.Features.GroceryListItem.Commands.UpdateGroceryListItem;
 using Application.Features.GroceryListItem.Queries.GetAllGroceryListItems;
+using Application.Features.GroceryListItem.Queries.GetGroceryListItem;
 using Application.Features.GroceryListItem.Shared;
-using Application.Features.Household.Commands.CreateHousehold;
-using Application.Features.Household.Shared;
-using Domain.Entities.GroceryList;
 using Identity.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +26,6 @@ public class GroceryListItemController : ControllerBase
     }
     // Getting all items related to a grocery list
     [HttpGet("GroceryList/Items")] // this route is shit
-    [CustomAuthorize(Permission.Member)]
     public async Task<List<GroceryListItemDto>> GetGroceryListItems()
     {
         var groceryListId =
@@ -39,8 +36,19 @@ public class GroceryListItemController : ControllerBase
         return data;
     }
 
+    [HttpGet("GroceryList/Item/{id}")]
+    public async Task<ActionResult<GroceryListItemDetailsDto>> GetItem(int id)
+    {
+        var groceryListId =
+            _claimAuthorizationService.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
+        var command = new GetGroceryListItemQuery(id, groceryListId);
+
+        var dto = await _mediatr.Send(command);
+
+        return Ok(dto);
+    }
+
     [HttpPost("GroceryList/Item")]
-    [CustomAuthorize(Permission.Member)]
     public async Task<ActionResult<GroceryListItemDto>> CreateItem(CreateGroceryListItemCommand item)
     {
         var groceryListId = _claimAuthorizationService.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
@@ -52,7 +60,6 @@ public class GroceryListItemController : ControllerBase
     }
 
     [HttpPut("GroceryList/Item")]
-    [CustomAuthorize(Permission.Member)]
     public async Task<ActionResult> UpdateItem(UpdateGroceryListItemCommand item)
     {
         var groceryListId = _claimAuthorizationService.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
@@ -64,7 +71,6 @@ public class GroceryListItemController : ControllerBase
     }
 
     [HttpDelete("GroceryList/Item/{groceryListItemId}")]
-    [CustomAuthorize(Permission.Member)]
     public async Task<ActionResult> DeleteItem(int groceryListItemId)
     {
         var groceryListId = _claimAuthorizationService.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);

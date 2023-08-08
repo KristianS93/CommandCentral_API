@@ -9,7 +9,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/Identity/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/DeleteGroceryList/DeleteGroceryListCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/DeleteGroceryList/DeleteGroceryListCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/DeleteGroceryList/DeleteGroceryListCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/DeleteGroceryList/DeleteGroceryListCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/UpdateGroceryList/UpdateGroceryListCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/UpdateGroceryList/UpdateGroceryListCommandHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GroceryListItemDetailsDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GroceryListItemDetailsDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Identity/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Identity/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Repositories/GroceryListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Repositories/GroceryListRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListControllerOld.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemControllerOld.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +150,7 @@
       <workItem from="1690897163407" duration="10128000" />
       <workItem from="1691359885345" duration="25374000" />
       <workItem from="1691429302939" duration="2789000" />
-      <workItem from="1691445437656" duration="14739000" />
+      <workItem from="1691445437656" duration="19388000" />
     </task>
     <servers />
   </component>

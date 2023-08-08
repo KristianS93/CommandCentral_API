@@ -36,4 +36,36 @@ public class UserService : IUserService
             LastName = member.LastName
         };
     }
+
+    public async Task CreateHousehold(int householdId, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        ArgumentNullException.ThrowIfNull(user);
+        user.HouseholdId = householdId;
+        await _userManager.UpdateAsync(user);
+    }
+
+    public async Task DeleteHousehold(int householdId, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        ArgumentNullException.ThrowIfNull(user);
+        user.HouseholdId = null;
+        await _userManager.UpdateAsync(user);
+    }
+
+    public async Task CreateGroceryList(int groceryListId, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        ArgumentNullException.ThrowIfNull(user);
+        user.GroceryListId = groceryListId;
+        await _userManager.UpdateAsync(user);
+    }
+
+    public async Task DeleteGroceryList(int groceryListId, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        ArgumentNullException.ThrowIfNull(user);
+        user.GroceryListId = null;
+        await _userManager.UpdateAsync(user);
+    }
 }

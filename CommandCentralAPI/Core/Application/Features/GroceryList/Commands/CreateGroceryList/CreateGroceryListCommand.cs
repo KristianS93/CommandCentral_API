@@ -1,6 +1,5 @@
+using MediatR;
+
 namespace Application.Features.GroceryList.Commands.CreateGroceryList;
 
-public class CreateGroceryListCommand
-{
-    
-}
+public record CreateGroceryListCommand(int HouseholdId) : IRequest<CreateGroceryListDto>;

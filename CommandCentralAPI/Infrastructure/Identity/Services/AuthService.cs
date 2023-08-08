@@ -93,8 +93,6 @@ public class AuthService : IAuthService
     {
         var userClaims = await _userManager.GetClaimsAsync(user);
         var roles = await _userManager.GetRolesAsync(user);
-
-        Console.WriteLine("!!!!!!!!!!!!in token generation!!!!!!!!!!!!!");
         
         //Get household id
         var householdIdStr = "";
@@ -109,19 +107,16 @@ public class AuthService : IAuthService
             else
             {
                 householdIdStr = household.Id.ToString();
-                Console.WriteLine("############## FOUND HOUSEHOLD ###############");
                 
                 // GroceryList
                 if (user.GroceryListId != null)
                 {
                     var groceryList = await _groceryListRepository.GetGroceryListByHouseholdIdAsync(household.Id);
                     groceryListIdStr = groceryList.Id.ToString();
-                    Console.WriteLine("############## FOUND GROCERYLIST ###############");
                 }
             }
         }
 
-        Console.WriteLine("############## AFTER HOUSEHOLD AND GROCERYLIST ###############");
         
         var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
 
@@ -146,7 +141,6 @@ public class AuthService : IAuthService
             expires: DateTime.Now.AddMinutes(_jwtSettings.Value.DurationInMinutes),
             signingCredentials: signingCredentials);
         
-        Console.WriteLine("###### TOKEN GENERATED ###########");
         return jwtSecurityToken;
     }
 }
