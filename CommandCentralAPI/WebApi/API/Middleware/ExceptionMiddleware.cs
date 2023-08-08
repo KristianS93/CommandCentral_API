@@ -29,6 +29,7 @@ public class ExceptionMiddleware
     {
         HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
         ErrorResponse errorResponse = new();
+        var path = httpContext.Request.Path;
 
         switch (exception)
         {
@@ -41,7 +42,7 @@ public class ExceptionMiddleware
                     Title = "Bad request exception",
                     Status = (int)statusCode,
                     Detail = badRequestException.Message,
-                    Instance = httpContext.Request.Path,
+                    Instance = path,
                     Errors = badRequestException.ValidationErrors
                 };
                 break;
@@ -53,7 +54,18 @@ public class ExceptionMiddleware
                     Title = "Not found exception",
                     Status = (int)statusCode,
                     Detail = notFoundException.Message,
-                    Instance = httpContext.Request.Path
+                    Instance = path
+                };
+                break;
+            case AuthorizationException authorizationException:
+                statusCode = HttpStatusCode.Forbidden;
+                errorResponse = new ErrorResponse
+                {
+                    Type = nameof(AuthorizationException),
+                    Title = "Access Denied",
+                    Status = (int)statusCode,
+                    Detail = authorizationException.Message,
+                    Instance = path,
                 };
                 break;
             default:
@@ -62,7 +74,7 @@ public class ExceptionMiddleware
                     Title = exception.Message,
                     Status = (int)statusCode,
                     Detail = exception.InnerException?.Message,
-                    Instance = httpContext.Request.Path,
+                    Instance = path,
                     Type = nameof(exception),
                 };
                 break;

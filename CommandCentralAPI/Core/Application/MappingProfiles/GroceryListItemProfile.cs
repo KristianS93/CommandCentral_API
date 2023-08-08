@@ -1,3 +1,4 @@
+using Application.Features.GroceryListItem.Commands.CreateGroceryListItem;
 using Application.Features.GroceryListItem.Commands.UpdateGroceryListItem;
 using Application.Features.GroceryListItem.Shared;
 using AutoMapper;
@@ -9,7 +10,8 @@ public class GroceryListItemProfile : Profile
 {
     public GroceryListItemProfile()
     {
-        CreateMap<GroceryListItemEntity, GetGroceryListItemDto>().ReverseMap();
+        CreateMap<GroceryListItemEntity, GroceryListItemDto>().ReverseMap();
         CreateMap<UpdateGroceryListItemCommand, GroceryListItemEntity>();
+        CreateMap<CreateGroceryListItemCommand, GroceryListItemEntity>();
     }
 }

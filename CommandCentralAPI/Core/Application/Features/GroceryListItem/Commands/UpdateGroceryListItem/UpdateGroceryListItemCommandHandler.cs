@@ -32,6 +32,12 @@ public class UpdateGroceryListItemCommandHandler : IRequestHandler<UpdateGrocery
         {
             throw new NotFoundException(nameof(GroceryListItemEntity), request.Id);
         }
+        
+        // check the owner of the item is correct 
+        if (await _groceryListItemRepository.IsOwnerOfItem(request.GroceryListId, request.Id) == false)
+        {
+            throw new AuthorizationException("Access denied to item");
+        }
 
         _mapper.Map(request, groceryListItem);
 

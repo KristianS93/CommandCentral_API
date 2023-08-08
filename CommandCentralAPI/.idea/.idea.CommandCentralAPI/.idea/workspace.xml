@@ -10,10 +10,21 @@
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Exceptions/NotFoundException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Exceptions/NotFoundException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Contracts/GroceryList/IGroceryListItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/DeleteGroceryListItem/DeleteGroceryListItemCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/DeleteGroceryListItem/DeleteGroceryListItemCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/DeleteGroceryListItem/DeleteGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/DeleteGroceryListItem/DeleteGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Shared/GetGroceryListItemDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Shared/GroceryListItemDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Infrastructure/Persistence/Repositories/GroceryListItemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Infrastructure/Persistence/Repositories/GroceryListItemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Controllers/GroceryListItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/API/Middleware/ExceptionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/API/Middleware/ExceptionMiddleware.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +45,9 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3e7a5d9e8f1e8fc8895e3999e4b986ebd69c6f311e8a7f7ba94f4560a54a89/IdentityDbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Shared/HouseholdDetailsDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/82f3bb64e8c52af0a0175218c6cd371f393f871ffe1482a2ffd51e7efaeddbb5/Task.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2S2JftZ1t92rCLFVgNQ8paKGDpR" />
@@ -133,7 +144,7 @@
       <workItem from="1690897163407" duration="10128000" />
       <workItem from="1691359885345" duration="25374000" />
       <workItem from="1691429302939" duration="2789000" />
-      <workItem from="1691445437656" duration="9754000" />
+      <workItem from="1691445437656" duration="13597000" />
     </task>
     <servers />
   </component>

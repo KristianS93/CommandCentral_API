@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.GroceryListItem.Queries.GetAllGroceryListItems;
 
-public class GetAllGroceryListItemsQueryHandler : IRequestHandler<GetAllGroceryListItemsQuery, List<GetGroceryListItemDto>>
+public class GetAllGroceryListItemsQueryHandler : IRequestHandler<GetAllGroceryListItemsQuery, List<GroceryListItemDto>>
 {
     private readonly IMapper _mapper;
     private readonly IGroceryListItemRepository _groceryListRepository;
@@ -16,13 +16,13 @@ public class GetAllGroceryListItemsQueryHandler : IRequestHandler<GetAllGroceryL
         _groceryListRepository = groceryListRepository;
     }
 
-    public async Task<List<GetGroceryListItemDto>> Handle(GetAllGroceryListItemsQuery request, CancellationToken cancellationToken)
+    public async Task<List<GroceryListItemDto>> Handle(GetAllGroceryListItemsQuery request, CancellationToken cancellationToken)
     {
         var groceryListItems = await _groceryListRepository.GetGroceryListItemAsync(request.GroceryListId);
         
         ArgumentNullException.ThrowIfNull(groceryListItems);
 
-        var listData = _mapper.Map<List<GetGroceryListItemDto>>(groceryListItems);
+        var listData = _mapper.Map<List<GroceryListItemDto>>(groceryListItems);
         
         return listData;
     }

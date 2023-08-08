@@ -7,4 +7,6 @@ public interface IGroceryListItemRepository : IGenericRepository<GroceryListItem
 {
     Task<List<GroceryListItemEntity>> GetGroceryListItemAsync(int groceryListId);
 
+    Task<bool> IsOwnerOfItem(int groceryListId, int itemId);
+
 }

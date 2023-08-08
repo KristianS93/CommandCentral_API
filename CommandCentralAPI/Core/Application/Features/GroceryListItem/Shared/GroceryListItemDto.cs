@@ -1,6 +1,6 @@
 namespace Application.Features.GroceryListItem.Shared;
 
-public class GetGroceryListItemDto
+public class GroceryListItemDto
 {
     public int Id { get; set; }
 

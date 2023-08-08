@@ -18,4 +18,10 @@ public class GroceryListItemRepository : GenericRepository<GroceryListItemEntity
     {
         return await _dbContext.Set<GroceryListItemEntity>().AsNoTracking().Where(e => e.GroceryListId == groceryListId).ToListAsync();
     }
+
+    public async Task<bool> IsOwnerOfItem(int groceryListId, int itemId)
+    {
+        return await _dbContext.Set<GroceryListItemEntity>()
+            .AnyAsync(e => e.Id == itemId && e.GroceryListId == groceryListId);
+    }
 }

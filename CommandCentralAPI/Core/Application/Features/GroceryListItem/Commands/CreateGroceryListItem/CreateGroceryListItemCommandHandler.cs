@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Features.GroceryListItem.Commands.CreateGroceryListItem;
 
-public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGroceryListItemCommand, GetGroceryListItemDto>
+public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGroceryListItemCommand, GroceryListItemDto>
 {
     private readonly IMapper _mapper;
     private readonly IGroceryListItemRepository _groceryListItemRepository;
@@ -17,7 +17,7 @@ public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGrocer
         _mapper = mapper;
         _groceryListItemRepository = groceryListItemRepository;
     }
-    public async Task<GetGroceryListItemDto> Handle(CreateGroceryListItemCommand request, CancellationToken cancellationToken)
+    public async Task<GroceryListItemDto> Handle(CreateGroceryListItemCommand request, CancellationToken cancellationToken)
     {
         var validator = new CreateGroceryListItemValidator();
         var validationResults = await validator.ValidateAsync(request);
@@ -29,7 +29,7 @@ public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGrocer
 
         var entity = _mapper.Map<GroceryListItemEntity>(request);
         
-        var dto =_mapper.Map<GetGroceryListItemDto>(await _groceryListItemRepository.CreateAsync(entity));
+        var dto =_mapper.Map<GroceryListItemDto>(await _groceryListItemRepository.CreateAsync(entity));
         
         return dto;
     }

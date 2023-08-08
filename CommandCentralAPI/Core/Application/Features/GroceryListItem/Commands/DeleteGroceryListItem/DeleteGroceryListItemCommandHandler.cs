@@ -19,6 +19,12 @@ public class DeleteGroceryListItemCommandHandler : IRequestHandler<DeleteGrocery
         
         ArgumentNullException.ThrowIfNull(item);
         
+        // check item is owned by the grocery list 
+        if (await _groceryListItemRepository.IsOwnerOfItem(request.GroceryListId, request.GroceryListItemId) == false)
+        {
+            throw new AuthorizationException("Access denied");
+        }
+        
         // delete
         await _groceryListItemRepository.DeleteAsync(item);
         
