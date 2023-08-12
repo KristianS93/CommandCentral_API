@@ -26,18 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="Application">
-        <HintPath>..\..\CommandCentralAPI\Core\Application\bin\Debug\net7.0\Application.dll</HintPath>
-      </Reference>
-      <Reference Include="Domain">
-        <HintPath>..\..\CommandCentralAPI\Core\Domain\bin\Debug\net7.0\Domain.dll</HintPath>
-      </Reference>
-
-
-
+      <ProjectReference Include="..\CommandCentralAPI.Tests.DatabaseFixture\CommandCentralAPI.Tests.DatabaseFixture.csproj" />
     </ItemGroup>
-
-
-
-
+    
 </Project>
