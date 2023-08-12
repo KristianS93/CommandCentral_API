@@ -1,13 +1,13 @@
-using Domain.Entities;
-using Persistence.Data;
+using Domain.Entities.GroceryList;
+using Domain.Entities.Household;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Persistence.DatabaseContext;
 
 namespace DatabaseFixture;
 
 public class TestDatabaseFixture : IDisposable
 {
-    private string _connectionString;
+    private readonly string _connectionString;
     // Tests are run in parallel so a lock is required
     private readonly object _lock = new();
     private bool _databaseInitialized;
@@ -37,7 +37,7 @@ public class TestDatabaseFixture : IDisposable
     public ApiDbContext CreateContext()
     {
         return new ApiDbContext(new DbContextOptionsBuilder<ApiDbContext>()
-            .UseNpgsql(_connectionString).Options, new Logger<ApiDbContext>(new LoggerFactory()));
+            .UseNpgsql(_connectionString).UseSnakeCaseNamingConvention().Options);
     }
 
     public void SeedTestData(ApiDbContext context)

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CommandCenrtalAPI.Tests.WebApi;
+namespace CommandCentralAPI.Tests.WebApi;
 
 public class HouseholdControllerTests : IClassFixture<TestDatabaseFixture>
 {
