@@ -10,7 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.0" />
+        <PackageReference Include="FluentAssertions" Version="6.11.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0"/>
+        <PackageReference Include="Moq" Version="4.18.4" />
         <PackageReference Include="xunit" Version="2.4.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,5 +24,20 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Application">
+        <HintPath>..\..\CommandCentralAPI\Core\Application\bin\Debug\net7.0\Application.dll</HintPath>
+      </Reference>
+      <Reference Include="Domain">
+        <HintPath>..\..\CommandCentralAPI\Core\Domain\bin\Debug\net7.0\Domain.dll</HintPath>
+      </Reference>
+
+
+
+    </ItemGroup>
+
+
+
 
 </Project>
