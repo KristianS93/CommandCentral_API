@@ -28,5 +28,17 @@
     <ItemGroup>
       <ProjectReference Include="..\CommandCentralAPI.Tests.DatabaseFixture\CommandCentralAPI.Tests.DatabaseFixture.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Application">
+        <HintPath>..\..\CommandCentralAPI\Core\Application\bin\Debug\net7.0\Application.dll</HintPath>
+      </Reference>
+      <Reference Include="Domain">
+        <HintPath>..\..\CommandCentralAPI\Core\Domain\bin\Debug\net7.0\Domain.dll</HintPath>
+      </Reference>
+      <Reference Include="Persistence">
+        <HintPath>..\..\CommandCentralAPI\Infrastructure\Persistence\bin\Debug\net7.0\Persistence.dll</HintPath>
+      </Reference>
+    </ItemGroup>
     
 </Project>
