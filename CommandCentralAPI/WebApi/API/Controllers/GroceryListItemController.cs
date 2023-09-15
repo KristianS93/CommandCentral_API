@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using API.Hub;
+using Application.Contracts.Hub;
 using Application.Contracts.Identity;
 using Application.Features.GroceryListItem.Commands.CreateGroceryListItem;
 using Application.Features.GroceryListItem.Commands.DeleteGroceryListItem;
@@ -9,6 +11,7 @@ using Application.Features.GroceryListItem.Shared;
 using Identity.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers;
 
@@ -17,13 +20,16 @@ namespace API.Controllers;
 public class GroceryListItemController : ControllerBase
 {
     private readonly IMediator _mediatr;
+    private readonly IHubContext<ItemsHub, IItemsHub> _itemsHub;
     private readonly IClaimAuthorizationService _claimAuthorizationService;
 
-    public GroceryListItemController(IMediator mediatr, IClaimAuthorizationService claimAuthorizationService)
+    public GroceryListItemController(IMediator mediatr, IClaimAuthorizationService claimAuthorizationService, IHubContext<ItemsHub, IItemsHub> itemsHub)
     {
         _mediatr = mediatr;
         _claimAuthorizationService = claimAuthorizationService;
+        _itemsHub = itemsHub;
     }
+    
     // Getting all items related to a grocery list
     [HttpGet("GroceryList/Items")] // this route is shit
     public async Task<List<GroceryListItemDto>> GetGroceryListItems()
@@ -32,7 +38,7 @@ public class GroceryListItemController : ControllerBase
             _claimAuthorizationService.GetIntegerClaimId(User.FindFirstValue(Claims.GroceryList.ToString())!);
 
         var data = await _mediatr.Send(new GetAllGroceryListItemsQuery(groceryListId));
-
+        await _itemsHub.Clients.All.SendItemsToUser(data);
         return data;
     }
 

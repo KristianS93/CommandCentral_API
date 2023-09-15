@@ -1,3 +1,4 @@
+using API.Hub;
 using API.Middleware;
 using Application;
 using Identity;
@@ -15,6 +16,7 @@ builder.Services.AddInfrastructureServices();
 builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 builder.Services.AddCors(options =>
 {
 options.AddPolicy("all", corsOpt => 
@@ -43,11 +45,12 @@ else
     app.ApplyAuthMigration();
 }
 
-
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHub<ItemsHub>("/offers");
 
 app.MapControllers();
 
