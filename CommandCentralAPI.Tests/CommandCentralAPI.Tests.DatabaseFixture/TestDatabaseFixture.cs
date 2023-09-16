@@ -40,6 +40,14 @@ public class TestDatabaseFixture : IDisposable
             .UseNpgsql(_connectionString).UseSnakeCaseNamingConvention().Options);
     }
 
+    public List<HouseholdEntity> SeededHouseholds = new List<HouseholdEntity>
+            {
+                new HouseholdEntity { Name = "Kristians hus" },
+                new HouseholdEntity { Name = "Ibis hus" },
+                new HouseholdEntity { Name = "No grocery list" },
+                new HouseholdEntity { Name = "New house" },
+            };
+
     public void SeedTestData(ApiDbContext context)
     {
         // add household
@@ -47,6 +55,7 @@ public class TestDatabaseFixture : IDisposable
         var household2 = new HouseholdEntity { Name = "Ibis hus" };
         var household3 = new HouseholdEntity { Name = "No grocery list" };
         var household4 = new HouseholdEntity { Name = "New house" };
+        
         context.AddRange(household1, household2, household3, household4);
         context.SaveChanges();
             
