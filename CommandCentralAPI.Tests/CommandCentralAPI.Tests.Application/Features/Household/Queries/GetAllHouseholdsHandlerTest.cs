@@ -1,11 +1,9 @@
 using Application.Contracts.Household;
 using Application.Features.Household.Queries.GetAllHouseholds;
 using Application.Features.Household.Shared;
-using Application.MappingProfiles;
 using AutoMapper;
 using DatabaseFixture;
 using Domain.Entities.Household;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Persistence.Repositories;
 using Xunit.Abstractions;
@@ -64,20 +62,15 @@ public class GetAllHouseholdsHandlerTest : IClassFixture<TestDatabaseFixture>
         using var context = _fixture.CreateContext();
         
         // mapper
-        var mapperConfig = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<HouseholdProfile>();
-        });
+        var mapper = _fixture.GetMapper();
         var count = 1;
-        var expected = _fixture.SeededHouseholds.Select(x => new HouseholdDetailsDto
+        var expected = _fixture.SeededHousehold.Select(x => new HouseholdDetailsDto
         {
             Id = count++, // this is a bit annoying, however could be solved by using client side guid generation, instead of db generated ids.
             Name = x.Name,
             CreatedAt = x.CreatedAt,
             LastModified = x.LastModified
         }).ToList();
-        
-        var mapper = mapperConfig.CreateMapper();
         
         _householdRepository = new HouseholdRepository(context);
         var handler = new GetAllHouseholdsQueryHandler(mapper, _householdRepository);
