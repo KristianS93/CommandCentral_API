@@ -1,7 +1,7 @@
 # CommandCentral API
 API for the CommandCentral App
 
-# Setup
+# Setup 1
 
 To run the API and database as a backend, start downloading the docker images.
 Next use docker compose to build and run the application.
