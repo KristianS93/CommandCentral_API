@@ -11,9 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/CommandCentralAPI.Tests.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/CommandCentralAPI.Tests.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,9 +72,9 @@
       &quot;TEXT&quot;
     ],
     &quot;rider.external.source.directories&quot;: [
-      &quot;/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/DecompilerCache&quot;,
-      &quot;/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/SourcesCache&quot;,
-      &quot;/home/dev-space/.local/share/Symbols/src&quot;
+      &quot;/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache&quot;,
+      &quot;/Users/kks93/.local/share/Symbols/src&quot;
     ]
   }
 }</component>
@@ -165,6 +162,8 @@
       <workItem from="1694378848414" duration="2944000" />
       <workItem from="1694901085998" duration="26000" />
       <workItem from="1694901521520" duration="3892000" />
+      <workItem from="1696709774581" duration="22000" />
+      <workItem from="1696709804693" duration="551000" />
     </task>
     <servers />
   </component>
