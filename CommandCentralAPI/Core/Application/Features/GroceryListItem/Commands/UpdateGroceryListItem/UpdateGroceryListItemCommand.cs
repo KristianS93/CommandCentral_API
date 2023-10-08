@@ -5,7 +5,7 @@ namespace Application.Features.GroceryListItem.Commands.UpdateGroceryListItem;
 
 public class UpdateGroceryListItemCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int GroceryListItemId{ get; set; }
     
     public string ItemName { get; set; } = string.Empty;
     

@@ -27,14 +27,14 @@ public class UpdateGroceryListItemCommandHandler : IRequestHandler<UpdateGrocery
         }
         
         // get grocerylistItem data 
-        var groceryListItem = await _groceryListItemRepository.GetByIdAsync(request.Id);
+        var groceryListItem = await _groceryListItemRepository.GetByIdAsync(request.GroceryListItemId);
         if (groceryListItem == null)
         {
-            throw new NotFoundException(nameof(GroceryListItemEntity), request.Id);
+            throw new NotFoundException(nameof(GroceryListItemEntity), request.GroceryListItemId);
         }
         
         // check the owner of the item is correct 
-        if (await _groceryListItemRepository.IsOwnerOfItem(request.GroceryListId, request.Id) == false)
+        if (await _groceryListItemRepository.IsOwnerOfItem(request.GroceryListId, request.GroceryListItemId) == false)
         {
             throw new AuthorizationException("Access denied to item");
         }
