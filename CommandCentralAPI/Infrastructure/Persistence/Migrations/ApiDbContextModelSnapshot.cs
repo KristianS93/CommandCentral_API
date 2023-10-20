@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Persistence.Data;
+using Persistence.DatabaseContext;
 
 #nullable disable
 
@@ -17,12 +17,12 @@ namespace Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Authentication.MemberEntity", b =>
+            modelBuilder.Entity("Domain.Entities.GroceryList.GroceryListEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,30 +31,83 @@ namespace Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("created_at");
+
                     b.Property<int>("HouseholdId")
                         .HasColumnType("integer")
                         .HasColumnName("household_id");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("password");
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("last_modified");
 
-                    b.Property<int>("Permission")
+                    b.Property<int?>("household")
                         .HasColumnType("integer")
-                        .HasColumnName("authority");
+                        .HasColumnName("household");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("username");
+                    b.HasKey("Id")
+                        .HasName("pk_grocerylist");
 
-                    b.HasKey("Id");
+                    b.HasIndex("HouseholdId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_grocerylist_household_id");
 
-                    b.ToTable("members");
+                    b.HasIndex("household")
+                        .IsUnique()
+                        .HasDatabaseName("ix_grocerylist_household");
+
+                    b.ToTable("grocerylist", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.BaseEntity", b =>
+            modelBuilder.Entity("Domain.Entities.GroceryList.GroceryListItemEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("GroceryListId")
+                        .HasColumnType("integer")
+                        .HasColumnName("grocery_list_id");
+
+                    b.Property<int>("ItemAmount")
+                        .HasColumnType("integer")
+                        .HasColumnName("item_amount");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("last_modified");
+
+                    b.Property<int?>("grocerylist")
+                        .HasColumnType("integer")
+                        .HasColumnName("grocerylist");
+
+                    b.HasKey("Id")
+                        .HasName("pk_grocerylist_item");
+
+                    b.HasIndex("GroceryListId")
+                        .HasDatabaseName("ix_grocerylist_item_grocery_list_id");
+
+                    b.HasIndex("grocerylist")
+                        .HasDatabaseName("ix_grocerylist_item_grocerylist");
+
+                    b.ToTable("grocerylist_item", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Household.HouseholdEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,386 +124,51 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp")
                         .HasColumnName("last_modified");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("BaseEntity");
-
-                    b.UseTptMappingStrategy();
-                });
-
-            modelBuilder.Entity("Domain.Entities.GroceryListEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("integer")
-                        .HasColumnName("household_id");
-
-                    b.Property<int?>("household")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseholdId")
-                        .IsUnique();
-
-                    b.HasIndex("household")
-                        .IsUnique();
-
-                    b.ToTable("grocerylist");
-                });
-
-            modelBuilder.Entity("Domain.Entities.GroceryListItemEntity", b =>
-                {
-                    b.Property<int>("GroceryListItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("GroceryListItemId"));
-
-                    b.Property<int>("GroceryListId")
-                        .HasColumnType("integer")
-                        .HasColumnName("grocerylist_id");
-
-                    b.Property<int>("ItemAmount")
-                        .HasColumnType("integer")
-                        .HasColumnName("item_amount");
-
-                    b.Property<string>("ItemName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("item_name");
-
-                    b.Property<int?>("grocerylist")
-                        .HasColumnType("integer");
-
-                    b.HasKey("GroceryListItemId");
-
-                    b.HasIndex("GroceryListId");
-
-                    b.HasIndex("grocerylist");
-
-                    b.ToTable("grocerylist_item");
-                });
-
-            modelBuilder.Entity("Domain.Entities.HouseholdEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_household");
 
-                    b.ToTable("household");
+                    b.ToTable("household", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.MealPlanner.TagEntity", b =>
+            modelBuilder.Entity("Domain.Entities.GroceryList.GroceryListEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("integer")
-                        .HasColumnName("household_id");
-
-                    b.Property<int>("MealId")
-                        .HasColumnType("integer")
-                        .HasColumnName("meal_id");
-
-                    b.Property<string>("TagName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("tag_name");
-
-                    b.Property<int?>("household")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseholdId");
-
-                    b.HasIndex("MealId");
-
-                    b.HasIndex("household");
-
-                    b.ToTable("tag");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TodoItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_completed");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("todo_item");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.IngredientEntity", b =>
-                {
-                    b.HasBaseType("Domain.Entities.BaseEntity");
-
-                    b.Property<string>("Amount")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ingredient_amount");
-
-                    b.Property<int>("MealId")
-                        .HasColumnType("integer")
-                        .HasColumnName("meal_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ingredient_name");
-
-                    b.Property<int?>("meal")
-                        .HasColumnType("integer");
-
-                    b.HasIndex("MealId");
-
-                    b.HasIndex("meal");
-
-                    b.ToTable("ingredient");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.MealEntity", b =>
-                {
-                    b.HasBaseType("Domain.Entities.BaseEntity");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("meal_description");
-
-                    b.Property<string>("Directions")
-                        .HasColumnType("text")
-                        .HasColumnName("meal_direction");
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("integer")
-                        .HasColumnName("household_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("meal_name");
-
-                    b.Property<string>("Tags")
-                        .HasColumnType("text")
-                        .HasColumnName("tags");
-
-                    b.Property<int?>("household")
-                        .HasColumnType("integer");
-
-                    b.HasIndex("HouseholdId");
-
-                    b.HasIndex("household");
-
-                    b.ToTable("meal");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.WeekPlanEntity", b =>
-                {
-                    b.HasBaseType("Domain.Entities.BaseEntity");
-
-                    b.Property<int>("Day1")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_1");
-
-                    b.Property<int>("Day2")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_2");
-
-                    b.Property<int>("Day3")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_3");
-
-                    b.Property<int>("Day4")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_4");
-
-                    b.Property<int>("Day5")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_5");
-
-                    b.Property<int>("Day6")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_6");
-
-                    b.Property<int>("Day7")
-                        .HasColumnType("integer")
-                        .HasColumnName("day_7");
-
-                    b.Property<int>("HouseholdId")
-                        .HasColumnType("integer")
-                        .HasColumnName("household_id");
-
-                    b.Property<int?>("household")
-                        .HasColumnType("integer");
-
-                    b.HasIndex("HouseholdId");
-
-                    b.HasIndex("household");
-
-                    b.ToTable("week_plan");
-                });
-
-            modelBuilder.Entity("Domain.Entities.GroceryListEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.HouseholdEntity", "Household")
+                    b.HasOne("Domain.Entities.Household.HouseholdEntity", "Household")
                         .WithMany()
                         .HasForeignKey("HouseholdId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_grocerylist_household_household_id");
 
-                    b.HasOne("Domain.Entities.HouseholdEntity", null)
+                    b.HasOne("Domain.Entities.Household.HouseholdEntity", null)
                         .WithOne()
-                        .HasForeignKey("Domain.Entities.GroceryListEntity", "household")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Domain.Entities.GroceryList.GroceryListEntity", "household")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("fk_grocerylist_household_household_entity_id");
 
                     b.Navigation("Household");
                 });
 
-            modelBuilder.Entity("Domain.Entities.GroceryListItemEntity", b =>
+            modelBuilder.Entity("Domain.Entities.GroceryList.GroceryListItemEntity", b =>
                 {
-                    b.HasOne("Domain.Entities.GroceryListEntity", "GroceryList")
-                        .WithMany("GroceryListItems")
+                    b.HasOne("Domain.Entities.GroceryList.GroceryListEntity", "GroceryList")
+                        .WithMany()
                         .HasForeignKey("GroceryListId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_grocerylist_item_grocerylist_grocery_list_id");
 
-                    b.HasOne("Domain.Entities.GroceryListEntity", null)
+                    b.HasOne("Domain.Entities.GroceryList.GroceryListEntity", null)
                         .WithMany()
                         .HasForeignKey("grocerylist")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("fk_grocerylist_item_grocerylist_grocery_list_entity_id");
 
                     b.Navigation("GroceryList");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.TagEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.HouseholdEntity", "Household")
-                        .WithMany()
-                        .HasForeignKey("HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.MealPlanner.MealEntity", "Meal")
-                        .WithMany()
-                        .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.HouseholdEntity", null)
-                        .WithMany()
-                        .HasForeignKey("household")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Household");
-
-                    b.Navigation("Meal");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.IngredientEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.BaseEntity", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.MealPlanner.IngredientEntity", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.MealPlanner.MealEntity", "Meal")
-                        .WithMany()
-                        .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.MealPlanner.MealEntity", null)
-                        .WithMany()
-                        .HasForeignKey("meal")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Meal");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.MealEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.HouseholdEntity", "Household")
-                        .WithMany()
-                        .HasForeignKey("HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.BaseEntity", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.MealPlanner.MealEntity", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.HouseholdEntity", null)
-                        .WithMany()
-                        .HasForeignKey("household")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Household");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MealPlanner.WeekPlanEntity", b =>
-                {
-                    b.HasOne("Domain.Entities.HouseholdEntity", "Household")
-                        .WithMany()
-                        .HasForeignKey("HouseholdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.BaseEntity", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.MealPlanner.WeekPlanEntity", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.HouseholdEntity", null)
-                        .WithMany()
-                        .HasForeignKey("household")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Household");
-                });
-
-            modelBuilder.Entity("Domain.Entities.GroceryListEntity", b =>
-                {
-                    b.Navigation("GroceryListItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,33 +1,30 @@
-using Domain.Entities.Authentication;
-using Domain.Exceptions;
-using Infrastructure.Authentication.Interfaces;
-using Infrastructure.Authentication.MemberAuthentication;
+using Application.Contracts.Identity;
+using Application.Models.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController]
 [Route("[controller]")]
+[ApiController]
 public class AuthenticationController : ControllerBase
 {
-    private readonly IMemberService _memberService;
+    private readonly IAuthService _authService;
 
-    public AuthenticationController(IMemberService memberService)
+    public AuthenticationController(IAuthService authService)
     {
-        _memberService = memberService;
+        _authService = authService;
     }
-
-    [HttpPost]
-    public async Task<ActionResult<string>> AuthenticateHouseholdAsync(MemberEntity member)
+    
+    [HttpPost("login")]
+    public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
     {
-        try
-        {
-            return Ok(await _memberService.LoginReturnTokenAsync(member));
-        }
-        catch (HouseholdDoesNotExistException)
-        {
-            // husk at ændre til korrekt error response.
-            return BadRequest();
-        }
+        Console.WriteLine("!!!!!!!!TRYING TO LOG IN!!!!!!!!");
+        return Ok(await _authService.Login(request));
+    }
+    
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponse>> Register(RegistrationRequest request)
+    {
+        return Ok(await _authService.Register(request));
     }
 }

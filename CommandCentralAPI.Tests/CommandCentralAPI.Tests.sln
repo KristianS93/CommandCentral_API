@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandCentralAPI.Tests.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandCentralApi.Tests.Infrastructure", "CommandCentralApi.Tests.Infrastructure\CommandCentralApi.Tests.Infrastructure.csproj", "{ADDF303E-7332-4CFB-976C-9F7B41B62F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandCenrtalAPI.Tests.WebApi", "CommandCenrtalAPI.Tests.WebApi\CommandCenrtalAPI.Tests.WebApi.csproj", "{C6CA06AC-0DFC-472F-82AF-4AEE264D5341}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandCentralAPI.Tests.WebApi", "CommandCentralAPI.Tests.WebApi\CommandCentralAPI.Tests.WebApi.csproj", "{C6CA06AC-0DFC-472F-82AF-4AEE264D5341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,3 +14,8 @@ EXPOSE 5432
 
 # Start the postgres server 
 CMD ["postgres"]
+
+
+
+# Build : docker build -t test-db .
+# Run : docker run -d -p 5432:5432 --name test-db-container test-db

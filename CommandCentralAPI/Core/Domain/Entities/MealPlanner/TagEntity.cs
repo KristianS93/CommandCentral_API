@@ -1,25 +1,20 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Common;
+using Domain.Entities.Household;
 
 namespace Domain.Entities.MealPlanner;
 
-[Table("tag")]
-public class TagEntity
+public class TagEntity : BaseEntity
 {
-    [Key]
-    [Column("id")]
-    public int Id { get; set; }
     
-    [Column("tag_name")]
-    public string TagName { get; set; }
+    public string TagName { get; set; } = String.Empty;
     
-    [Column("meal_id")]
     public int MealId { get; set; }
     
-    [Column("household_id")]
     public int HouseholdId { get; set; }
 
-    public MealEntity Meal { get; set; }
+    public MealEntity? Meal { get; set; }
 
-    public HouseholdEntity Household { get; set; }
+    public HouseholdEntity? Household { get; set; }
 }

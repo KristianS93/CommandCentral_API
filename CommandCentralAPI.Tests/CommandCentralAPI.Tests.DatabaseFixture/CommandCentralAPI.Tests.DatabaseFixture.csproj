@@ -11,6 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
@@ -26,6 +27,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Reference Include="Application">
+        <HintPath>..\..\CommandCentralAPI\Core\Application\bin\Debug\net7.0\Application.dll</HintPath>
+      </Reference>
       <Reference Include="Domain">
         <HintPath>..\..\CommandCentralAPI\Core\Domain\bin\Debug\net7.0\Domain.dll</HintPath>
       </Reference>
