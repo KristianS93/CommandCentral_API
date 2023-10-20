@@ -1,5 +1,4 @@
 using Application.Contracts.Household;
-using Domain.Entities.Household;
 using MediatR;
 
 namespace Application.Features.Household.Commands.DeleteHousehold;

@@ -1,4 +1,5 @@
 using Application.Contracts.Household;
+using Application.Features.Household;
 using Application.Features.Household.Queries.GetHousehold;
 using DatabaseFixture;
 using Persistence.Repositories;
@@ -23,11 +24,12 @@ public class GetHouseholdHandlerTest
         using var context = _fixture.CreateContext();
         
         // mapper
-        var mapper = _fixture.GetMapper();
-        var expected = mapper.Map<HouseholdDto>(_fixture.SeededHousehold[0]);
+        // var mapper = _fixture.GetMapper();
+        // var expected = mapper.Map<HouseholdDto>(_fixture.SeededHousehold[0]);
+        var expected = _fixture.SeededHousehold[0].ToDTO();
         
         IHouseholdRepository householdRepository = new HouseholdRepository(context);
-        var handler = new GetHouseholdQueryHandler(mapper, householdRepository);
+        var handler = new GetHouseholdQueryHandler(householdRepository);
         var id = 1;
         // act
         var query = new GetHouseholdQuery(id);
@@ -44,10 +46,10 @@ public class GetHouseholdHandlerTest
         using var context = _fixture.CreateContext();
         
         // mapper
-        var mapper = _fixture.GetMapper();
+        // var mapper = _fixture.GetMapper();
         
         IHouseholdRepository householdRepository = new HouseholdRepository(context);
-        var handler = new GetHouseholdQueryHandler(mapper, householdRepository);
+        var handler = new GetHouseholdQueryHandler(householdRepository);
         // act
         var query = new GetHouseholdQuery(23);
         // Assert

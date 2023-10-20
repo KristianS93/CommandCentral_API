@@ -36,14 +36,14 @@ public class TestDatabaseFixture : IDisposable
         }
     }
 
-    public IMapper GetMapper()
-    {
-        var mapperConfig = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<HouseholdProfile>();
-        });
-        return mapperConfig.CreateMapper();
-    }
+    // public IMapper GetMapper()
+    // {
+    //     var mapperConfig = new MapperConfiguration(cfg =>
+    //     {
+    //         cfg.AddProfile<HouseholdProfile>();
+    //     });
+    //     return mapperConfig.CreateMapper();
+    // }
     
     public ApiDbContext CreateContext()
     {

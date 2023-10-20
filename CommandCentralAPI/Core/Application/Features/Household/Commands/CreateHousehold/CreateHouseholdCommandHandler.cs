@@ -1,19 +1,15 @@
 using Application.Contracts.Household;
 using Application.Exceptions;
 using Application.Features.Household.Shared;
-using AutoMapper;
-using Domain.Entities.Household;
 using MediatR;
 
 namespace Application.Features.Household.Commands.CreateHousehold;
 
 public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdCommand, HouseholdDetailsDto>
 {
-    private readonly IMapper _mapper;
     private readonly IHouseholdRepository _householdRepository;
-    public CreateHouseholdCommandHandler(IMapper mapper, IHouseholdRepository householdRepository)
+    public CreateHouseholdCommandHandler(IHouseholdRepository householdRepository)
     {
-        _mapper = mapper;
         _householdRepository = householdRepository;
     }
     public async Task<HouseholdDetailsDto> Handle(CreateHouseholdCommand request, CancellationToken cancellationToken)
@@ -26,8 +22,8 @@ public class CreateHouseholdCommandHandler : IRequestHandler<CreateHouseholdComm
             throw new BadRequestException("Invalid Household", validationResult);
         }
 
-        var household = _mapper.Map<HouseholdEntity>(request);
-        var dto = _mapper.Map<HouseholdDetailsDto>(await _householdRepository.CreateAsync(household));
+        var household = request.ToHouseholdEntity();
+        var dto = (await _householdRepository.CreateAsync(household)).ToDetailsDTO();
         
         return dto;
     }

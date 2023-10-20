@@ -11,10 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetHouseholdHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetHouseholdHandlerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/ApplicationServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/ApplicationServiceRegistration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetAllHouseholds/GetAllHouseholdsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetAllHouseholds/GetAllHouseholdsQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,9 +81,9 @@
       "TEXT"
     ],
     "rider.external.source.directories": [
-      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
-      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/SourcesCache",
-      "/home/dev-space/.local/share/Symbols/src"
+      "/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
+      "/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache",
+      "/Users/kks93/.local/share/Symbols/src"
     ]
   }
 }]]></component>
@@ -168,6 +174,7 @@
       <workItem from="1696709774581" duration="22000" />
       <workItem from="1696709804693" duration="551000" />
       <workItem from="1696797773044" duration="2434000" />
+      <workItem from="1697825972229" duration="3426000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,5 @@
 using Application.Contracts.Household;
 using Application.Exceptions;
-using Application.Features.Household.Commands.CreateHousehold;
-using AutoMapper;
 using Domain.Entities.Household;
 using MediatR;
 
@@ -9,12 +7,10 @@ namespace Application.Features.Household.Commands.UpdateHousehold;
 
 public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdCommand, Unit>
 {
-    private readonly IMapper _mapper;
     private readonly IHouseholdRepository _householdRepository;
 
-    public UpdateHouseholdCommandHandler(IMapper mapper, IHouseholdRepository householdRepository)
+    public UpdateHouseholdCommandHandler(IHouseholdRepository householdRepository)
     {
-        _mapper = mapper;
         _householdRepository = householdRepository;
     }
     public async Task<Unit> Handle(UpdateHouseholdCommand request, CancellationToken cancellationToken)
@@ -33,10 +29,10 @@ public class UpdateHouseholdCommandHandler : IRequestHandler<UpdateHouseholdComm
         {
             throw new NotFoundException(nameof(HouseholdEntity), request.Id);
         }
+
+        // update householddata fields, but only the ones needing to be updated, rest is kept.
+        householdData = request.UpdateEntity(householdData);
         
-        
-        // This convert keeps the fields not updated
-        _mapper.Map(request, householdData);
         // this works because of the map have migrated the new data
         await _householdRepository.UpdateAsync(householdData);
         
