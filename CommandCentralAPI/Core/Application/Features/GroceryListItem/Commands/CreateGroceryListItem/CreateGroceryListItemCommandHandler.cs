@@ -1,20 +1,15 @@
 using Application.Contracts.GroceryList;
 using Application.Exceptions;
 using Application.Features.GroceryListItem.Shared;
-using AutoMapper;
-using Domain.Entities.GroceryList;
-using FluentValidation;
 using MediatR;
 
 namespace Application.Features.GroceryListItem.Commands.CreateGroceryListItem;
 
 public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGroceryListItemCommand, GroceryListItemDto>
 {
-    private readonly IMapper _mapper;
     private readonly IGroceryListItemRepository _groceryListItemRepository;
-    public CreateGroceryListItemCommandHandler(IMapper mapper, IGroceryListItemRepository groceryListItemRepository)
+    public CreateGroceryListItemCommandHandler(IGroceryListItemRepository groceryListItemRepository)
     {
-        _mapper = mapper;
         _groceryListItemRepository = groceryListItemRepository;
     }
     public async Task<GroceryListItemDto> Handle(CreateGroceryListItemCommand request, CancellationToken cancellationToken)
@@ -27,9 +22,9 @@ public class CreateGroceryListItemCommandHandler :  IRequestHandler<CreateGrocer
             throw new BadRequestException("Invalid grocery list item", validationResults);
         }
 
-        var entity = _mapper.Map<GroceryListItemEntity>(request);
-        
-        var dto =_mapper.Map<GroceryListItemDto>(await _groceryListItemRepository.CreateAsync(entity));
+        var entity = request.ToEntity();
+
+            var dto = (await _groceryListItemRepository.CreateAsync(entity)).ToDTO();
         
         return dto;
     }

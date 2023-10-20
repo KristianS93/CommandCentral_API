@@ -10,17 +10,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetAllHouseholdsHandlerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetHouseholdHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Queries/GetHouseholdHandlerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.DatabaseFixture/TestDatabaseFixture.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/ApplicationServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/ApplicationServiceRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/DeleteHousehold/DeleteHouseholdCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Commands/UpdateHousehold/UpdateHouseholdCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetAllHouseholds/GetAllHouseholdsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetAllHouseholds/GetAllHouseholdsQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/Household/Queries/GetHousehold/GetHouseholdQueryHandler.cs" afterDir="false" />
+    <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project.">
+      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListProfile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/HouseholdProfile.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,15 +37,15 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="2b410c52-fb99-4d89-890d-7d1169d762db" />
-        <option name="url" value="git@github.com:KristianS93/CommandCentral_API.git" />
+        <option name="accountId" value="fda83c1f-60d7-40aa-aa05-e76b60a199bd" />
+        <option name="url" value="https://github.com/KristianS93/CommandCentral_API.git" />
       </UrlAndAccount>
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/kks93/Documents/GitRepos/CommandCentral_API/CommandCentralAPI/Core/Application/ApplicationServiceRegistration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Commands/CreateHousehold/CreateHouseholdValidator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core/Application/Features/Household/Shared/HouseholdDetailsDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/82f3bb64e8c52af0a0175218c6cd371f393f871ffe1482a2ffd51e7efaeddbb5/Task.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -174,8 +173,17 @@
       <workItem from="1696709774581" duration="22000" />
       <workItem from="1696709804693" duration="551000" />
       <workItem from="1696797773044" duration="2434000" />
-      <workItem from="1697825972229" duration="3426000" />
+      <workItem from="1697825972229" duration="5885000" />
     </task>
+    <task id="LOCAL-00001" summary="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project.">
+      <option name="closed" value="true" />
+      <created>1697829648774</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697829648774</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,5 +192,7 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project." />
   </component>
 </project>

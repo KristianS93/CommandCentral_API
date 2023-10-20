@@ -1,6 +1,5 @@
 using Application.Contracts.GroceryList;
 using Application.Exceptions;
-using AutoMapper;
 using Domain.Entities.GroceryList;
 using MediatR;
 
@@ -8,12 +7,10 @@ namespace Application.Features.GroceryListItem.Commands.UpdateGroceryListItem;
 
 public class UpdateGroceryListItemCommandHandler : IRequestHandler<UpdateGroceryListItemCommand, Unit>
 {
-    private readonly IMapper _mapper;
     private readonly IGroceryListItemRepository _groceryListItemRepository;
 
-    public UpdateGroceryListItemCommandHandler(IMapper mapper,IGroceryListItemRepository groceryListItemRepository)
+    public UpdateGroceryListItemCommandHandler(IGroceryListItemRepository groceryListItemRepository)
     {
-        _mapper = mapper;
         _groceryListItemRepository = groceryListItemRepository;
     }
     public async Task<Unit> Handle(UpdateGroceryListItemCommand request, CancellationToken cancellationToken)
@@ -39,7 +36,8 @@ public class UpdateGroceryListItemCommandHandler : IRequestHandler<UpdateGrocery
             throw new AuthorizationException("Access denied to item");
         }
 
-        _mapper.Map(request, groceryListItem);
+        // we only update the fields that are updated, rest is already given from the entity
+        groceryListItem = request.ToEntity(groceryListItem);
 
         await _groceryListItemRepository.UpdateAsync(groceryListItem);
         

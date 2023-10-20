@@ -1,10 +1,7 @@
 using Application.Contracts.Household;
 using Application.Features.Household.Queries.GetAllHouseholds;
 using Application.Features.Household.Shared;
-using AutoMapper;
 using DatabaseFixture;
-using Domain.Entities.Household;
-using Moq;
 using Persistence.Repositories;
 using Xunit.Abstractions;
 

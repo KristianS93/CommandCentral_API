@@ -1,6 +1,5 @@
 using Application.Contracts.GroceryList;
 using Application.Exceptions;
-using AutoMapper;
 using MediatR;
 
 namespace Application.Features.GroceryListItem.Queries.GetGroceryListItem;
@@ -8,12 +7,10 @@ namespace Application.Features.GroceryListItem.Queries.GetGroceryListItem;
 public class GetGroceryListItemQueryHandler : IRequestHandler<GetGroceryListItemQuery, GroceryListItemDetailsDto>
 {
     private readonly IGroceryListItemRepository _groceryListItemRepository;
-    private readonly IMapper _mapper;
 
-    public GetGroceryListItemQueryHandler(IGroceryListItemRepository groceryListItemRepository, IMapper mapper)
+    public GetGroceryListItemQueryHandler(IGroceryListItemRepository groceryListItemRepository)
     {
         _groceryListItemRepository = groceryListItemRepository;
-        _mapper = mapper;
     }
     public async Task<GroceryListItemDetailsDto> Handle(GetGroceryListItemQuery request, CancellationToken cancellationToken)
     {
@@ -27,6 +24,6 @@ public class GetGroceryListItemQueryHandler : IRequestHandler<GetGroceryListItem
 
         ArgumentNullException.ThrowIfNull(item);
         
-        return _mapper.Map<GroceryListItemDetailsDto>(item);
+        return item.ToDetailsDTO();
     }
 }

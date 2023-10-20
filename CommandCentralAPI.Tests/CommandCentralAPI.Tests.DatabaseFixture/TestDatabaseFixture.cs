@@ -1,5 +1,3 @@
-using Application.MappingProfiles;
-using AutoMapper;
 using Domain.Entities.GroceryList;
 using Domain.Entities.Household;
 using Microsoft.EntityFrameworkCore;
