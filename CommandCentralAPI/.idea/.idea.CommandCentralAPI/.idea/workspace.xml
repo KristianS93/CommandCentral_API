@@ -11,15 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab11be8-2bbe-4f09-be97-8895b25bec25" name="Changes" comment="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project.">
-      <change beforePath="$PROJECT_DIR$/Core/Application/Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryList/Commands/CreateGroceryList/CreateGroceryListCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/CreateGroceryListItem/CreateGroceryListItemCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Commands/UpdateGroceryListItem/UpdateGroceryListItemCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetAllGroceryListItems/GetAllGroceryListItemsQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Application/Features/GroceryListItem/Queries/GetGroceryListItem/GetGroceryListItemQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListItemProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/GroceryListProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Application/MappingProfiles/HouseholdProfile.cs" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Commands/DeleteHouseholdHandlerTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Commands/UpdateHouseholdHandlerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/CommandCentralAPI.Tests.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/CommandCentralAPI.Tests.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Commands/CreateHouseholdHandlerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CommandCentralAPI.Tests/CommandCentralAPI.Tests.Application/Features/Household/Commands/CreateHouseholdHandlerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CommandCentralAPI/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +63,7 @@
     "WebServerToolWindowFactoryState": "false",
     "XThreadsFramesViewSplitterKey": "0.57644993",
     "git-widget-placeholder": "cqrs",
-    "last_opened_file_path": "/home/dev-space/Documents/GitRepos/CommandCentral_API/CC",
+    "last_opened_file_path": "/home/dev-space/Documents/GitRepos/CommandCentral_API/CommandCentralAPI.Tests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,9 +76,9 @@
       "TEXT"
     ],
     "rider.external.source.directories": [
-      "/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
-      "/Users/kks93/Library/Application Support/JetBrains/Rider2023.2/resharper-host/SourcesCache",
-      "/Users/kks93/.local/share/Symbols/src"
+      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/DecompilerCache",
+      "/home/dev-space/.config/JetBrains/Rider2023.2/resharper-host/SourcesCache",
+      "/home/dev-space/.local/share/Symbols/src"
     ]
   }
 }]]></component>
@@ -174,6 +170,7 @@
       <workItem from="1696709804693" duration="551000" />
       <workItem from="1696797773044" duration="2434000" />
       <workItem from="1697825972229" duration="5885000" />
+      <workItem from="1697832799541" duration="2945000" />
     </task>
     <task id="LOCAL-00001" summary="Started removing AutoMapper, and instead using simple extensionmethods. This removes some of the magic happening, which I will endorse in this project.">
       <option name="closed" value="true" />
